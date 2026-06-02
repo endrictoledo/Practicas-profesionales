@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" prefHeight="674.0" prefWidth="642.0" style="-fx-background-color: #f1f5f9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectoconstruccion.controlador.GUIRegistroOVController">
+   <content>
+       <VBox alignment="CENTER" style="-fx-padding: 30;">
+          <children>
+              <VBox maxWidth="700.0" spacing="20.0" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                 <children>
+                     <Label text="Formulario de Registro: Organización Vinculada">
+                         <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     </Label>
+                     <Separator />
+                     
+                     <Label text="RAZÓN SOCIAL" textFill="#185244">
+                         <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     </Label>
+                     <TextField fx:id="txtOrgName" promptText="Nombre de la Organización *" style="-fx-padding: 10;" />
+                     
+                     <Label text="DIRECCIÓN" textFill="#185244">
+                         <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     </Label>
+                     <TextField fx:id="txtAddress" promptText="Dirección Física *" style="-fx-padding: 10;" />
+                     <HBox spacing="20.0" />
+         
+                     <Label text="CONTACTO" textFill="#185244">
+                         <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     </Label>
+                     <HBox spacing="20.0">
+                        <children>
+                            <TextField fx:id="txtPhoneNumber" promptText="Número de Teléfono *" style="-fx-padding: 10;" HBox.hgrow="ALWAYS" />
+                            <TextField fx:id="txtEmail" promptText="Correo Electrónico *" style="-fx-padding: 10;" HBox.hgrow="ALWAYS" />
+                        </children>
+                     </HBox>
+                     
+                     <Separator />
+         
+                     <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 10 0 0 0;">
+            <children>
+                            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#btnCancelOnAction" style="-fx-background-color: #C70039; -fx-text-fill: #ffffff; -fx-border-color: #e2e8f0; -fx-border-radius: 5; -fx-padding: 10 25; -fx-cursor: hand;" text="Cancelar">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Button>
+                            
+                            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 25; -fx-cursor: hand;" text="Registrar Organización" />
+            </children>
+                     </HBox>
+                 </children>
+              </VBox>
+          </children>
+       </VBox>
+   </content>
+</ScrollPane>

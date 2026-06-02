@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="600.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #f1f5f9; -fx-padding: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.RequestProjectGUIController">
+   <children>
+       <HBox alignment="CENTER_LEFT" spacing="20.0">
+          <children>
+              <VBox>
+                 <children>
+                     <Label text="Catálogo de Proyectos Disponibles" textFill="#1e293b">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                     <Label text="Explore las opciones y envíe una solicitud de asignación. Solo puede solicitar un proyecto a la vez." textFill="#64748b" />
+                 </children>
+              </VBox>
+              <Region HBox.hgrow="ALWAYS" />
+          </children>
+       </HBox>
+       <TableView fx:id="tableProjects" style="-fx-background-radius: 10;" VBox.vgrow="ALWAYS">
+           <columns>
+               <TableColumn fx:id="col_nombre" prefWidth="237.0" text="Nombre del Proyecto" />
+               <TableColumn fx:id="colOrganizacion" prefWidth="179.0" text="Organización" />
+               <TableColumn fx:id="colCapacidad" prefWidth="164.0" text="Lugares Disp." />
+               <TableColumn fx:id="colActions" prefWidth="159.0" text="Acciones" />
+           </columns>
+       </TableView>
+   </children>
+</VBox>

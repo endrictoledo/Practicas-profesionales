@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="650.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white; -fx-padding: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.GUIAsignarCalificacionController">
+   <children>
+      <!-- Título y Fecha -->
+      <VBox spacing="10.0">
+         <children>
+            <Label text="Entrega del estudiante" textFill="#1e293b">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Fecha: 19/feb/2026 - 12:06 hrs." textFill="#64748b">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+
+      <!-- Contenido de la entrega -->
+      <VBox spacing="15.0">
+         <children>
+            <!-- Texto de la entrega del alumno -->
+            <Label alignment="TOP_LEFT" prefWidth="540.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." textFill="#334155" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            
+            <!-- Botón Descargar solicitado -->
+            <Button fx:id="btnDescargar" mnemonicParsing="false" style="-fx-background-color: #C70039; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="⬇ Descargar archivo adjunto" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+
+      <!-- Separador visual -->
+      <AnchorPane prefHeight="1.0" style="-fx-background-color: #e2e8f0;">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin>
+      </AnchorPane>
+
+      <!-- Sección de Evaluación -->
+      <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+         <children>
+            <!-- Cabecera de evaluación con Spinner -->
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+               <children>
+                  <Label text="Evaluación del profesor" textFill="#1e293b">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Label text="Calificación" textFill="#475569">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtCalificacion" prefWidth="60.0" promptText="0-10" style="-fx-border-color: #cbd5e1; -fx-border-radius: 4;" />
+                        <Label text="de 10 pts." textFill="#475569">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+
+            <!-- Área de texto grande para observaciones -->
+            <VBox style="-fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4;" VBox.vgrow="ALWAYS">
+               <children>
+                  <!-- Barra simulada de herramientas de edición -->
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="15.0" style="-fx-background-color: #f8fafc; -fx-border-color: transparent transparent #cbd5e1 transparent; -fx-border-width: 1; -fx-background-radius: 4 4 0 0;">
+                     <children>
+                        <Label text="B" textFill="#475569">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="I" textFill="#475569">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="U" textFill="#475569" underline="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="S" textFill="#475569">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane prefWidth="1.0" style="-fx-background-color: #cbd5e1;" />
+                        <Label text="Observaciones de la evaluación" textFill="#64748b">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </HBox>
+                  <!-- Text Area Principal -->
+                  <TextArea fx:id="txtObservaciones" promptText="Actividad recibida. Escribe aquí tus observaciones..." style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextArea>
+               </children>
+            </VBox>
+            
+            <!-- Botón Guardar en la esquina inferior derecha -->
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <Button fx:id="btnGuardar" mnemonicParsing="false" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-cursor: hand;" text="Guardar">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="35.0" right="35.0" top="8.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
