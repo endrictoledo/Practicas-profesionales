@@ -19,9 +19,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import practicasprofesionales.excepciones.DAOException;
-import practicasprofesionales.modelo.UserType;
-import practicasprofesionales.modelo.dao.UserDAO;
-import practicasprofesionales.modelo.pojo.User;
+import practicasprofesionales.modelo.TipoUsuario;
+import practicasprofesionales.modelo.dao.UsuarioDAO;
+import practicasprofesionales.modelo.pojo.Usuario;
 
 /**
  * FXML Controller class
@@ -60,8 +60,8 @@ public class LoginController implements Initializable {
         setFormEnabled(false);
 
         try {
-            UserDAO dao = new UserDAO();
-            User user = dao.login(email, password);
+            UsuarioDAO dao = new UsuarioDAO();
+            Usuario user = dao.login(email, password);
 
             if (user != null) {
                 navigateToMenu(user);
@@ -78,8 +78,8 @@ public class LoginController implements Initializable {
         }
     }
 
-    private void navigateToMenu(User user) {
-        UserType type = user.getUserType(); //obtiene el tipo del usuario 
+    private void navigateToMenu(Usuario user) {
+        TipoUsuario type = user.getTipoUsuario(); 
         String fxmlPath = resolveFxmlPath(type);
         String title    = resolveTitle(type);
 
@@ -100,7 +100,7 @@ public class LoginController implements Initializable {
         }
     }
 
-    private String resolveFxmlPath(UserType type) { //Usa un switch moderno para obtener la ruta correcta 
+    private String resolveFxmlPath(TipoUsuario type) { //Usa un switch moderno para obtener la ruta correcta 
         return switch (type) {
             case COORDINADOR  -> FXML_COORDINATOR;
             case ADMINISTRADOR -> FXML_ADMIN;
@@ -109,7 +109,7 @@ public class LoginController implements Initializable {
         };
     }
 
-    private String resolveTitle(UserType type) {
+    private String resolveTitle(TipoUsuario type) {
         return switch (type) {
             case COORDINADOR   -> "Sistema de Prácticas — Coordinador";
             case ADMINISTRADOR -> "Sistema de Prácticas — Administrador";

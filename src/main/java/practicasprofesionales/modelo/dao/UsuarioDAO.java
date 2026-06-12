@@ -13,17 +13,17 @@ import java.sql.Statement;
 import java.util.logging.Logger;
 import practicasprofesionales.excepciones.DAOException;
 import practicasprofesionales.modelo.ConexionBD;
-import practicasprofesionales.modelo.UserType;
-import practicasprofesionales.modelo.pojo.User;
+import practicasprofesionales.modelo.TipoUsuario;
+import practicasprofesionales.modelo.pojo.Usuario;
 import practicasprofesionales.utilidades.PasswordHasher;
 
 /**
  *
  * @author endri
  */
-public class UserDAO {
+public class UsuarioDAO {
 
-    private static final Logger logger = Logger.getLogger(UserDAO.class.getName());
+    private static final Logger logger = Logger.getLogger(UsuarioDAO.class.getName());
 
     private static final String SQL_INSERT
             = "INSERT INTO usuario (gmail, contrasena, tipoUsuario, estadoActividad) "
@@ -35,18 +35,18 @@ public class UserDAO {
     private static final String SQL_DEACTIVATE
             = "UPDATE usuario SET estadoActividad = 'inactivo' WHERE idUsuario = ?";
 
-    public int registerUser(User user) throws DAOException {
-        validateUserForRegistration(user);
+    public int registerUser(Usuario usuario) throws DAOException {
+        validateUserForRegistration(usuario);
 
-        String hashedPassword = PasswordHasher.hash(user.getPlainPassword());
+        String hashedPassword = PasswordHasher.hash(usuario.getContrasenaPlana());
 
         try (Connection connection = ConexionBD.obtenerConexion(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT,
                 Statement.RETURN_GENERATED_KEYS)) {
 
-            preparedStatement.setString(1, user.getGmail().trim().toLowerCase());
+            preparedStatement.setString(1, usuario.getCorreo().trim().toLowerCase());
             preparedStatement.setString(2, hashedPassword);
-            preparedStatement.setString(3, user.getUserType().getDbValue());
-            preparedStatement.setString(4, user.isActive() ? "activo" : "inactivo");
+            preparedStatement.setString(3, usuario.getTipoUsuario().getDbValue());
+            preparedStatement.setString(4, usuario.isActivo() ? "activo" : "inactivo");
 
             preparedStatement.executeUpdate();
 
@@ -54,7 +54,7 @@ public class UserDAO {
                 if (keys.next()) {
                     int generatedId = keys.getInt(1);
                     logger.info(() -> "Usuario registrado — id: " + generatedId
-                            + ", tipo: " + user.getUserType().getDbValue());
+                            + ", tipo: " + usuario.getTipoUsuario().getDbValue());
                     return generatedId;
                 }
             }
@@ -69,7 +69,7 @@ public class UserDAO {
         }
     }
 
-    public User login(String gmail, String plainPassword) throws DAOException {
+    public Usuario login(String gmail, String plainPassword) throws DAOException {
         if (gmail == null || gmail.isBlank() || plainPassword == null || plainPassword.isBlank()) {
             return null;
         }
@@ -86,10 +86,10 @@ public class UserDAO {
                     String storedHash = resultSet.getString("contrasena");
 
                     if (PasswordHasher.verify(plainPassword, storedHash)) {
-                        User user = mapResultSet(resultSet);
+                        Usuario usuario = mapResultSet(resultSet);
                         logger.info(() -> "Login exitoso — gmail: " + gmail
-                                + ", tipo: " + user.getUserType().getDbValue());
-                        return user;
+                                + ", tipo: " + usuario.getTipoUsuario().getDbValue());
+                        return usuario;
                     }
                 }
             }
@@ -136,26 +136,26 @@ public class UserDAO {
         }
     }
 
-    private User mapResultSet(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        user.setIdUser(resultSet.getInt("idUsuario"));
-        user.setGmail(resultSet.getString("gmail"));
-        user.setUserType(UserType.fromDbValue(resultSet.getString("tipoUsuario")));
-        user.setActive("activo".equals(resultSet.getString("estadoActividad")));
-        return user;
+    private Usuario mapResultSet(ResultSet resultSet) throws SQLException {
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(resultSet.getInt("idUsuario"));
+        usuario.setCorreo(resultSet.getString("gmail"));
+        usuario.setTipoUsuario(TipoUsuario.fromDbValue(resultSet.getString("tipoUsuario")));
+        usuario.setActivo("activo".equals(resultSet.getString("estadoActividad")));
+        return usuario;
     }
 
-    private void validateUserForRegistration(User user) throws DAOException {
+    private void validateUserForRegistration(Usuario user) throws DAOException {
         if (user == null) {
             throw new DAOException("El usuario no puede ser null", null);
         }
-        if (user.getGmail() == null || user.getGmail().isBlank()) {
+        if (user.getCorreo()== null || user.getCorreo().isBlank()) {
             throw new DAOException("El gmail del usuario es obligatorio", null);
         }
-        if (user.getPlainPassword() == null || user.getPlainPassword().isBlank()) {
+        if (user.getContrasenaPlana()== null || user.getContrasenaPlana().isBlank()) {
             throw new DAOException("La contraseña del usuario es obligatoria", null);
         }
-        if (user.getUserType() == null) {
+        if (user.getTipoUsuario()== null) {
             throw new DAOException("El tipo de usuario es obligatorio", null);
         }
     }

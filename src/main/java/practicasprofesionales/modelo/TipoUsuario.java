@@ -5,7 +5,7 @@ package practicasprofesionales.modelo;
  *
  * @author endri
  */
-public enum UserType {
+public enum TipoUsuario {
     
     ESTUDIANTE("estudiante"),
     COORDINADOR("coordinador"),
@@ -14,7 +14,7 @@ public enum UserType {
 
     private final String dbValue;
 
-    UserType(String dbValue) {
+    TipoUsuario(String dbValue) {
         this.dbValue = dbValue;
     }
 
@@ -22,8 +22,8 @@ public enum UserType {
         return dbValue;
     }
 
-    public static UserType fromDbValue(String value) {
-        for (UserType type : values()) {
+    public static TipoUsuario fromDbValue(String value) {
+        for (TipoUsuario type : values()) {
             if (type.dbValue.equalsIgnoreCase(value)) {
                 return type;
             }
