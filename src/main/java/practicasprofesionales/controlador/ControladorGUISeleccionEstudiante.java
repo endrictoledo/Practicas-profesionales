@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package proyectoconstruccion.controlador;
+package practicasprofesionales.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,26 +11,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author endri
  */
-public class GUIRegistroOVController implements Initializable {
+public class ControladorGUISeleccionEstudiante implements Initializable {
 
     @FXML
-    private TextField txtOrgName;
+    private TextField txt_buscar;
     @FXML
-    private TextField txtAddress;
+    private Button btn_buscar;
     @FXML
-    private TextField txtPhoneNumber;
+    private VBox vb_listaEstudiantes;
     @FXML
-    private TextField txtEmail;
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnSave;
+    private StackPane pn_panelBlancoDerecho;
 
     /**
      * Initializes the controller class.
@@ -41,11 +39,7 @@ public class GUIRegistroOVController implements Initializable {
     }    
 
     @FXML
-    private void btnCancelOnAction(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnSaveOnAction(ActionEvent event) {
+    private void btn_asignarProrroga(ActionEvent event) {
     }
     
 }

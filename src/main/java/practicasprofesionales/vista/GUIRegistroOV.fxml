@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" prefHeight="674.0" prefWidth="642.0" style="-fx-background-color: #f1f5f9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectoconstruccion.controlador.GUIRegistroOVController">
+<ScrollPane fitToWidth="true" prefHeight="674.0" prefWidth="642.0" style="-fx-background-color: #f1f5f9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIRegistroOV">
    <content>
        <VBox alignment="CENTER" style="-fx-padding: 30;">
           <children>
@@ -25,14 +25,14 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                      </Label>
-                     <TextField fx:id="txtOrgName" promptText="Nombre de la Organización *" style="-fx-padding: 10;" />
+                     <TextField fx:id="txt_nombreOrg" promptText="Nombre de la Organización *" style="-fx-padding: 10;" />
                      
                      <Label text="DIRECCIÓN" textFill="#185244">
                          <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                      </Label>
-                     <TextField fx:id="txtAddress" promptText="Dirección Física *" style="-fx-padding: 10;" />
+                     <TextField fx:id="txt_direccion" promptText="Dirección Física *" style="-fx-padding: 10;" />
                      <HBox spacing="20.0" />
          
                      <Label text="CONTACTO" textFill="#185244">
@@ -42,8 +42,8 @@
                      </Label>
                      <HBox spacing="20.0">
                         <children>
-                            <TextField fx:id="txtPhoneNumber" promptText="Número de Teléfono *" style="-fx-padding: 10;" HBox.hgrow="ALWAYS" />
-                            <TextField fx:id="txtEmail" promptText="Correo Electrónico *" style="-fx-padding: 10;" HBox.hgrow="ALWAYS" />
+                            <TextField fx:id="txt_telefono" promptText="Número de Teléfono *" style="-fx-padding: 10;" HBox.hgrow="ALWAYS" />
+                            <TextField fx:id="txt_correo" promptText="Correo Electrónico *" style="-fx-padding: 10;" HBox.hgrow="ALWAYS" />
                         </children>
                      </HBox>
                      
@@ -51,12 +51,12 @@
          
                      <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 10 0 0 0;">
             <children>
-                            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#btnCancelOnAction" style="-fx-background-color: #C70039; -fx-text-fill: #ffffff; -fx-border-color: #e2e8f0; -fx-border-radius: 5; -fx-padding: 10 25; -fx-cursor: hand;" text="Cancelar">
+                            <Button fx:id="btn_cancelar" mnemonicParsing="false" onAction="#btn_cancelarOnAction" style="-fx-background-color: #C70039; -fx-text-fill: #ffffff; -fx-border-color: #e2e8f0; -fx-border-radius: 5; -fx-padding: 10 25; -fx-cursor: hand;" text="Cancelar">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></Button>
                             
-                            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 25; -fx-cursor: hand;" text="Registrar Organización" />
+                            <Button fx:id="btn_guardar" mnemonicParsing="false" onAction="#btn_guardarOnAction" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 25; -fx-cursor: hand;" text="Registrar Organización" />
             </children>
                      </HBox>
                  </children>

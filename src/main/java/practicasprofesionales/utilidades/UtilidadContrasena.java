@@ -6,11 +6,11 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author endri
  */
-public class PasswordHasher {
+public class UtilidadContrasena {
 
     private static final int WORK_FACTOR = 12;
 
-    private PasswordHasher() {
+    private UtilidadContrasena() {
     }
 
     public static String hash(String plainPassword) {

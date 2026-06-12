@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.LoginController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIInicioSesion">
     <center>
         <StackPane prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #f8fafc;">
            <children>
@@ -44,7 +44,7 @@
                         <Insets bottom="6" />
                      </VBox.margin>
                       </Label>
-                      <TextField fx:id="txtEmail" prefHeight="44" prefWidth="360" promptText="usuario@ejemplo.com" style="-fx-background-color: white;                                   -fx-border-color: #d1d5db;                                   -fx-border-radius: 8;                                   -fx-background-radius: 8;                                   -fx-padding: 10 14;                                   -fx-font-size: 14px;">
+                      <TextField fx:id="txt_correo" prefHeight="44" prefWidth="360" promptText="usuario@ejemplo.com" style="-fx-background-color: white;                                   -fx-border-color: #d1d5db;                                   -fx-border-radius: 8;                                   -fx-background-radius: 8;                                   -fx-padding: 10 14;                                   -fx-font-size: 14px;">
                           <VBox.margin>
                         <Insets bottom="18" />
                      </VBox.margin>
@@ -55,19 +55,19 @@
                         <Insets bottom="6" />
                      </VBox.margin>
                       </Label>
-                      <PasswordField fx:id="txtPassword" prefHeight="44" prefWidth="360" promptText="••••••••" style="-fx-background-color: white;                                       -fx-border-color: #d1d5db;                                       -fx-border-radius: 8;                                       -fx-background-radius: 8;                                       -fx-padding: 10 14;                                       -fx-font-size: 14px;">
+                      <PasswordField fx:id="txt_contrasena" prefHeight="44" prefWidth="360" promptText="••••••••" style="-fx-background-color: white;                                       -fx-border-color: #d1d5db;                                       -fx-border-radius: 8;                                       -fx-background-radius: 8;                                       -fx-padding: 10 14;                                       -fx-font-size: 14px;">
                           <VBox.margin>
                         <Insets bottom="8" />
                      </VBox.margin>
                       </PasswordField>
       
-                      <Label fx:id="lblError" maxWidth="360" style="-fx-text-fill: #ef4444; -fx-font-size: 12px;" text="" wrapText="true">
+                      <Label fx:id="lbl_error" maxWidth="360" style="-fx-text-fill: #ef4444; -fx-font-size: 12px;" text="" wrapText="true">
                           <VBox.margin>
                         <Insets bottom="18" />
                      </VBox.margin>
                       </Label>
       
-                      <Button fx:id="btnLogin" defaultButton="true" onAction="#handleLogin" prefHeight="46" prefWidth="360" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Iniciar sesión">
+                      <Button fx:id="btn_ingresar" defaultButton="true" onAction="#manejarInicioSesion" prefHeight="46" prefWidth="360" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Iniciar sesión">
                           <VBox.margin>
                         <Insets bottom="24" />
                      </VBox.margin>

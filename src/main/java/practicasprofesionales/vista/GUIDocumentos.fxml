@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" spacing="40.0" style="-fx-background-color: #f8fafc; -fx-padding: 40;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.GUIDocumentosController">
+<VBox prefHeight="600.0" prefWidth="800.0" spacing="40.0" style="-fx-background-color: #f8fafc; -fx-padding: 40;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIDocumentos">
    <children>
       <!-- Encabezado de la vista -->
       <VBox spacing="8.0">
@@ -50,7 +50,7 @@
                   </VBox>
                   
                         <!-- Botón Seleccionar Archivo -->
-                  <Button fx:id="btnSeleccionarArchivo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #174033; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" text="↑ Seleccionar Archivo">
+                  <Button fx:id="btn_seleccionarArchivo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #174033; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" text="↑ Seleccionar Archivo">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -81,7 +81,7 @@
                   </VBox>
                   
                         <!-- Botón Ver Formatos -->
-                  <Button fx:id="btnVerFormatos" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #043c72; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" text="↓ Ver Formatos">
+                  <Button fx:id="btn_verFormatos" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #043c72; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" text="↓ Ver Formatos">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

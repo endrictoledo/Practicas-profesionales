@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
  *
  * @author endri
  */
-public class ProfesorMenuController implements Initializable {
+public class ControladorGUIMenuProfesor implements Initializable {
 
     @FXML
     private Pane pn_principal;

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="650.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white; -fx-padding: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.GUIAsignarCalificacionController">
+<VBox prefHeight="650.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white; -fx-padding: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIAsignarCalificacion">
    <children>
       <!-- Título y Fecha -->
       <VBox spacing="10.0">
@@ -44,7 +44,7 @@
             </Label>
             
             <!-- Botón Descargar solicitado -->
-            <Button fx:id="btnDescargar" mnemonicParsing="false" style="-fx-background-color: #C70039; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="⬇ Descargar archivo adjunto" textFill="WHITE">
+            <Button fx:id="btn_descargar" mnemonicParsing="false" style="-fx-background-color: #C70039; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="⬇ Descargar archivo adjunto" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -80,7 +80,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtCalificacion" prefWidth="60.0" promptText="0-10" style="-fx-border-color: #cbd5e1; -fx-border-radius: 4;" />
+                        <TextField fx:id="txt_calificacion" prefWidth="60.0" promptText="0-10" style="-fx-border-color: #cbd5e1; -fx-border-radius: 4;" />
                         <Label text="de 10 pts." textFill="#475569">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -132,7 +132,7 @@
                      </padding>
                   </HBox>
                   <!-- Text Area Principal -->
-                  <TextArea fx:id="txtObservaciones" promptText="Actividad recibida. Escribe aquí tus observaciones..." style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true" VBox.vgrow="ALWAYS">
+                  <TextArea fx:id="txt_observaciones" promptText="Actividad recibida. Escribe aquí tus observaciones..." style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -146,7 +146,7 @@
             <!-- Botón Guardar en la esquina inferior derecha -->
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Button fx:id="btnGuardar" mnemonicParsing="false" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-cursor: hand;" text="Guardar">
+                  <Button fx:id="btn_guardar" mnemonicParsing="false" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-cursor: hand;" text="Guardar">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

@@ -6,23 +6,21 @@ package practicasprofesionales.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
  *
  * @author endri
  */
-public class FXMLInicioSesionController implements Initializable {
+public class ControladorGUIDocumentos implements Initializable {
 
     @FXML
-    private TextField tf_correoElectronico;
+    private Button btn_seleccionarArchivo;
     @FXML
-    private PasswordField pw_contrasenia;
+    private Button btn_verFormatos;
 
     /**
      * Initializes the controller class.
@@ -31,9 +29,5 @@ public class FXMLInicioSesionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void btn_iniciarSesion(ActionEvent event) {
-    }
     
 }

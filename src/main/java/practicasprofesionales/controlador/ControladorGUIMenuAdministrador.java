@@ -6,27 +6,14 @@ package practicasprofesionales.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author endri
  */
-public class GUIAsignarCalificacionController implements Initializable {
-
-    @FXML
-    private Button btnDescargar;
-    @FXML
-    private TextField txtCalificacion;
-    @FXML
-    private TextArea txtObservaciones;
-    @FXML
-    private Button btnGuardar;
+public class ControladorGUIMenuAdministrador implements Initializable {
 
     /**
      * Initializes the controller class.

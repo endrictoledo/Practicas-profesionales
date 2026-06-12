@@ -9,17 +9,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
  *
  * @author endri
  */
-public class GUIMenuPracticanteController implements Initializable {
-
-    @FXML
-    private Pane pn_principal;
+public class ControladorGUIListaSubirDocumentos implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -29,25 +25,28 @@ public class GUIMenuPracticanteController implements Initializable {
         // TODO
     }    
 
-
     @FXML
-    private void btnBuzon(ActionEvent event) {
+    private void btn_verDetallesSolicitud(ActionEvent event) {
     }
 
     @FXML
-    private void btnCerrarSesion(ActionEvent event) {
+    private void btn_verDetallesOficio(ActionEvent event) {
     }
 
     @FXML
-    private void btn_reportes(ActionEvent event) {
+    private void btn_verDetallesHorario(ActionEvent event) {
     }
 
     @FXML
-    private void btn_solicitarProyecto(ActionEvent event) {
+    private void btn_verDetallesCronograma(ActionEvent event) {
     }
 
     @FXML
-    private void btn_documentosIniciales(ActionEvent event) {
+    private void btn_verDetallesAutoevaluación(ActionEvent event) {
+    }
+
+    @FXML
+    private void btn_verDetallesEvaluacionOV(ActionEvent event) {
     }
     
 }

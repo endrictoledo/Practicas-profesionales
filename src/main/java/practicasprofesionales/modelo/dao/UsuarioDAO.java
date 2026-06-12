@@ -11,11 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
-import practicasprofesionales.excepciones.DAOException;
+import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.ConexionBD;
 import practicasprofesionales.modelo.TipoUsuario;
 import practicasprofesionales.modelo.pojo.Usuario;
-import practicasprofesionales.utilidades.PasswordHasher;
+import practicasprofesionales.utilidades.UtilidadContrasena;
 
 /**
  *
@@ -35,10 +35,10 @@ public class UsuarioDAO {
     private static final String SQL_DEACTIVATE
             = "UPDATE usuario SET estadoActividad = 'inactivo' WHERE idUsuario = ?";
 
-    public int registerUser(Usuario usuario) throws DAOException {
+    public int registerUser(Usuario usuario) throws ExcepcionDAO {
         validateUserForRegistration(usuario);
 
-        String hashedPassword = PasswordHasher.hash(usuario.getContrasenaPlana());
+        String hashedPassword = UtilidadContrasena.hash(usuario.getContrasenaPlana());
 
         try (Connection connection = ConexionBD.obtenerConexion(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT,
                 Statement.RETURN_GENERATED_KEYS)) {
@@ -58,18 +58,18 @@ public class UsuarioDAO {
                     return generatedId;
                 }
             }
-            throw new DAOException("No se generó ID para el usuario", null);
+            throw new ExcepcionDAO("No se generó ID para el usuario", null);
 
         } catch (SQLException e) {
             if (isDuplicateEntry(e)) {
-                throw new DAOException(
+                throw new ExcepcionDAO(
                         "El correo electrónico ya está registrado en el sistema.", e);
             }
-            throw new DAOException("Error al registrar usuario", e);
+            throw new ExcepcionDAO("Error al registrar usuario", e);
         }
     }
 
-    public Usuario login(String gmail, String plainPassword) throws DAOException {
+    public Usuario login(String gmail, String plainPassword) throws ExcepcionDAO {
         if (gmail == null || gmail.isBlank() || plainPassword == null || plainPassword.isBlank()) {
             return null;
         }
@@ -85,7 +85,7 @@ public class UsuarioDAO {
                 if (resultSet.next()) {
                     String storedHash = resultSet.getString("contrasena");
 
-                    if (PasswordHasher.verify(plainPassword, storedHash)) {
+                    if (UtilidadContrasena.verify(plainPassword, storedHash)) {
                         Usuario usuario = mapResultSet(resultSet);
                         logger.info(() -> "Login exitoso — gmail: " + gmail
                                 + ", tipo: " + usuario.getTipoUsuario().getDbValue());
@@ -98,16 +98,16 @@ public class UsuarioDAO {
 
         } catch (SQLException e) {
             System.err.println("SQL ERROR: " + e.getMessage());
-            throw new DAOException("Error de base de datos durante el login", e);
+            throw new ExcepcionDAO("Error de base de datos durante el login", e);
         }
     }
 
-    public boolean updatePassword(int idUsuario, String newPlainPassword) throws DAOException {
+    public boolean updatePassword(int idUsuario, String newPlainPassword) throws ExcepcionDAO {
         if (newPlainPassword == null || newPlainPassword.isBlank()) {
-            throw new DAOException("La nueva contraseña no puede estar vacía", null);
+            throw new ExcepcionDAO("La nueva contraseña no puede estar vacía", null);
         }
 
-        String newHash = PasswordHasher.hash(newPlainPassword);
+        String newHash = UtilidadContrasena.hash(newPlainPassword);
 
         try (Connection connection = ConexionBD.obtenerConexion(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_PASSWORD)) {
 
@@ -119,11 +119,11 @@ public class UsuarioDAO {
             return rows > 0;
 
         } catch (SQLException e) {
-            throw new DAOException("Error al actualizar la contraseña", e);
+            throw new ExcepcionDAO("Error al actualizar la contraseña", e);
         }
     }
 
-    public boolean deactivateUser(int idUsuario) throws DAOException {
+    public boolean deactivateUser(int idUsuario) throws ExcepcionDAO {
         try (Connection connection = ConexionBD.obtenerConexion(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_DEACTIVATE)) {
 
             preparedStatement.setInt(1, idUsuario);
@@ -132,7 +132,7 @@ public class UsuarioDAO {
             return rows > 0;
 
         } catch (SQLException e) {
-            throw new DAOException("Error al desactivar usuario", e);
+            throw new ExcepcionDAO("Error al desactivar usuario", e);
         }
     }
 
@@ -145,18 +145,18 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    private void validateUserForRegistration(Usuario user) throws DAOException {
+    private void validateUserForRegistration(Usuario user) throws ExcepcionDAO {
         if (user == null) {
-            throw new DAOException("El usuario no puede ser null", null);
+            throw new ExcepcionDAO("El usuario no puede ser null", null);
         }
         if (user.getCorreo()== null || user.getCorreo().isBlank()) {
-            throw new DAOException("El gmail del usuario es obligatorio", null);
+            throw new ExcepcionDAO("El gmail del usuario es obligatorio", null);
         }
         if (user.getContrasenaPlana()== null || user.getContrasenaPlana().isBlank()) {
-            throw new DAOException("La contraseña del usuario es obligatoria", null);
+            throw new ExcepcionDAO("La contraseña del usuario es obligatoria", null);
         }
         if (user.getTipoUsuario()== null) {
-            throw new DAOException("El tipo de usuario es obligatorio", null);
+            throw new ExcepcionDAO("El tipo de usuario es obligatorio", null);
         }
     }
 

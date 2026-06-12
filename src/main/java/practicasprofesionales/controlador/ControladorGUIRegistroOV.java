@@ -6,29 +6,31 @@ package practicasprofesionales.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author endri
  */
-public class GUISubirDocumentoController implements Initializable {
+public class ControladorGUIRegistroOV implements Initializable {
 
     @FXML
-    private TextArea txtContenido;
+    private TextField txt_nombreOrg;
     @FXML
-    private StackPane pnDropzone;
+    private TextField txt_direccion;
     @FXML
-    private Button btnSeleccionarDocumento;
+    private TextField txt_telefono;
     @FXML
-    private Button btnGuardarBorrador;
+    private TextField txt_correo;
     @FXML
-    private Button btnSubir;
+    private Button btn_cancelar;
+    @FXML
+    private Button btn_guardar;
 
     /**
      * Initializes the controller class.
@@ -37,5 +39,13 @@ public class GUISubirDocumentoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void btn_cancelarOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btn_guardarOnAction(ActionEvent event) {
+    }
     
 }

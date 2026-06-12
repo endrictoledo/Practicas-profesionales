@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" prefHeight="492.0" prefWidth="607.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.GUIListaSubirDocumentos">
+<ScrollPane fitToWidth="true" prefHeight="492.0" prefWidth="607.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIListaSubirDocumentos">
    <content>
       <VBox spacing="20.0" style="-fx-background-color: #f8fafc; -fx-padding: 30;">
          <children>

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" prefHeight="792.0" prefWidth="1084.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.GUISubirDocumentoController">
+<ScrollPane fitToWidth="true" prefHeight="792.0" prefWidth="1084.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUISubirDocumento">
    <content>
       <VBox prefHeight="780.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #f8fafc; -fx-padding: 30;">
          <children>
@@ -79,7 +79,7 @@
                            </padding>
                         </HBox>
                         <!-- Text Area -->
-                        <TextArea fx:id="txtContenido" prefHeight="150.0" promptText="Escribe tu contenido aquí..." style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true">
+                        <TextArea fx:id="txt_contenido" prefHeight="150.0" promptText="Escribe tu contenido aquí..." style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -102,7 +102,7 @@
                   </Label>
                   
                   <!-- Dropzone (Borde punteado) -->
-                  <StackPane fx:id="pnDropzone" prefHeight="150.0" style="-fx-background-color: #f1f5f9; -fx-border-color: #94a3b8; -fx-border-style: dashed; -fx-border-width: 1.5; -fx-border-radius: 6; -fx-background-radius: 6; -fx-cursor: hand;">
+                  <StackPane fx:id="pn_dropzone" prefHeight="150.0" style="-fx-background-color: #f1f5f9; -fx-border-color: #94a3b8; -fx-border-style: dashed; -fx-border-width: 1.5; -fx-border-radius: 6; -fx-background-radius: 6; -fx-cursor: hand;">
                      <children>
                         <VBox alignment="CENTER" spacing="5.0">
                            <children>
@@ -116,7 +116,7 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="btnSeleccionarDocumento" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Seleccionar documento" textFill="#334155">
+                              <Button fx:id="btn_seleccionarDocumento" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Seleccionar documento" textFill="#334155">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -140,7 +140,7 @@
             <!-- Botones inferiores -->
             <HBox alignment="CENTER_RIGHT" spacing="15.0">
                <children>
-                  <Button fx:id="btnGuardarBorrador" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #16a34a; -fx-text-fill: #16a34a; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Guardar borrador">
+                  <Button fx:id="btn_guardarBorrador" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #16a34a; -fx-text-fill: #16a34a; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Guardar borrador">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -148,7 +148,7 @@
                         <Insets bottom="8.0" left="20.0" right="20.0" top="8.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btnSubir" mnemonicParsing="false" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-background-radius: 4; -fx-cursor: hand;" text="Subir">
+                  <Button fx:id="btn_subir" mnemonicParsing="false" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-background-radius: 4; -fx-cursor: hand;" text="Subir">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

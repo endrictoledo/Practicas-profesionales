@@ -9,32 +9,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author endri
  */
-public class RegisterLinkedOrganizationGUIController implements Initializable {
-
-    @FXML
-    private TextField txtOrgName;
-    @FXML
-    private TextField txtAddress;
-    @FXML
-    private TextField txtCountry;
-    @FXML
-    private TextField txtState;
-    @FXML
-    private TextField txtPhoneNumber;
-    @FXML
-    private TextField txtEmail;
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnSave;
+public class ControladorGUIListaReportes implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -45,11 +26,15 @@ public class RegisterLinkedOrganizationGUIController implements Initializable {
     }    
 
     @FXML
-    private void btnCancelOnAction(ActionEvent event) {
+    private void btn_calificarParcial(ActionEvent event) {
     }
 
     @FXML
-    private void btnSaveOnAction(ActionEvent event) {
+    private void btn_calificarMensual(ActionEvent event) {
+    }
+
+    @FXML
+    private void btn_calificarFinal(ActionEvent event) {
     }
     
 }

@@ -6,29 +6,28 @@ package practicasprofesionales.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
  *
  * @author endri
  */
-public class GUISeleccionEstudianteController implements Initializable {
+public class ControladorGUIListaProyectos implements Initializable {
 
     @FXML
-    private TextField txtBuscar;
+    private TableView<?> tabla_proyectos;
     @FXML
-    private Button btnBuscar;
+    private TableColumn<?, ?> col_nombre;
     @FXML
-    private VBox vbListaEstudiantes;
+    private TableColumn<?, ?> col_organizacion;
     @FXML
-    private StackPane pn_panelBlancoDerecho;
+    private TableColumn<?, ?> col_cupos;
+    @FXML
+    private TableColumn<?, ?> col_acciones;
 
     /**
      * Initializes the controller class.
@@ -37,9 +36,5 @@ public class GUISeleccionEstudianteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void btn_asignarProrroga(ActionEvent event) {
-    }
     
 }
