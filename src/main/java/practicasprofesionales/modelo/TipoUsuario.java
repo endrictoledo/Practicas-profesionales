@@ -7,10 +7,10 @@ package practicasprofesionales.modelo;
  */
 public enum TipoUsuario {
     
-    ESTUDIANTE("estudiante"),
-    COORDINADOR("coordinador"),
-    PROFESOR("profesor"),
-    ADMINISTRADOR("administrador");
+    ESTUDIANTE("ESTUDIANTE"),
+    COORDINADOR("COORDINADOR"),
+    PROFESOR("PROFESOR"),
+    ADMINISTRADOR("ADMINISTRADOR");
 
     private final String dbValue;
 

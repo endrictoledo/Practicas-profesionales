@@ -4,6 +4,8 @@
  */
 package practicasprofesionales.controlador;
 
+import java.awt.Desktop;
+import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -27,8 +29,7 @@ public class ControladorGUIMenuPracticante implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
+    }
 
     @FXML
     private void btnBuzon(ActionEvent event) {
@@ -36,6 +37,7 @@ public class ControladorGUIMenuPracticante implements Initializable {
 
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
+        practicasprofesionales.utilidades.Utilidades.cerrarSesion(event);
     }
 
     @FXML
@@ -49,5 +51,23 @@ public class ControladorGUIMenuPracticante implements Initializable {
     @FXML
     private void btn_documentosIniciales(ActionEvent event) {
     }
-    
+
+    @FXML
+    private void btn_evaluarOV(ActionEvent event) {
+        String urlMicrosoftForms = "https://forms.office.com/r/TU_ENLACE_AQUI";
+
+        // Verificamos si la computadora soporta la acción de abrir un navegador
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                // Le pedimos al sistema operativo que abra el enlace
+                Desktop.getDesktop().browse(new URI(urlMicrosoftForms));
+            } catch (Exception e) {
+                System.err.println("Error al intentar abrir el navegador: " + e.getMessage());
+                // Aquí podrías mostrar un pequeño Label de error o una Alerta al usuario
+            }
+        } else {
+            System.err.println("La función de abrir enlaces no es compatible en este sistema.");
+        }
+    }
+
 }

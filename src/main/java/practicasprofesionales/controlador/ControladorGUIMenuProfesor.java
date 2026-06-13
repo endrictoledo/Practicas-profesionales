@@ -35,7 +35,7 @@ public class ControladorGUIMenuProfesor implements Initializable {
     @FXML
     private void btnEvaluarReportes(ActionEvent event) {
         try {
-            Parent vista = FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/GUIListaReportes.fxml"));
+            Parent vista = FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml"));
             pn_principal.getChildren().clear();
             pn_principal.getChildren().add(vista);
         } catch (IOException e) {

@@ -33,9 +33,9 @@ public class ControladorGUIInicioSesion implements Initializable {
     @FXML 
     private Button btn_ingresar;
 
-    private static final String FXML_COORDINADOR = "/practicasprofesionales/vista/MenuCoordinadorGUI.fxml";
-    private static final String FXML_ADMINISTRADOR = "/practicasprofesionales/vista/MenuAdministradorGUI.fxml";
-    private static final String FXML_PROFESOR     = "/practicasprofesionales/vista/MenuProfesorGUI.fxml";
+    private static final String FXML_COORDINADOR = "/practicasprofesionales/vista/GUIMenuCoordinador.fxml";
+    private static final String FXML_ADMINISTRADOR = "/practicasprofesionales/vista/GUIMenuAdministrador.fxml";
+    private static final String FXML_PROFESOR     = "/practicasprofesionales/vista/GUIMenuProfesor.fxml";
     private static final String FXML_ESTUDIANTE   = "/practicasprofesionales/vista/GUIMenuPracticante.fxml";
 
     @Override

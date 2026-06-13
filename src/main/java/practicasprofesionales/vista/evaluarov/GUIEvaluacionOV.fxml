@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #f1f5f9; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIEvaluacionOV">
+   <fx:define>
+      <ToggleGroup fx:id="tg_satisfaccion" />
+      <ToggleGroup fx:id="tg_involucramiento" />
+      <ToggleGroup fx:id="tg_objetivos" />
+   </fx:define>
+   <content>
+      <VBox alignment="TOP_CENTER" spacing="25.0" style="-fx-background-color: #f1f5f9; -fx-padding: 30;">
+         <children>
+            
+            <!-- Encabezado -->
+            <VBox spacing="5.0">
+               <children>
+                  <Label text="Evaluación de Organización Vinculada" textFill="#185244">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Por favor, responde honestamente a las siguientes preguntas sobre tu estadía." textFill="#64748b">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+
+            <!-- Contenedor Principal Blanco -->
+            <VBox spacing="35.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #e2e8f0; -fx-border-radius: 10; -fx-padding: 40;">
+               <children>
+
+                  <!-- Pregunta 1: Satisfacción (Radio Buttons 1 al 10) -->
+                  <VBox spacing="15.0">
+                     <children>
+                        <Label text="1. Del 1 al 10, ¿qué tan satisfecho estás con tu estadía en esta organización?" textFill="#1e293b" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-background-color: #f8fafc; -fx-padding: 15; -fx-background-radius: 8;">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="1" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="2" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="3" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="4" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="5" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="6" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="7" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="8" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="9" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="10" toggleGroup="$tg_satisfaccion" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <Separator />
+
+                  <!-- Pregunta 2: Involucramiento (Radio Buttons) -->
+                  <VBox spacing="15.0">
+                     <children>
+                        <Label text="2. Selecciona qué tanto te involucraste dentro de la organización." textFill="#1e293b" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox spacing="25.0" style="-fx-background-color: #f8fafc; -fx-padding: 15; -fx-background-radius: 8;">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Mucho" toggleGroup="$tg_involucramiento" />
+                              <RadioButton mnemonicParsing="false" text="Normal" toggleGroup="$tg_involucramiento" />
+                              <RadioButton mnemonicParsing="false" text="Poco" toggleGroup="$tg_involucramiento" />
+                              <RadioButton mnemonicParsing="false" text="Muy poco" toggleGroup="$tg_involucramiento" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <Separator />
+
+                  <!-- Pregunta 3: Objetivos (Radio Buttons) -->
+                  <VBox spacing="15.0">
+                     <children>
+                        <Label text="3. ¿Consideras que cumpliste con tus objetivos dentro de la organización?" textFill="#1e293b" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <VBox spacing="12.0" style="-fx-background-color: #f8fafc; -fx-padding: 15; -fx-background-radius: 8;">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Definitivamente sí" toggleGroup="$tg_objetivos" />
+                              <RadioButton mnemonicParsing="false" text="Suficientemente" toggleGroup="$tg_objetivos" />
+                              <RadioButton mnemonicParsing="false" text="Parcialmente" toggleGroup="$tg_objetivos" />
+                              <RadioButton mnemonicParsing="false" text="No" toggleGroup="$tg_objetivos" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+
+                  <Separator />
+
+                  <!-- Pregunta 4: Comentarios / Sugerencias (TextArea) -->
+                  <VBox spacing="15.0">
+                     <children>
+                        <Label text="4. Por favor, escribe un comentario o sugerencia que te gustaría dar para mejorar la organización:" textFill="#1e293b" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="txt_sugerencia" prefHeight="100.0" promptText="Escribe tus sugerencias aquí..." style="-fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4;" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </VBox>
+
+                  <!-- Botones de Acción -->
+                  <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                     <children>
+                        <Button fx:id="btn_cancelar" mnemonicParsing="false" onAction="#btn_cancelarOnAction" style="-fx-background-color: transparent; -fx-text-fill: #64748b; -fx-cursor: hand;" text="Cancelar">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_finalizar" mnemonicParsing="false" onAction="#btn_finalizarOnAction" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 12 30; -fx-cursor: hand;" text="Finalizar">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

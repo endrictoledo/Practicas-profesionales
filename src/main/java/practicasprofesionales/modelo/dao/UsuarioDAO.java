@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package practicasprofesionales.modelo.dao;
 
-//import practicasprofesionales.dataacces.ConfigDatabase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,36 +12,33 @@ import practicasprofesionales.modelo.TipoUsuario;
 import practicasprofesionales.modelo.pojo.Usuario;
 import practicasprofesionales.utilidades.UtilidadContrasena;
 
-/**
- *
- * @author endri
- */
 public class UsuarioDAO {
 
     private static final Logger logger = Logger.getLogger(UsuarioDAO.class.getName());
 
+    // Se asume que estado 1 es ACTIVO y 2 es INACTIVO según la base de datos
     private static final String SQL_INSERT
-            = "INSERT INTO usuario (gmail, contrasena, tipoUsuario, estadoActividad) "
+            = "INSERT INTO usuario (correoInstitucional, contraseña, tipoUsuario, estado) "
             + "VALUES (?, ?, ?, ?)";
 
     private static final String SQL_UPDATE_PASSWORD
-            = "UPDATE usuario SET contrasena = ? WHERE idUsuario = ?";
+            = "UPDATE usuario SET contraseña = ? WHERE idUsuario = ?";
 
     private static final String SQL_DEACTIVATE
-            = "UPDATE usuario SET estadoActividad = 'inactivo' WHERE idUsuario = ?";
+            = "UPDATE usuario SET estado = 2 WHERE idUsuario = ?"; // 2 = Inactivo
 
     public int registerUser(Usuario usuario) throws ExcepcionDAO {
         validateUserForRegistration(usuario);
 
         String hashedPassword = UtilidadContrasena.hash(usuario.getContrasenaPlana());
 
-        try (Connection connection = ConexionBD.obtenerConexion(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT,
-                Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = ConexionBD.obtenerConexion(); 
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, usuario.getCorreo().trim().toLowerCase());
             preparedStatement.setString(2, hashedPassword);
             preparedStatement.setString(3, usuario.getTipoUsuario().getDbValue());
-            preparedStatement.setString(4, usuario.isActivo() ? "activo" : "inactivo");
+            preparedStatement.setInt(4, usuario.isActivo() ? 1 : 2); // 1 = Activo, 2 = Inactivo
 
             preparedStatement.executeUpdate();
 
@@ -62,38 +54,39 @@ public class UsuarioDAO {
 
         } catch (SQLException e) {
             if (isDuplicateEntry(e)) {
-                throw new ExcepcionDAO(
-                        "El correo electrónico ya está registrado en el sistema.", e);
+                throw new ExcepcionDAO("El correo electrónico ya está registrado en el sistema.", e);
             }
             throw new ExcepcionDAO("Error al registrar usuario", e);
         }
     }
 
-    public Usuario login(String gmail, String plainPassword) throws ExcepcionDAO {
-        if (gmail == null || gmail.isBlank() || plainPassword == null || plainPassword.isBlank()) {
+    public Usuario login(String correoInstitucional, String plainPassword) throws ExcepcionDAO {
+        if (correoInstitucional == null || correoInstitucional.isBlank() || plainPassword == null || plainPassword.isBlank()) {
             return null;
         }
 
-        String sentencia = "SELECT u.idUsuario, u.gmail, u.contrasena, u.tipoUsuario, eu.nombreEstado AS estadoActividad "
+        String sentencia = "SELECT u.idUsuario, u.correoInstitucional, u.contraseña, u.tipoUsuario, eu.nombreEstado AS estadoActividad "
                 + "FROM usuario u JOIN estado_usuario eu on u.estado = eu.idEstadoUsuario "
-                + "WHERE u.gmail = ? AND eu.nombreEstado = 'ACTIVO'";
-        try (Connection connection = ConexionBD.obtenerConexion(); PreparedStatement preparedStatement = connection.prepareStatement(sentencia)) {
+                + "WHERE u.correoInstitucional = ? AND eu.nombreEstado = 'ACTIVO'";
+                
+        try (Connection connection = ConexionBD.obtenerConexion(); 
+             PreparedStatement preparedStatement = connection.prepareStatement(sentencia)) {
 
-            preparedStatement.setString(1, gmail.trim().toLowerCase());
+            preparedStatement.setString(1, correoInstitucional.trim().toLowerCase());
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    String storedHash = resultSet.getString("contrasena");
+                    String storedHash = resultSet.getString("contraseña");
 
                     if (UtilidadContrasena.verify(plainPassword, storedHash)) {
                         Usuario usuario = mapResultSet(resultSet);
-                        logger.info(() -> "Login exitoso — gmail: " + gmail
+                        logger.info(() -> "Login exitoso — correo: " + correoInstitucional
                                 + ", tipo: " + usuario.getTipoUsuario().getDbValue());
                         return usuario;
                     }
                 }
             }
-            logger.warning(() -> "Intento de login fallido — gmail: " + gmail);
+            logger.warning(() -> "Intento de login fallido — correo: " + correoInstitucional);
             return null;
 
         } catch (SQLException e) {
@@ -109,7 +102,8 @@ public class UsuarioDAO {
 
         String newHash = UtilidadContrasena.hash(newPlainPassword);
 
-        try (Connection connection = ConexionBD.obtenerConexion(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_PASSWORD)) {
+        try (Connection connection = ConexionBD.obtenerConexion(); 
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_PASSWORD)) {
 
             preparedStatement.setString(1, newHash);
             preparedStatement.setInt(2, idUsuario);
@@ -124,7 +118,8 @@ public class UsuarioDAO {
     }
 
     public boolean deactivateUser(int idUsuario) throws ExcepcionDAO {
-        try (Connection connection = ConexionBD.obtenerConexion(); PreparedStatement preparedStatement = connection.prepareStatement(SQL_DEACTIVATE)) {
+        try (Connection connection = ConexionBD.obtenerConexion(); 
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DEACTIVATE)) {
 
             preparedStatement.setInt(1, idUsuario);
             int rows = preparedStatement.executeUpdate();
@@ -139,9 +134,9 @@ public class UsuarioDAO {
     private Usuario mapResultSet(ResultSet resultSet) throws SQLException {
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(resultSet.getInt("idUsuario"));
-        usuario.setCorreo(resultSet.getString("gmail"));
+        usuario.setCorreo(resultSet.getString("correoInstitucional"));
         usuario.setTipoUsuario(TipoUsuario.fromDbValue(resultSet.getString("tipoUsuario")));
-        usuario.setActivo("activo".equals(resultSet.getString("estadoActividad")));
+        usuario.setActivo("ACTIVO".equalsIgnoreCase(resultSet.getString("estadoActividad")));
         return usuario;
     }
 
@@ -150,7 +145,7 @@ public class UsuarioDAO {
             throw new ExcepcionDAO("El usuario no puede ser null", null);
         }
         if (user.getCorreo()== null || user.getCorreo().isBlank()) {
-            throw new ExcepcionDAO("El gmail del usuario es obligatorio", null);
+            throw new ExcepcionDAO("El correo del usuario es obligatorio", null);
         }
         if (user.getContrasenaPlana()== null || user.getContrasenaPlana().isBlank()) {
             throw new ExcepcionDAO("La contraseña del usuario es obligatoria", null);

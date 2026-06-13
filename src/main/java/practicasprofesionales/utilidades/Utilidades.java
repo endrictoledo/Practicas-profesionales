@@ -18,4 +18,18 @@ public class Utilidades {
      alerta.setHeaderText(null);
      alerta.show();
     }
+    
+    public static void cerrarSesion(javafx.event.ActionEvent event) {
+        try {
+            javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(Utilidades.class.getResource("/practicasprofesionales/vista/GUIInicioSesion.fxml"));
+            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.setTitle("Sistema de Prácticas — Inicio de Sesión");
+            stage.centerOnScreen();
+            stage.show();
+        } catch (java.io.IOException e) {
+            System.err.println("Error al cerrar sesión: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

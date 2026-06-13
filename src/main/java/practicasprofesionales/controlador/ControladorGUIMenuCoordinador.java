@@ -29,7 +29,7 @@ public class ControladorGUIMenuCoordinador implements Initializable {
 
     @FXML
     private void accionBtnRegistrarOrganizacion(ActionEvent event) {
-        cargarSubVista("GUIRegistroOV.fxml");
+        cargarSubVista("registrarorganizacionvinculada/GUIRegistroOV.fxml");
     }
 
     private void cargarSubVista(String nombreFxml) {

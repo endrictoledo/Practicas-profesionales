@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class ConexionBD {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String NOMBRE_BD = "proyectoconstruccion";
+    private static final String NOMBRE_BD = "sistemapracticasprofesionalesbd";
     private static final String IP = "localhost";
     private static final String PUERTO = "3306";
     private static final String USUARIO_BD = "root";
@@ -24,7 +24,7 @@ public class ConexionBD {
     public static Connection obtenerConexion() throws SQLException {
         try {
             String URL_CONEXION = "jdbc:mysql://" + IP + ":" + PUERTO + "/" + NOMBRE_BD
-                    + "?allowPublicKeyRetrieveral=true&useSSL=false&serverTimezone=UTC";
+                    + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC";
 
             Class.forName(DRIVER);
 

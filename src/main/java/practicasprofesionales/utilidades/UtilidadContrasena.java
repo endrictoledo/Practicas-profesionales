@@ -32,14 +32,8 @@ public class UtilidadContrasena {
         }
         return result;
     }
-    // Añade esto temporalmente para generar tu hash
+    
 
-    public static void main(String[] args) {
-        String miContrasenaPlana = "1234567890";
-        String contrasenaHasheada = hash(miContrasenaPlana);
 
-        System.out.println("Tu hash generado es:");
-        System.out.println(contrasenaHasheada);
-    }
 
 }

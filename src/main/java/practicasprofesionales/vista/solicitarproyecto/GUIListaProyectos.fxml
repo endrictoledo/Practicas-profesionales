@@ -24,13 +24,17 @@
               <Region HBox.hgrow="ALWAYS" />
           </children>
        </HBox>
-       <TableView fx:id="tabla_proyectos" style="-fx-background-radius: 10;" VBox.vgrow="ALWAYS">
+       <TableView fx:id="tabla_proyectos" prefHeight="429.0" prefWidth="740.0" style="-fx-background-radius: 10;" VBox.vgrow="ALWAYS">
            <columns>
                <TableColumn fx:id="col_nombre" prefWidth="237.0" text="Nombre del Proyecto" />
-               <TableColumn fx:id="col_organizacion" prefWidth="179.0" text="Organización" />
-               <TableColumn fx:id="col_cupos" prefWidth="164.0" text="Lugares Disp." />
-               <TableColumn fx:id="col_acciones" prefWidth="159.0" text="Acciones" />
+               <TableColumn fx:id="col_organizacion" prefWidth="296.0" text="Organización" />
+               <TableColumn fx:id="col_cupos" prefWidth="206.0" text="Lugares Disp." />
            </columns>
        </TableView>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#btn_masInformacion" text="Mostrar más información" />
+         </children>
+      </HBox>
    </children>
 </VBox>

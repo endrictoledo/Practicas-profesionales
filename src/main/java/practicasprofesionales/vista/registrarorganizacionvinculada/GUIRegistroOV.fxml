@@ -33,8 +33,12 @@
                      </font>
                      </Label>
                      <TextField fx:id="txt_direccion" promptText="Dirección Física *" style="-fx-padding: 10;" />
-                     <HBox spacing="20.0" />
-         
+                     <Label text="SECTOR" textFill="#185244">
+                         <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     </Label>
+                     <ComboBox fx:id="cb_sector" prefWidth="700.0" promptText="Seleccione el Sector *" style="-fx-padding: 5;" />
                      <Label text="CONTACTO" textFill="#185244">
                          <font>
                         <Font name="System Bold" size="14.0" />
