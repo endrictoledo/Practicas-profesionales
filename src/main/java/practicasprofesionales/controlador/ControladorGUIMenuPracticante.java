@@ -54,19 +54,18 @@ public class ControladorGUIMenuPracticante implements Initializable {
 
     @FXML
     private void btn_evaluarOV(ActionEvent event) {
-        String urlMicrosoftForms = "https://forms.office.com/r/TU_ENLACE_AQUI";
-
-        // Verificamos si la computadora soporta la acción de abrir un navegador
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            try {
-                // Le pedimos al sistema operativo que abra el enlace
-                Desktop.getDesktop().browse(new URI(urlMicrosoftForms));
-            } catch (Exception e) {
-                System.err.println("Error al intentar abrir el navegador: " + e.getMessage());
-                // Aquí podrías mostrar un pequeño Label de error o una Alerta al usuario
-            }
-        } else {
-            System.err.println("La función de abrir enlaces no es compatible en este sistema.");
+        try {
+            javafx.scene.layout.Region subVista = (javafx.scene.layout.Region) javafx.fxml.FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarov/GUIEvaluacionOV.fxml"));
+            
+            // Obligar a la vista (ScrollPane) a estirarse al mismo tamaño que el panel principal
+            subVista.prefWidthProperty().bind(pn_principal.widthProperty());
+            subVista.prefHeightProperty().bind(pn_principal.heightProperty());
+            
+            pn_principal.getChildren().clear();
+            pn_principal.getChildren().add(subVista);
+        } catch (java.io.IOException e) {
+            System.err.println("Error al cargar la subvista de Evaluación OV: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

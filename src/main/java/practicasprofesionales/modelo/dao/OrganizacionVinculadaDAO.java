@@ -9,7 +9,7 @@ import practicasprofesionales.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionales.modelo.pojo.RespuestaOperacion;
 
 public class OrganizacionVinculadaDAO {
-    
+
     public static boolean verificarOrganizacionExistente(String razonSocial) throws SQLException, NullPointerException {
         Connection conexion = ConexionBD.obtenerConexion();
         int count = 0;
@@ -38,14 +38,14 @@ public class OrganizacionVinculadaDAO {
             ps.setString(3, ov.getSector());
             ps.setString(4, ov.getCorreo());
             ps.setString(5, ov.getTelefono());
-            
+
             int filasAfectadas = ps.executeUpdate();
             conexionDB.close();
             if (filasAfectadas > 0) {
-                respuesta.setError(false);
+                respuesta.setIsError(false);
                 respuesta.setMensaje("Registro exitoso");
             } else {
-                respuesta.setError(true);
+                respuesta.setIsError(true);
                 respuesta.setMensaje("Lo sentimos, la información no pudo ser guardada, intente nuevamente.");
             }
             return respuesta;

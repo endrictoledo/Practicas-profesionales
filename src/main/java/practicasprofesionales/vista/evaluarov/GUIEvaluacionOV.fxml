@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #f1f5f9; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIEvaluacionOV">
-   <fx:define>
-      <ToggleGroup fx:id="tg_satisfaccion" />
-      <ToggleGroup fx:id="tg_involucramiento" />
-      <ToggleGroup fx:id="tg_objetivos" />
-   </fx:define>
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="1002.0" prefWidth="898.0" style="-fx-background-color: #f1f5f9; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIEvaluacionOV">
    <content>
       <VBox alignment="TOP_CENTER" spacing="25.0" style="-fx-background-color: #f1f5f9; -fx-padding: 30;">
          <children>
@@ -44,7 +43,11 @@
                         </Label>
                         <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-background-color: #f8fafc; -fx-padding: 15; -fx-background-radius: 8;">
                            <children>
-                              <RadioButton mnemonicParsing="false" text="1" toggleGroup="$tg_satisfaccion" />
+                              <RadioButton mnemonicParsing="false" text="1">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tg_satisfaccion" />
+                                 </toggleGroup>
+                              </RadioButton>
                               <RadioButton mnemonicParsing="false" text="2" toggleGroup="$tg_satisfaccion" />
                               <RadioButton mnemonicParsing="false" text="3" toggleGroup="$tg_satisfaccion" />
                               <RadioButton mnemonicParsing="false" text="4" toggleGroup="$tg_satisfaccion" />
@@ -71,7 +74,11 @@
                         </Label>
                         <HBox spacing="25.0" style="-fx-background-color: #f8fafc; -fx-padding: 15; -fx-background-radius: 8;">
                            <children>
-                              <RadioButton mnemonicParsing="false" text="Mucho" toggleGroup="$tg_involucramiento" />
+                              <RadioButton mnemonicParsing="false" text="Mucho">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tg_involucramiento" />
+                                 </toggleGroup>
+                              </RadioButton>
                               <RadioButton mnemonicParsing="false" text="Normal" toggleGroup="$tg_involucramiento" />
                               <RadioButton mnemonicParsing="false" text="Poco" toggleGroup="$tg_involucramiento" />
                               <RadioButton mnemonicParsing="false" text="Muy poco" toggleGroup="$tg_involucramiento" />
@@ -92,7 +99,11 @@
                         </Label>
                         <VBox spacing="12.0" style="-fx-background-color: #f8fafc; -fx-padding: 15; -fx-background-radius: 8;">
                            <children>
-                              <RadioButton mnemonicParsing="false" text="Definitivamente sí" toggleGroup="$tg_objetivos" />
+                              <RadioButton mnemonicParsing="false" text="Definitivamente sí">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tg_objetivos" />
+                                 </toggleGroup>
+                              </RadioButton>
                               <RadioButton mnemonicParsing="false" text="Suficientemente" toggleGroup="$tg_objetivos" />
                               <RadioButton mnemonicParsing="false" text="Parcialmente" toggleGroup="$tg_objetivos" />
                               <RadioButton mnemonicParsing="false" text="No" toggleGroup="$tg_objetivos" />

@@ -46,7 +46,7 @@ public class ControladorGUIInicioSesion implements Initializable {
     
     @FXML
     private void manejarInicioSesion(ActionEvent event) {
-        String correo    = txt_correo.getText().trim();
+        String correo = txt_correo.getText().trim();
         String contrasena = txt_contrasena.getText();
 
         if (!validarCampos(correo, contrasena)) return;
@@ -55,9 +55,10 @@ public class ControladorGUIInicioSesion implements Initializable {
 
         try {
             UsuarioDAO dao = new UsuarioDAO();
-            Usuario usuario = dao.login(correo, contrasena);
+            Usuario usuario = dao.ingresar(correo, contrasena);
 
             if (usuario != null) {
+                practicasprofesionales.utilidades.SesionGlobal.getInstancia().setUsuarioActual(usuario);
                 navegarAMenu(usuario);
             } else {
                 mostrarError("Correo o contraseña incorrectos. Intenta de nuevo.");

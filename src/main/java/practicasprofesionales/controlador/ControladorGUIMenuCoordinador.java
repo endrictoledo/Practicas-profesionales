@@ -38,7 +38,7 @@ public class ControladorGUIMenuCoordinador implements Initializable {
             pn_principal.getChildren().clear();
             pn_principal.getChildren().add(subVista);
         } catch (IOException e) {
-            System.err.println("Error crítico: No se pudo cargar el archivo FXML -> " + nombreFxml);
+            System.err.println("Error crítico: No se pudo cargar el archivo FXML: " + nombreFxml);
             e.printStackTrace();
         }
     }

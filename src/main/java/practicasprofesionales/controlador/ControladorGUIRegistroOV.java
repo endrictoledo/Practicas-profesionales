@@ -42,7 +42,7 @@ public class ControladorGUIRegistroOV implements Initializable {
 
     @FXML
     private void btn_cancelarOnAction(ActionEvent event) {
-        // FA 1: Cancelación registros
+        
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmación");
         confirmacion.setHeaderText(null);
@@ -50,7 +50,6 @@ public class ControladorGUIRegistroOV implements Initializable {
         
         confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                // Limpiar campos y "volver" al inicio (paso 2 del FA1)
                 limpiarCampos();
             }
         });
@@ -67,7 +66,7 @@ public class ControladorGUIRegistroOV implements Initializable {
         if (cb_sector.getValue() != null) {
             ov.setSector(cb_sector.getValue());
         } else {
-            ov.setSector(""); // Se enviará vacío para que salte el EX1
+            ov.setSector(""); 
         }
         
         RespuestaOperacion respuesta = OrganizacionVinculadaService.guardarOrganizacion(ov);
@@ -98,6 +97,6 @@ public class ControladorGUIRegistroOV implements Initializable {
         cb_sector.getSelectionModel().clearSelection();
         txt_telefono.clear();
         txt_correo.clear();
-        txt_correo.setStyle("-fx-padding: 10;"); // quitar borde rojo
+        txt_correo.setStyle("-fx-padding: 10;");
     }
 }

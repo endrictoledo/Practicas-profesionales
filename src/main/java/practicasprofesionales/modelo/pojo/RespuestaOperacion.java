@@ -1,24 +1,31 @@
 package practicasprofesionales.modelo.pojo;
 
 public class RespuestaOperacion {
-    private boolean error;
+
+    private boolean isError;
     private String mensaje;
     private Object datos;
 
     public RespuestaOperacion() {
     }
 
-    public RespuestaOperacion(boolean error, String mensaje) {
-        this.error = error;
+    public RespuestaOperacion(boolean isError, String mensaje) {
+        this.isError = isError;
         this.mensaje = mensaje;
     }
 
-    public boolean isError() {
-        return error;
+    public RespuestaOperacion(boolean isError, String mensaje, Object datos) {
+        this.isError = isError;
+        this.mensaje = mensaje;
+        this.datos = datos;
     }
 
-    public void setError(boolean error) {
-        this.error = error;
+    public boolean isError() {
+        return isError;
+    }
+
+    public void setIsError(boolean isError) {
+        this.isError = isError;
     }
 
     public String getMensaje() {
@@ -36,4 +43,5 @@ public class RespuestaOperacion {
     public void setDatos(Object datos) {
         this.datos = datos;
     }
+
 }

@@ -16,7 +16,6 @@ public class UsuarioDAO {
 
     private static final Logger logger = Logger.getLogger(UsuarioDAO.class.getName());
 
-    // Se asume que estado 1 es ACTIVO y 2 es INACTIVO según la base de datos
     private static final String SQL_INSERT
             = "INSERT INTO usuario (correoInstitucional, contraseña, tipoUsuario, estado) "
             + "VALUES (?, ?, ?, ?)";
@@ -24,11 +23,11 @@ public class UsuarioDAO {
     private static final String SQL_UPDATE_PASSWORD
             = "UPDATE usuario SET contraseña = ? WHERE idUsuario = ?";
 
-    private static final String SQL_DEACTIVATE
-            = "UPDATE usuario SET estado = 2 WHERE idUsuario = ?"; // 2 = Inactivo
+    private static final String SQL_DESACTIVATE
+            = "UPDATE usuario SET estado = 2 WHERE idUsuario = ?"; 
 
     public int registerUser(Usuario usuario) throws ExcepcionDAO {
-        validateUserForRegistration(usuario);
+        validarUsuarioParaRegistro(usuario);
 
         String hashedPassword = UtilidadContrasena.hash(usuario.getContrasenaPlana());
 
@@ -60,7 +59,7 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario login(String correoInstitucional, String plainPassword) throws ExcepcionDAO {
+    public Usuario ingresar(String correoInstitucional, String plainPassword) throws ExcepcionDAO {
         if (correoInstitucional == null || correoInstitucional.isBlank() || plainPassword == null || plainPassword.isBlank()) {
             return null;
         }
@@ -79,7 +78,7 @@ public class UsuarioDAO {
                     String storedHash = resultSet.getString("contraseña");
 
                     if (UtilidadContrasena.verify(plainPassword, storedHash)) {
-                        Usuario usuario = mapResultSet(resultSet);
+                        Usuario usuario = mapearResultSet(resultSet);
                         logger.info(() -> "Login exitoso — correo: " + correoInstitucional
                                 + ", tipo: " + usuario.getTipoUsuario().getDbValue());
                         return usuario;
@@ -95,7 +94,7 @@ public class UsuarioDAO {
         }
     }
 
-    public boolean updatePassword(int idUsuario, String newPlainPassword) throws ExcepcionDAO {
+    public boolean actualizarContrasena(int idUsuario, String newPlainPassword) throws ExcepcionDAO {
         if (newPlainPassword == null || newPlainPassword.isBlank()) {
             throw new ExcepcionDAO("La nueva contraseña no puede estar vacía", null);
         }
@@ -117,9 +116,9 @@ public class UsuarioDAO {
         }
     }
 
-    public boolean deactivateUser(int idUsuario) throws ExcepcionDAO {
+    public boolean desactivarUsuario(int idUsuario) throws ExcepcionDAO {
         try (Connection connection = ConexionBD.obtenerConexion(); 
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DEACTIVATE)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DESACTIVATE)) {
 
             preparedStatement.setInt(1, idUsuario);
             int rows = preparedStatement.executeUpdate();
@@ -131,7 +130,7 @@ public class UsuarioDAO {
         }
     }
 
-    private Usuario mapResultSet(ResultSet resultSet) throws SQLException {
+    private Usuario mapearResultSet(ResultSet resultSet) throws SQLException {
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(resultSet.getInt("idUsuario"));
         usuario.setCorreo(resultSet.getString("correoInstitucional"));
@@ -140,7 +139,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    private void validateUserForRegistration(Usuario user) throws ExcepcionDAO {
+    private void validarUsuarioParaRegistro(Usuario user) throws ExcepcionDAO {
         if (user == null) {
             throw new ExcepcionDAO("El usuario no puede ser null", null);
         }
