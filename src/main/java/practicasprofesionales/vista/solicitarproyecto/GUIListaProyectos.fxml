@@ -33,7 +33,7 @@
        </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#btn_masInformacion" text="Mostrar más información" />
+            <Button fx:id="btn_masInformacion" mnemonicParsing="false" onAction="#btn_masInformacion" text="Mostrar más información" />
          </children>
       </HBox>
    </children>

@@ -38,16 +38,16 @@ public class ControladorGUIRegistroOV implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<String> sectores = FXCollections.observableArrayList("Público", "Privado", "Social");
         cb_sector.setItems(sectores);
-    }    
+    }
 
     @FXML
     private void btn_cancelarOnAction(ActionEvent event) {
-        
+
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmación");
         confirmacion.setHeaderText(null);
         confirmacion.setContentText("¿Seguro que desea cancelar el registro?");
-        
+
         confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 limpiarCampos();
@@ -62,35 +62,36 @@ public class ControladorGUIRegistroOV implements Initializable {
         ov.setDireccion(txt_direccion.getText());
         ov.setCorreo(txt_correo.getText());
         ov.setTelefono(txt_telefono.getText());
-        
+
         if (cb_sector.getValue() != null) {
             ov.setSector(cb_sector.getValue());
         } else {
-            ov.setSector(""); 
+            ov.setSector("");
         }
-        
+
         RespuestaOperacion respuesta = OrganizacionVinculadaService.guardarOrganizacion(ov);
-        
+        validarRespuesta(respuesta);
+
+    }
+
+    private void validarRespuesta(RespuestaOperacion respuesta) {
         if (respuesta.isError()) {
-            // Manejo de Excepciones
             if (respuesta.getMensaje().contains("Parámetros inválidos")) {
                 Utilidades.mostrarAlertaSimple("Error de validación", "Parámetros inválidos o campos incompletos", Alert.AlertType.ERROR);
             } else if (respuesta.getMensaje().contains("ya se encuentra registrada")) {
                 Utilidades.mostrarAlertaSimple("Organización duplicada", "Esta organización ya se encuentra registrada en el sistema", Alert.AlertType.WARNING);
             } else if (respuesta.getMensaje().contains("Formato de correo electrónico no válido")) {
                 Utilidades.mostrarAlertaSimple("Formato incorrecto", "Formato de correo electrónico no válido", Alert.AlertType.ERROR);
-                // Resaltar en rojo (opcional, como dice el EX3)
                 txt_correo.setStyle("-fx-border-color: red; -fx-padding: 10;");
             } else {
                 Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
             }
         } else {
-            // Flujo Normal: Éxito
             Utilidades.mostrarAlertaSimple("Registro Exitoso", "Registro exitoso", Alert.AlertType.INFORMATION);
             limpiarCampos();
         }
     }
-    
+
     private void limpiarCampos() {
         txt_nombreOrg.clear();
         txt_direccion.clear();

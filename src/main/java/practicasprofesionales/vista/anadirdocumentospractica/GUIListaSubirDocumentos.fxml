@@ -13,134 +13,134 @@
 <?import javafx.scene.text.Font?>
 
 <ScrollPane fitToWidth="true" prefHeight="492.0" prefWidth="607.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIListaSubirDocumentos">
-   <content>
-      <VBox spacing="20.0" style="-fx-background-color: #f8fafc; -fx-padding: 30;">
-         <children>
-      <!-- Título de la sección -->
-      <Label text="Actividades y Reportes" textFill="#1e293b">
-         <font>
-            <Font name="System Bold" size="22.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
-      </Label>
+    <content>
+        <VBox spacing="20.0" style="-fx-background-color: #f8fafc; -fx-padding: 30;">
+            <children>
+      
+                <Label text="Actividades y Reportes" textFill="#1e293b">
+                    <font>
+                        <Font name="System Bold" size="22.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </Label>
 
-      <!-- Cuadro 1: Reporte Parcial -->
-      <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
-         <children>
-            <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
-               <children>
-                  <Label text="Solicitud de practica" textFill="#0f172a">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <Button mnemonicParsing="false" onAction="#btn_verDetallesSolicitud" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
+      
+                <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
+                    <children>
+                        <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                            <children>
+                                <Label text="Solicitud de practica" textFill="#0f172a">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#btn_verDetallesSolicitud" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
 
-      <!-- Cuadro 2: Reporte mensual -->
-      <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
-         <children>
-            <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
-               <children>
-                  <Label text="Oficio de aceptación" textFill="#0f172a">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <Button mnemonicParsing="false" onAction="#btn_verDetallesOficio" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
+      
+                <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
+                    <children>
+                        <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                            <children>
+                                <Label text="Oficio de aceptación" textFill="#0f172a">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#btn_verDetallesOficio" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
 
-      <!-- Cuadro 3: Reporte final -->
-      <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
-         <children>
-            <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
-               <children>
-                  <Label text="Horario" textFill="#0f172a">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <Button mnemonicParsing="false" onAction="#btn_verDetallesHorario" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-            <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
-               <children>
-                  <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
-                     <children>
-                        <Label text="Cronograma" textFill="#0f172a">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <Button mnemonicParsing="false" onAction="#btn_verDetallesCronograma" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
-               <children>
-                  <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
-                     <children>
-                        <Label text="Autoevaluación" textFill="#0f172a">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <Button mnemonicParsing="false" onAction="#btn_verDetallesAutoevaluación" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
-               <children>
-                  <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
-                     <children>
-                        <Label text="Evaluación de la Ov" textFill="#0f172a">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <Button mnemonicParsing="false" onAction="#btn_verDetallesEvaluacionOV" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
+      
+                <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
+                    <children>
+                        <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                            <children>
+                                <Label text="Horario" textFill="#0f172a">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#btn_verDetallesHorario" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
+                    <children>
+                        <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                            <children>
+                                <Label text="Cronograma" textFill="#0f172a">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#btn_verDetallesCronograma" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
+                    <children>
+                        <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                            <children>
+                                <Label text="Autoevaluación" textFill="#0f172a">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#btn_verDetallesAutoevaluación" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="110.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #cbd5e1; -fx-border-radius: 8; -fx-border-width: 1;">
+                    <children>
+                        <VBox spacing="8.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                            <children>
+                                <Label text="Evaluación de la Ov" textFill="#0f172a">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#btn_verDetallesEvaluacionOV" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 20 8 20; -fx-cursor: hand;" text="Ver detalles" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
 
-         </children>
-      </VBox>
-   </content>
+            </children>
+        </VBox>
+    </content>
 </ScrollPane>

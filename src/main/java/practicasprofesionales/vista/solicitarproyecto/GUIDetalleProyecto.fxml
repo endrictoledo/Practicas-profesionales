@@ -9,191 +9,191 @@
 <?import javafx.scene.text.Font?>
 
 <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="1050.0" prefWidth="1029.0" style="-fx-background-color: #f1f5f9; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIDetalleProyecto">
-   <content>
-      <VBox alignment="TOP_CENTER" prefHeight="2879.0" prefWidth="501.0" spacing="25.0" style="-fx-background-color: #f1f5f9; -fx-padding: 30;">
-         <children>
+    <content>
+        <VBox alignment="TOP_CENTER" prefHeight="2879.0" prefWidth="501.0" spacing="25.0" style="-fx-background-color: #f1f5f9; -fx-padding: 30;">
+            <children>
             
-            <!-- Encabezado -->
-            <HBox alignment="CENTER_LEFT" spacing="15.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <Label text="Detalles del Proyecto" textFill="#185244">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                        <Label text="Revisa la información completa antes de enviar tu solicitud" textFill="#64748b">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-
-            <!-- Tarjeta Principal (Contenedor Blanco) -->
-            <VBox spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #e2e8f0; -fx-border-radius: 10; -fx-padding: 35;">
-               <children>
-                  
-                  <!-- Zona del Titulo del Proyecto -->
-                  <HBox alignment="CENTER_LEFT" spacing="15.0">
-                     <children>
-                        <VBox alignment="CENTER_LEFT">
-                           <children>
-                              <Label fx:id="lbl_nombreProyecto" text="Nombre del proyecto" textFill="#1e293b">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font>
-                              </Label>
-                           </children>
+            
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <children>
+                        <VBox>
+                            <children>
+                                <Label text="Detalles del Proyecto" textFill="#185244">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Revisa la información completa antes de enviar tu solicitud" textFill="#64748b">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
                         </VBox>
-                     </children>
-                  </HBox>
+                    </children>
+                </HBox>
 
-                  <Separator />
-
-                  <!-- BLOQUES DE INFORMACIÓN (Uno debajo de otro) -->
+            
+                <VBox spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #e2e8f0; -fx-border-radius: 10; -fx-padding: 35;">
+                    <children>
                   
-                  <!-- Descripción General -->
-                  <VBox spacing="8.0">
-                     <children>
-                        <Label text="DESCRIPCIÓN GENERAL" textFill="#64748b">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbl_descripcionGeneral" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Descripción del proyecto" textFill="#334155" wrapText="true">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-
-                  <!-- Responsabilidades -->
-                  <VBox spacing="8.0">
-                     <children>
-                        <Label text="RESPONSABILIDADES" textFill="#64748b">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbl_responsabilidades" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Responsabilidades del estudiante dentro del proyecto" textFill="#334155" wrapText="true">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-
-                  <!-- Objetivo -->
-                  <VBox spacing="8.0">
-                     <children>
-                        <Label text="OBJETIVO DEL PROYECTO" textFill="#64748b">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbl_objetivo" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="El objetivo del proyecto" textFill="#334155" wrapText="true">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-
-                  <!-- Actividades -->
-                  <VBox spacing="8.0">
-                     <children>
-                        <Label text="ACTIVIDADES" textFill="#64748b">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbl_actividades" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Lista de actividades que se realizan dentro del proyecto&#10;" textFill="#334155" wrapText="true">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-
-                  <!-- Duración -->
-                  <VBox spacing="8.0">
-                     <children>
-                        <Label text="DURACIÓN" textFill="#64748b">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbl_duracion" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Duración del proyecto en meses" textFill="#334155" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-
-                  <!-- Horario -->
-                  <VBox spacing="8.0">
-                     <children>
-                        <Label text="HORARIO" textFill="#64748b">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbl_horario" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Horario laboral Dias, Horas" textFill="#334155" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-
-                  <!-- Cupos Disponibles Destacado -->
-                  <VBox spacing="8.0">
-                     <children>
-                        <Label text="CUPOS DISPONIBLES" textFill="#64748b">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-background-color: #ecfdf5; -fx-background-radius: 8; -fx-padding: 15; -fx-border-color: #d1fae5; -fx-border-radius: 8;">
-                           <children>
-                              <Label fx:id="lbl_cupos" text="Escribir el número de cupos disponibles en el proyecto" textFill="#065f46">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
+                  
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                            <children>
+                                <VBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label fx:id="lbl_nombreProyecto" text="Nombre del proyecto" textFill="#1e293b">
+                                            <font>
+                                                <Font name="System Bold" size="22.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                            </children>
                         </HBox>
-                     </children>
-                  </VBox>
 
-                  <!-- Botones de Acción al Final -->
-                  <HBox alignment="CENTER_RIGHT" spacing="20.0">
-                     <children>
-                        <Button fx:id="btn_cancelar" mnemonicParsing="false" onAction="#btn_cancelar" style="-fx-background-color: transparent; -fx-text-fill: #64748b; -fx-cursor: hand;" text="Cancelar">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="btn_anadir" mnemonicParsing="false" onAction="#btn_anadir" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 12 30; -fx-cursor: hand;" text="Añadir">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </HBox>
+                        <Separator />
 
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-   </content>
+                  
+                  
+                  
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="DESCRIPCIÓN GENERAL" textFill="#64748b">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lbl_descripcionGeneral" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Descripción del proyecto" textFill="#334155" wrapText="true">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                  
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="RESPONSABILIDADES" textFill="#64748b">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lbl_responsabilidades" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Responsabilidades del estudiante dentro del proyecto" textFill="#334155" wrapText="true">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                  
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="OBJETIVO DEL PROYECTO" textFill="#64748b">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lbl_objetivo" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="El objetivo del proyecto" textFill="#334155" wrapText="true">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                  
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="ACTIVIDADES" textFill="#64748b">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lbl_actividades" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Lista de actividades que se realizan dentro del proyecto&#10;" textFill="#334155" wrapText="true">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                  
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="DURACIÓN" textFill="#64748b">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lbl_duracion" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Duración del proyecto en meses" textFill="#334155" wrapText="true">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                  
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="HORARIO" textFill="#64748b">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lbl_horario" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Horario laboral Dias, Horas" textFill="#334155" wrapText="true">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                  
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="CUPOS DISPONIBLES" textFill="#64748b">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-background-color: #ecfdf5; -fx-background-radius: 8; -fx-padding: 15; -fx-border-color: #d1fae5; -fx-border-radius: 8;">
+                                    <children>
+                                        <Label fx:id="lbl_cupos" text="Escribir el número de cupos disponibles en el proyecto" textFill="#065f46">
+                                            <font>
+                                                <Font name="System Bold" size="16.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                  
+                        <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                            <children>
+                                <Button fx:id="btn_cancelar" mnemonicParsing="false" onAction="#btn_cancelar" style="-fx-background-color: transparent; -fx-text-fill: #64748b; -fx-cursor: hand;" text="Cancelar">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="btn_anadir" mnemonicParsing="false" onAction="#btn_anadir" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 12 30; -fx-cursor: hand;" text="Añadir">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </HBox>
+
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </content>
 </ScrollPane>
