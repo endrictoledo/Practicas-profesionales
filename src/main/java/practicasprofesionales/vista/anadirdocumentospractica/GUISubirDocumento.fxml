@@ -116,7 +116,7 @@
                                                 <Font size="12.0" />
                                             </font>
                                         </Label>
-                                        <Button fx:id="btn_seleccionarDocumento" onAction="#btn_seleccionarDocumentoOnAction" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Seleccionar documento" textFill="#334155">
+                                        <Button fx:id="btn_seleccionarDocumento" mnemonicParsing="false" onAction="#btn_seleccionarDocumentoOnAction" style="-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Seleccionar documento" textFill="#334155">
                                             <VBox.margin>
                                                 <Insets top="10.0" />
                                             </VBox.margin>
@@ -140,7 +140,7 @@
             
                 <HBox alignment="CENTER_RIGHT" spacing="15.0">
                     <children>
-                        <Button fx:id="btn_cancelar" onAction="#btn_cancelarOnAction" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ef4444; -fx-text-fill: #ef4444; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Cancelar">
+                        <Button fx:id="btn_cancelar" mnemonicParsing="false" onAction="#btn_cancelarOnAction" style="-fx-background-color: white; -fx-border-color: #ef4444; -fx-text-fill: #ef4444; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Cancelar">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -148,7 +148,7 @@
                                 <Insets bottom="8.0" left="20.0" right="20.0" top="8.0" />
                             </padding>
                         </Button>
-                        <Button fx:id="btn_subir" onAction="#btn_subirOnAction" disable="true" mnemonicParsing="false" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-background-radius: 4; -fx-cursor: hand;" text="Subir">
+                        <Button fx:id="btn_subir" disable="true" mnemonicParsing="false" onAction="#btn_subirOnAction" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-cursor: hand;" text="Subir">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>

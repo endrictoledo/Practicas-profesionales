@@ -4,15 +4,31 @@
  */
 package practicasprofesionales.controlador;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion; 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import practicasprofesionales.modelo.pojo.RespuestaOperacion;
+import practicasprofesionales.modelo.servicios.SubirDocumentoService;
 import practicasprofesionales.utilidades.Utilidades;
+
 /**
  * FXML Controller class
  *
@@ -29,12 +45,12 @@ public class ControladorGUISubirDocumento implements Initializable {
     @FXML
     private Button btn_subir;
     @FXML
-    private javafx.scene.control.Label lbl_tipoDocumentoTitulo;
+    private Label lbl_tipoDocumentoTitulo;
     @FXML
-    private javafx.scene.control.Label lbl_archivosSubidos;
+    private Label lbl_archivosSubidos;
 
     private String tipoDocumento;
-    private java.io.File archivoSeleccionado;
+    private File archivoSeleccionado;
 
     /**
      * Initializes the controller class.
@@ -42,9 +58,9 @@ public class ControladorGUISubirDocumento implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btn_subir.setDisable(true);
-    }    
+    }
 
-    public void initData(String tipoDocumento) {
+    public void inicializarDatos(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
         if (lbl_tipoDocumentoTitulo != null) {
             lbl_tipoDocumentoTitulo.setText("Documento seleccionado: " + tipoDocumento);
@@ -52,86 +68,80 @@ public class ControladorGUISubirDocumento implements Initializable {
     }
 
     @FXML
-    private void btn_seleccionarDocumentoOnAction(javafx.event.ActionEvent event) {
+    private void btn_seleccionarDocumento(ActionEvent event) {
         try {
-            javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
+            FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Seleccionar documento");
             fileChooser.getExtensionFilters().addAll(
-                new javafx.stage.FileChooser.ExtensionFilter("Documentos (PDF, DOCX, TXT)", "*.pdf", "*.docx", "*.txt"),
-                new javafx.stage.FileChooser.ExtensionFilter("Todos los archivos", "*.*")
+                    new FileChooser.ExtensionFilter("Documentos (PDF, DOCX, TXT)", "*.pdf", "*.docx", "*.txt"),
+                    new FileChooser.ExtensionFilter("Todos los archivos", "*.*")
             );
-            
-            javafx.scene.Node source = (javafx.scene.Node) event.getSource();
-            javafx.stage.Stage stage = (javafx.stage.Stage) source.getScene().getWindow();
-            
-            java.io.File file = fileChooser.showOpenDialog(stage);
-            
-            if (file != null) {
-                this.archivoSeleccionado = file;
-                lbl_archivosSubidos.setText("Archivos subidos: 1 (" + file.getName() + ")");
+
+            Node fuente = (Node) event.getSource();
+            Stage stage = (Stage) fuente.getScene().getWindow();
+
+            File archivo = fileChooser.showOpenDialog(stage);
+
+            if (archivo != null) {
+                this.archivoSeleccionado = archivo;
+                lbl_archivosSubidos.setText("Archivos subidos: 1 (" + archivo.getName() + ")");
                 btn_subir.setDisable(false);
             }
         } catch (Exception e) {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-            alert.setTitle("Error al abrir explorador");
-            alert.setHeaderText("No se pudo abrir el explorador de archivos");
-            alert.setContentText("Ocurrió un error inesperado al intentar acceder a los archivos de su computador.");
-            
-            javafx.scene.control.ButtonType btnIntentar = new javafx.scene.control.ButtonType("Intentar de nuevo");
-            javafx.scene.control.ButtonType btnCancelar = new javafx.scene.control.ButtonType("Cancelar", javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
-            
-            alert.getButtonTypes().setAll(btnIntentar, btnCancelar);
-            
-            java.util.Optional<javafx.scene.control.ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == btnIntentar) {
-                btn_seleccionarDocumentoOnAction(event);
+            //Esta es la parte para preparar la alerta y que pueda volver a intentar buscar el archivo :]
+            boolean confirmacion = Utilidades.configurarAlerta(
+                    "Error al abrir explorador",
+                    "No se pudo abrir el explorador de archivos",
+                    "Ocurrió un error inesperado al intentar acceder a los archivos de su computador.",
+                    "Intentar de nuevo", "Cancelar", Alert.AlertType.ERROR);
+
+            if (confirmacion) {
+                btn_seleccionarDocumento(event);
             }
         }
     }
 
     @FXML
-    private void btn_cancelarOnAction(javafx.event.ActionEvent event) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmación de Cancelación");
-        alert.setHeaderText("¿Seguro desea cancelar el proceso?");
-        alert.setContentText("Los cambios y documentos seleccionados no se guardarán.");
-        
-        javafx.scene.control.ButtonType btnSi = new javafx.scene.control.ButtonType("Sí");
-        javafx.scene.control.ButtonType btnNo = new javafx.scene.control.ButtonType("No", javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(btnSi, btnNo);
-        
-        java.util.Optional<javafx.scene.control.ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == btnSi) {
+    private void btn_cancelar(ActionEvent event) {
+
+        boolean confirmacion = Utilidades.configurarAlerta("Confirmación de Cancelación",
+                "¿Seguro desea cancelar el proceso?",
+                "Los cambios y documentos seleccionados no se guardarán.",
+                "Sí",
+                "No",
+                Alert.AlertType.CONFIRMATION);
+
+        if (confirmacion) {
             regresarAListaDocumentos(event);
         }
     }
 
     @FXML
-    private void btn_subirOnAction(javafx.event.ActionEvent event) {
-        practicasprofesionales.modelo.servicios.SubirDocumentoService service = new practicasprofesionales.modelo.servicios.SubirDocumentoService();
+    private void btn_subir(ActionEvent event) {
+        SubirDocumentoService service = new SubirDocumentoService();
         RespuestaOperacion respuesta = service.procesarSubidaDocumento(archivoSeleccionado, tipoDocumento);
-        
+
         if (!respuesta.isError()) {
-            Utilidades.mostrarAlertaSimple("Éxito", respuesta.getMensaje(), javafx.scene.control.Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Éxito", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
             regresarAListaDocumentos(event);
         } else {
-            Utilidades.mostrarAlertaSimple("Error al subir", respuesta.getMensaje(), javafx.scene.control.Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error al subir", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
     }
-    
-    private void regresarAListaDocumentos(javafx.event.ActionEvent event) {
+
+    private void regresarAListaDocumentos(ActionEvent event) {
         try {
-            javafx.scene.Node source = (javafx.scene.Node) event.getSource();
-            javafx.scene.layout.Pane parentPane = (javafx.scene.layout.Pane) source.getScene().lookup("#pn_principal");
-            
-            javafx.scene.layout.Region subVista = (javafx.scene.layout.Region) javafx.fxml.FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/anadirdocumentospractica/GUIListaSubirDocumentos.fxml"));
-            
+            Node source = (Node) event.getSource();
+            Pane parentPane = (Pane) source.getScene().lookup("#pn_principal");
+
+            Region subVista = (Region) FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/anadirdocumentospractica/GUIListaSubirDocumentos.fxml"));
+
             subVista.prefWidthProperty().bind(parentPane.widthProperty());
             subVista.prefHeightProperty().bind(parentPane.heightProperty());
-            
+
             parentPane.getChildren().clear();
             parentPane.getChildren().add(subVista);
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

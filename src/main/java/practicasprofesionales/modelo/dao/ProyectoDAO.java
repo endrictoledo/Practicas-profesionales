@@ -14,12 +14,14 @@ public class ProyectoDAO {
 
     public List<Proyecto> obtenerProyectosDisponibles() throws ExcepcionDAO {
         List<Proyecto> proyectos = new ArrayList<>();
-        // Hacemos JOIN con organizacion_vinculada para traer el nombre real
+        // Hacemos JOIN con organizacion_vinculada y encargadoproyecto para traer los nombres reales
         String query = "SELECT p.idProyecto, p.nombre, p.descripcion, p.objetivo, "
                      + "p.cupos, p.responsabilidades, p.actividades, p.duracion, p.horario, "
-                     + "o.nombre AS nombreOrganizacion "
+                     + "o.nombre AS nombreOrganizacion, "
+                     + "CONCAT(e.nombreEncargado, ' ', e.apellidoPaterno, ' ', e.apellidoMaterno) AS nombreEncargado "
                      + "FROM proyecto p "
                      + "JOIN organizacion_vinculada o ON p.Organizacion_vinculada_id_organizacion_vinculada = o.id_organizacion_vinculada "
+                     + "LEFT JOIN encargadoproyecto e ON p.EncargadoProyecto_idEncargadoProyecto = e.idEncargadoProyecto "
                      + "WHERE p.cupos > 0";
                      
         try (Connection conn = ConexionBD.obtenerConexion();
@@ -38,6 +40,7 @@ public class ProyectoDAO {
                 p.setDuracion(rs.getString("duracion"));
                 p.setHorario(rs.getString("horario"));
                 p.setNombreOrganizacion(rs.getString("nombreOrganizacion"));
+                p.setNombreEncargado(rs.getString("nombreEncargado"));
                 proyectos.add(p);
             }
         } catch (SQLException e) {

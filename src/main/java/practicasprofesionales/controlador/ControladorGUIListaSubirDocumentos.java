@@ -8,7 +8,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 /**
  * FXML Controller class
@@ -19,29 +23,36 @@ public class ControladorGUIListaSubirDocumentos implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     private void cargarSubirDocumento(String nombreDocumento, ActionEvent event) {
         try {
-            javafx.scene.Node source = (javafx.scene.Node) event.getSource();
-            javafx.scene.layout.Pane parentPane = (javafx.scene.layout.Pane) source.getScene().lookup("#pn_principal");
-            if (parentPane == null) return;
+            Node fuente = (Node) event.getSource(); //Decubre qué botón fue el que se disparó el evento
+            Pane panelPadre = (Pane) fuente.getScene().lookup("#pn_principal"); //Este escala y descubre cuál es el contenedor central
+            if (panelPadre == null) {
+                return;
+            }
             
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/practicasprofesionales/vista/anadirdocumentospractica/GUISubirDocumento.fxml"));
-            javafx.scene.layout.Region subVista = loader.load();
+            //Esta parte se hace de esta forma para poder transferir datos entre las pantallas fácilmente
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("/practicasprofesionales/vista/anadirdocumentospractica/GUISubirDocumento.fxml"));
+            Region subVista = cargador.load();
             
-            ControladorGUISubirDocumento controlador = loader.getController();
-            controlador.initData(nombreDocumento);
-            
-            subVista.prefWidthProperty().bind(parentPane.widthProperty());
-            subVista.prefHeightProperty().bind(parentPane.heightProperty());
-            
-            parentPane.getChildren().clear();
-            parentPane.getChildren().add(subVista);
+            //De esta forma podemos enviar el nombre dle documento 
+            ControladorGUISubirDocumento controlador = cargador.getController();
+            controlador.inicializarDatos(nombreDocumento);
+
+            subVista.prefWidthProperty().bind(panelPadre.widthProperty());
+            subVista.prefHeightProperty().bind(panelPadre.heightProperty());
+
+            panelPadre.getChildren().clear();
+            panelPadre.getChildren().add(subVista);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,5 +87,5 @@ public class ControladorGUIListaSubirDocumentos implements Initializable {
     private void btn_verDetallesEvaluacionOV(ActionEvent event) {
         cargarSubirDocumento("Evaluación OV", event);
     }
-    
+
 }

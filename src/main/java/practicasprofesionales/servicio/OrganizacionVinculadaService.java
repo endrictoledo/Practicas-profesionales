@@ -14,7 +14,7 @@ public class OrganizacionVinculadaService {
     public static RespuestaOperacion guardarOrganizacion(OrganizacionVinculada ov) {
         RespuestaOperacion respuesta = new RespuestaOperacion();
 
-        if (verificarDatosValidos(ov)) {
+        if (!verificarDatosValidos(ov)) {
 
             respuesta.setIsError(true);
             respuesta.setMensaje("Parámetros inválidos o campos incompletos");

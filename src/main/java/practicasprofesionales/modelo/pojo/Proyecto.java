@@ -13,8 +13,9 @@ public class Proyecto {
     private String duracion;
     private String horario;
     
-    // Campo transitorio para mostrar el nombre en la tabla fácilmente
+    // Campos transitorios para mostrar datos de tablas unidas (DTO)
     private String nombreOrganizacion;
+    private String nombreEncargado;
 
     public Proyecto() {
     }
@@ -113,5 +114,13 @@ public class Proyecto {
 
     public void setNombreOrganizacion(String nombreOrganizacion) {
         this.nombreOrganizacion = nombreOrganizacion;
+    }
+
+    public String getNombreEncargado() {
+        return nombreEncargado;
+    }
+
+    public void setNombreEncargado(String nombreEncargado) {
+        this.nombreEncargado = nombreEncargado;
     }
 }

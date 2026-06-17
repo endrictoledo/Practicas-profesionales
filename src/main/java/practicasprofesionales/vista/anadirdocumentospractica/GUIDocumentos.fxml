@@ -31,7 +31,7 @@
         <HBox spacing="30.0">
             <children>
             
-                <VBox prefWidth="350.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #e2e8f0; -fx-border-radius: 12; -fx-padding: 30; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);">
+                <VBox prefWidth="350.0" spacing="25.0" style="-fx-background-color: white; -fx-padding: 30; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);">
                     <children>
                   
                         <VBox spacing="10.0" VBox.vgrow="ALWAYS">
@@ -41,7 +41,7 @@
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label prefHeight="60.0" text="Sube tu horario, cronograma y autoevaluación (CU-PR-02)." textFill="#64748b" wrapText="true">
+                                <Label prefHeight="60.0" text="Sube tu horario, cronograma y autoevaluación." textFill="#64748b" wrapText="true">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -50,7 +50,7 @@
                         </VBox>
                   
                         
-                        <Button fx:id="btn_seleccionarArchivo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #174033; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" text="↑ Seleccionar Archivo">
+                        <Button fx:id="btn_seleccionarArchivo" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btn_seleccionarArchivo" style="-fx-background-color: #174033; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" text="Seleccionar Archivo">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -62,7 +62,7 @@
                 </VBox>
       
             
-                <VBox prefWidth="350.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #e2e8f0; -fx-border-radius: 12; -fx-padding: 30; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);">
+                <VBox prefWidth="350.0" spacing="25.0" style="-fx-background-color: white; -fx-padding: 30; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);">
                     <children>
                   
                         <VBox spacing="10.0" VBox.vgrow="ALWAYS">
@@ -72,7 +72,7 @@
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label prefHeight="60.0" text="Obtén las plantillas oficiales para tus reportes (CU-PR-04)." textFill="#64748b" wrapText="true">
+                                <Label prefHeight="60.0" text="Obtén las plantillas oficiales para tus reportes." textFill="#64748b" wrapText="true">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -81,7 +81,7 @@
                         </VBox>
                   
                         
-                        <Button fx:id="btn_verFormatos" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #043c72; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" text="↓ Ver Formatos">
+                        <Button fx:id="btn_verFormatos" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #043c72; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" text="Ver Formatos">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
