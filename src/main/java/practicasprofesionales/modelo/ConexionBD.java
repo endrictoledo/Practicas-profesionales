@@ -15,11 +15,11 @@ import java.sql.SQLException;
 public class ConexionBD {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String NOMBRE_BD = "sistemapracticasbd";
+    private static final String NOMBRE_BD = "practicasprofesionales";
     private static final String IP = "localhost";
     private static final String PUERTO = "3306";
     private static final String USUARIO_BD = "root";
-    private static final String PASSWORD = "ArturoBa23";
+    private static final String PASSWORD = "325102099";
 
     public static Connection obtenerConexion() throws SQLException {
         try {
