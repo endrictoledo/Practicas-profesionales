@@ -2,6 +2,10 @@ package practicasprofesionales.modelo.DTO;
 
 import java.sql.Date;
 
+/**
+ *
+ * @author endri
+ */
 public class ReporteEstudiante {
     private int idDocumento;
     private String nombreEstudiante;

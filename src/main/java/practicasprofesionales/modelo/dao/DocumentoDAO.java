@@ -11,6 +11,10 @@ import practicasprofesionales.modelo.ConexionBD;
 import practicasprofesionales.modelo.DTO.Documento;
 import practicasprofesionales.modelo.DTO.ReporteEstudiante;
 
+/**
+ *
+ * @author endri
+ */
 public class DocumentoDAO {
 
     public boolean registrarDocumento(Documento documento) throws ExcepcionDAO {

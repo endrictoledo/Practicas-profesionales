@@ -6,6 +6,10 @@ import practicasprofesionales.modelo.dao.OrganizacionVinculadaDAO;
 import practicasprofesionales.modelo.DTO.OrganizacionVinculada;
 import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 
+/**
+ *
+ * @author endri
+ */
 public class OrganizacionVinculadaService {
 
     private static final String CORREO_REGEX = "^[A-Za-z0-9+_.-]+@(.+\\.com)$";

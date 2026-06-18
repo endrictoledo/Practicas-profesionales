@@ -4,10 +4,12 @@
  */
 package practicasprofesionales.controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -28,7 +30,7 @@ public class ControladorGUIMenuPracticante implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        cambiarVista("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml");
     }
     
     @FXML
@@ -36,12 +38,13 @@ public class ControladorGUIMenuPracticante implements Initializable {
     }
     
     @FXML
-    private void btnCerrarSesion(ActionEvent event) {
-        Utilidades.cerrarSesion(event);
+    private void btn_cerrarSesion(ActionEvent event) {
+        Utilidades.navegar(event, "/practicasprofesionales/vista/GUIInicioSesion.fxml", "Inicio de Sesión");
     }
     
     @FXML
     private void btn_reportes(ActionEvent event) {
+        cambiarVista("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml");
     }
     
     @FXML
@@ -61,14 +64,14 @@ public class ControladorGUIMenuPracticante implements Initializable {
     
     private void cambiarVista(String ruta) {
         try {
-            Region subVista = (Region) javafx.fxml.FXMLLoader.load(getClass().getResource(ruta));
+            Region subVista = (Region) FXMLLoader.load(getClass().getResource(ruta));
             
             subVista.prefWidthProperty().bind(pn_principal.widthProperty());
             subVista.prefHeightProperty().bind(pn_principal.heightProperty());
             
             pn_principal.getChildren().clear();
             pn_principal.getChildren().add(subVista);
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             System.err.println("Error al cargar la nueva vista" + e.getMessage());
             e.printStackTrace();
         }

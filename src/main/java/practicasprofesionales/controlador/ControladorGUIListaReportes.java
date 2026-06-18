@@ -31,7 +31,6 @@ public class ControladorGUIListaReportes implements Initializable {
 
     private void cargarSeleccionEstudiante(String tipoReporte, ActionEvent event) {
         try {
-            //Averigua que bot+on fue presionado 
             Node fuente = (Node) event.getSource();
             Pane parentPane = (Pane) fuente.getScene().lookup("#pn_principal");
             if (parentPane == null) return;

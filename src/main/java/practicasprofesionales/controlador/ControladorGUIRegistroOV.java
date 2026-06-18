@@ -17,6 +17,10 @@ import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 import practicasprofesionales.servicio.OrganizacionVinculadaService;
 import practicasprofesionales.utilidades.Utilidades;
 
+/**
+ *
+ * @author endri
+ */
 public class ControladorGUIRegistroOV implements Initializable {
 
     @FXML

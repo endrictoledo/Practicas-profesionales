@@ -8,6 +8,10 @@ import practicasprofesionales.modelo.ConexionBD;
 import practicasprofesionales.modelo.DTO.OrganizacionVinculada;
 import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 
+/**
+ *
+ * @author endri
+ */
 public class OrganizacionVinculadaDAO {
 
     public static boolean verificarOrganizacionExistente(String razonSocial) throws SQLException, NullPointerException {

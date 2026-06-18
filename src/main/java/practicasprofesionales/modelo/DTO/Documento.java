@@ -2,6 +2,10 @@ package practicasprofesionales.modelo.DTO;
 
 import java.sql.Date;
 
+/**
+ *
+ * @author endri
+ */
 public class Documento {
     private int idDocumento;
     private Date fecha;

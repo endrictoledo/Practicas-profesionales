@@ -37,7 +37,6 @@ public class ControladorGUIDocumentos implements Initializable {
     @FXML
     private void btn_seleccionarArchivo(ActionEvent event) {
         try {
-            //Me sirve para obetener el contenedor padre usando el método lookup
             Pane panelPadre = (Pane) btn_seleccionarArchivo.getScene().lookup("#pn_principal");
             if (panelPadre == null) {
                 System.err.println("No se encontró el pn_principal en la escena.");

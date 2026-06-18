@@ -8,6 +8,10 @@ import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 import practicasprofesionales.modelo.DTO.Usuario;
 import practicasprofesionales.utilidades.SesionGlobal;
 
+/**
+ *
+ * @author endri
+ */
 public class SolicitarProyectoService {
     private ProyectoDAO proyectoDAO;
     private SolicitudProyectoDAO solicitudDAO;
@@ -19,7 +23,6 @@ public class SolicitarProyectoService {
 
     public RespuestaOperacion solicitarProyecto(Proyecto proyecto) {
         try {
-            // 1. Obtener estudiante actual
             Usuario usuarioSesion = SesionGlobal.getInstancia().getUsuarioActual();
             if (usuarioSesion == null) {
                 return new RespuestaOperacion(true, "Error de sesión: Inicie sesión de nuevo.");
@@ -30,13 +33,11 @@ public class SolicitarProyectoService {
                 return new RespuestaOperacion(true, "Error de sistema: Estudiante no encontrado.");
             }
 
-            // 2. Verificar Cupo (EX 1)
             int cuposDisponibles = proyectoDAO.verificarCupos(proyecto.getIdProyecto(), proyecto.getNombre());
             if (cuposDisponibles <= 0) {
                 return new RespuestaOperacion(true, "Lo sentimos, el cupo de este proyecto llegó al límite");
             }
 
-            // 3. Registrar Solicitud (EX 2 si falla)
             boolean registrado = solicitudDAO.registrarSolicitud(idEstudiante, proyecto);
             if (registrado) {
                 return new RespuestaOperacion(false, "El proyecto fue agregado con éxito");

@@ -1,13 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package practicasprofesionales.utilidades;
 
+import java.io.IOException;
 import java.util.Optional;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
 
 /**
  *
@@ -37,16 +40,30 @@ public class Utilidades {
         return result.isPresent() && result.get() == btnTrue;
     }
 
-    public static void cerrarSesion(javafx.event.ActionEvent event) {
+    public static void cerrarSesion(ActionEvent event) {
         try {
-            javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(Utilidades.class.getResource("/practicasprofesionales/vista/GUIInicioSesion.fxml"));
-            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new javafx.scene.Scene(root));
+            Parent root = FXMLLoader.load(Utilidades.class.getResource("/practicasprofesionales/vista/GUIInicioSesion.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
             stage.setTitle("Sistema de Prácticas — Inicio de Sesión");
             stage.centerOnScreen();
             stage.show();
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             System.err.println("Error al cerrar sesión: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public static void navegar(ActionEvent event, String ruta, String titulo) {
+        try {
+            Parent root = FXMLLoader.load(Utilidades.class.getResource(ruta));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Sistema de Prácticas — " + titulo);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error al navegar a: " + ruta);
             e.printStackTrace();
         }
     }

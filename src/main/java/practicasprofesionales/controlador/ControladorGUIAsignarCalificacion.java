@@ -1,21 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package practicasprofesionales.controlador;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.stage.FileChooser;
 import practicasprofesionales.modelo.DTO.ReporteEstudiante;
 import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 import practicasprofesionales.modelo.servicios.EvaluacionReporteService;
+import practicasprofesionales.utilidades.Utilidades;
 
 /**
  * FXML Controller class
@@ -38,21 +44,16 @@ public class ControladorGUIAsignarCalificacion implements Initializable {
     private ReporteEstudiante reporte;
     private EvaluacionReporteService service;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
     public void inicializarDatos(ReporteEstudiante reporte) {
         this.reporte = reporte;
         this.service = new EvaluacionReporteService();
 
-        // Mostrar la fecha actual en la etiqueta
-        java.time.format.DateTimeFormatter formato = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        lbl_fecha.setText(java.time.LocalDate.now().format(formato));
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        lbl_fecha.setText(LocalDate.now().format(formato));
 
         if (reporte.getCalificacion() != null && !reporte.getCalificacion().equals("N/A")) {
             txt_calificacion.setText(reporte.getCalificacion());
@@ -62,44 +63,45 @@ public class ControladorGUIAsignarCalificacion implements Initializable {
         }
     }
 
-    private void btn_descargar(javafx.event.ActionEvent event) {
+    @FXML
+    private void btn_descargar(ActionEvent event) {
         try {
-            javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
+            FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Guardar documento");
             fileChooser.setInitialFileName(reporte.getNombreDocumento() + "_" + reporte.getNombreEstudiante() + ".pdf");
 
-            java.io.File file = fileChooser.showSaveDialog(btn_descargar.getScene().getWindow());
+            File file = fileChooser.showSaveDialog(btn_descargar.getScene().getWindow());
             if (file != null) {
-                try (java.io.FileOutputStream fos = new java.io.FileOutputStream(file)) {
+                try (FileOutputStream fos = new FileOutputStream(file)) {
                     fos.write(reporte.getArchivoFisico());
                 }
-                practicasprofesionales.utilidades.Utilidades.mostrarAlertaSimple("Éxito", "Descarga exitosa", javafx.scene.control.Alert.AlertType.INFORMATION);
+                Utilidades.mostrarAlertaSimple("Éxito", "Descarga exitosa", AlertType.INFORMATION);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            practicasprofesionales.utilidades.Utilidades.mostrarAlertaSimple("Error", "Error al descargar el archivo", javafx.scene.control.Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error", "Error al descargar el archivo", AlertType.ERROR);
         }
     }
 
     @FXML
-    private void btn_guardarOnAction(javafx.event.ActionEvent event) {
+    private void btn_guardarOnAction(ActionEvent event) {
         String cal = txt_calificacion.getText();
         String obs = txt_observaciones.getText();
 
         RespuestaOperacion respuesta = service.asignarCalificacion(reporte, cal, obs);
 
         if (!respuesta.isError()) {
-            practicasprofesionales.utilidades.Utilidades.mostrarAlertaSimple("Éxito", respuesta.getMensaje(), javafx.scene.control.Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Éxito", respuesta.getMensaje(), AlertType.INFORMATION);
             regresarAListaReportes();
         } else {
-            practicasprofesionales.utilidades.Utilidades.mostrarAlertaSimple("Valor inválido", respuesta.getMensaje(), javafx.scene.control.Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Valor inválido", respuesta.getMensaje(), AlertType.ERROR);
         }
     }
 
     private void regresarAListaReportes() {
         try {
-            javafx.scene.layout.Pane parentPane = (javafx.scene.layout.Pane) btn_descargar.getScene().lookup("#pn_principal");
-            javafx.scene.layout.Region vista = (javafx.scene.layout.Region) javafx.fxml.FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml"));
+            Pane parentPane = (Pane) btn_descargar.getScene().lookup("#pn_principal");
+            Region vista = (Region) FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml"));
             vista.prefWidthProperty().bind(parentPane.widthProperty());
             vista.prefHeightProperty().bind(parentPane.heightProperty());
             parentPane.getChildren().clear();

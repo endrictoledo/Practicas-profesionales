@@ -1,5 +1,9 @@
 package practicasprofesionales.modelo.DTO;
 
+/**
+ *
+ * @author endri
+ */
 public class RespuestaOperacion {
 
     private boolean isError;

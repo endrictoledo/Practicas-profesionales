@@ -1,5 +1,9 @@
 package practicasprofesionales.modelo.DTO;
 
+/**
+ *
+ * @author endri
+ */
 public class Proyecto {
     private int idProyecto;
     private String nombre;
@@ -13,7 +17,6 @@ public class Proyecto {
     private String duracion;
     private String horario;
     
-    // Campos transitorios para mostrar datos de tablas unidas (DTO)
     private String nombreOrganizacion;
     private String nombreEncargado;
 

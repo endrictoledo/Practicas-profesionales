@@ -2,6 +2,10 @@ package practicasprofesionales.utilidades;
 
 import practicasprofesionales.modelo.DTO.Usuario;
 
+/**
+ *
+ * @author endri
+ */
 public class SesionGlobal {
     private static SesionGlobal instancia;
     private Usuario usuarioActual;

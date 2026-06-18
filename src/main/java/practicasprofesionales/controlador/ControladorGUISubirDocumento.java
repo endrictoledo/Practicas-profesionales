@@ -88,7 +88,6 @@ public class ControladorGUISubirDocumento implements Initializable {
                 btn_subir.setDisable(false);
             }
         } catch (Exception e) {
-            //Esta es la parte para preparar la alerta y que pueda volver a intentar buscar el archivo :]
             boolean confirmacion = Utilidades.configurarAlerta(
                     "Error al abrir explorador",
                     "No se pudo abrir el explorador de archivos",

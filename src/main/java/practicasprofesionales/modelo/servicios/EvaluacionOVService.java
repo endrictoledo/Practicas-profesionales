@@ -8,6 +8,10 @@ import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 
+/**
+ *
+ * @author endri
+ */
 public class EvaluacionOVService {
 
     private final DocumentoDAO documentoDAO;
@@ -18,7 +22,6 @@ public class EvaluacionOVService {
 
     public RespuestaOperacion procesarEvaluacion(int idUsuario, String satisfaccion, String involucramiento, String objetivos, String sugerencia) {
         
-        // La validación para que el formulario no esté vacío
         if (satisfaccion == null || satisfaccion.trim().isEmpty() ||
             involucramiento == null || involucramiento.trim().isEmpty() ||
             objetivos == null || objetivos.trim().isEmpty() ||

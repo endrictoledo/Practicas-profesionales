@@ -11,6 +11,10 @@ import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 import practicasprofesionales.utilidades.SesionGlobal;
 import practicasprofesionales.modelo.DTO.Usuario;
 
+/**
+ *
+ * @author endri
+ */
 public class SubirDocumentoService {
     
     private DocumentoDAO documentoDAO;

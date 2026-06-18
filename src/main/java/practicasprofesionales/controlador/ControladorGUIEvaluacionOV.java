@@ -22,6 +22,10 @@ import practicasprofesionales.modelo.servicios.EvaluacionOVService;
 import practicasprofesionales.utilidades.SesionGlobal;
 import practicasprofesionales.utilidades.Utilidades;
 
+/**
+ *
+ * @author endri
+ */
 public class ControladorGUIEvaluacionOV implements Initializable {
 
     @FXML

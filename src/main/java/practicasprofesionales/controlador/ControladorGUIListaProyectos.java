@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package practicasprofesionales.controlador;
 
 import java.net.URL;
@@ -13,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -80,7 +77,7 @@ public class ControladorGUIListaProyectos implements Initializable {
             tabla_proyectos.setItems(FXCollections.observableArrayList(lista));
         } catch (Exception e) {
             e.printStackTrace();
-            Utilidades.mostrarAlertaSimple("Error", "No se pudieron cargar los proyectos.", javafx.scene.control.Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error", "No se pudieron cargar los proyectos.", AlertType.ERROR);
         }
     }
 
@@ -91,7 +88,7 @@ public class ControladorGUIListaProyectos implements Initializable {
         if (proyectoSeleccionado != null) {
             abrirDetalleProyecto(proyectoSeleccionado, event);
         } else {
-            Utilidades.mostrarAlertaSimple("Atención", "Por favor selecciona un proyecto de la tabla primero.", javafx.scene.control.Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Atención", "Por favor selecciona un proyecto de la tabla primero.", AlertType.WARNING);
         }
     }
 }

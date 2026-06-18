@@ -12,6 +12,10 @@ import practicasprofesionales.modelo.TipoUsuario;
 import practicasprofesionales.modelo.DTO.Usuario;
 import practicasprofesionales.utilidades.UtilidadContrasena;
 
+/**
+ *
+ * @author endri
+ */
 public class UsuarioDAO {
 
     private static final Logger logger = Logger.getLogger(UsuarioDAO.class.getName());

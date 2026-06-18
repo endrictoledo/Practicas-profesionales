@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import practicasprofesionales.utilidades.Utilidades;
 
 /**
@@ -35,7 +36,7 @@ public class ControladorGUIMenuProfesor implements Initializable {
     @FXML
     private void btnEvaluarReportes(ActionEvent event) {
         try {
-            javafx.scene.layout.Region vista = (javafx.scene.layout.Region) FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml"));
+            Region vista = (Region) FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml"));
             vista.prefWidthProperty().bind(pn_principal.widthProperty());
             vista.prefHeightProperty().bind(pn_principal.heightProperty());
             pn_principal.getChildren().clear();

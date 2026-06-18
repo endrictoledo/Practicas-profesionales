@@ -18,6 +18,7 @@ import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.TipoUsuario;
 import practicasprofesionales.modelo.dao.UsuarioDAO;
 import practicasprofesionales.modelo.DTO.Usuario;
+import practicasprofesionales.utilidades.SesionGlobal;
 
 /**
  * Controlador de la vista InicioSesionGUI
@@ -58,7 +59,7 @@ public class ControladorGUIInicioSesion implements Initializable {
             Usuario usuario = dao.ingresar(correo, contrasena);
 
             if (usuario != null) {
-                practicasprofesionales.utilidades.SesionGlobal.getInstancia().setUsuarioActual(usuario);
+                SesionGlobal.getInstancia().setUsuarioActual(usuario);
                 navegarAMenu(usuario);
             } else {
                 txt_contrasena.clear();

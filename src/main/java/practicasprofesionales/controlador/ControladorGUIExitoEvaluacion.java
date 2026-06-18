@@ -17,6 +17,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import practicasprofesionales.utilidades.Utilidades;
 
+/**
+ *
+ * @author endri
+ */
 public class ControladorGUIExitoEvaluacion implements Initializable {
 
     private Button btn_descargar;

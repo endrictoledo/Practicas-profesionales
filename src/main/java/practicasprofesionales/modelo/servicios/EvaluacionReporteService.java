@@ -7,6 +7,10 @@ import practicasprofesionales.modelo.dao.DocumentoDAO;
 import practicasprofesionales.modelo.DTO.ReporteEstudiante;
 import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 
+/**
+ *
+ * @author endri
+ */
 public class EvaluacionReporteService {
 
     private DocumentoDAO documentoDAO;

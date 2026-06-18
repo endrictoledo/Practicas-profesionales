@@ -10,6 +10,10 @@ import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.ConexionBD;
 import practicasprofesionales.modelo.DTO.Proyecto;
 
+/**
+ *
+ * @author endri
+ */
 public class ProyectoDAO {
 
     public List<Proyecto> obtenerProyectosDisponibles() throws ExcepcionDAO {
