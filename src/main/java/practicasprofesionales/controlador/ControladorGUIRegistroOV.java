@@ -30,10 +30,6 @@ public class ControladorGUIRegistroOV implements Initializable {
     private TextField txt_telefono;
     @FXML
     private TextField txt_correo;
-    @FXML
-    private Button btn_cancelar;
-    @FXML
-    private Button btn_guardar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -43,7 +39,7 @@ public class ControladorGUIRegistroOV implements Initializable {
     }
 
     @FXML
-    private void btn_cancelarOnAction(ActionEvent event) {
+    private void btn_cancelar(ActionEvent event) {
 
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmación");
@@ -58,7 +54,7 @@ public class ControladorGUIRegistroOV implements Initializable {
     }
 
     @FXML
-    private void btn_guardarOnAction(ActionEvent event) {
+    private void btn_guardar(ActionEvent event) {
         OrganizacionVinculada ov = new OrganizacionVinculada();
         ov.setRazonSocial(txt_nombreOrg.getText());
         ov.setDireccion(txt_direccion.getText());
@@ -94,6 +90,11 @@ public class ControladorGUIRegistroOV implements Initializable {
                         "Formato de correo electrónico no válido",
                         Alert.AlertType.ERROR);
                 txt_correo.setStyle("-fx-border-color: red; -fx-padding: 10;");
+            } else if (respuesta.getMensaje().contains("exactamente 10 dígitos")) {
+                Utilidades.mostrarAlertaSimple("Formato incorrecto", 
+                        respuesta.getMensaje(),
+                        Alert.AlertType.ERROR);
+                txt_telefono.setStyle("-fx-border-color: red; -fx-padding: 10;");
             } else {
                 Utilidades.mostrarAlertaSimple("Error", 
                         respuesta.getMensaje(), Alert.AlertType.ERROR);
@@ -112,5 +113,6 @@ public class ControladorGUIRegistroOV implements Initializable {
         txt_telefono.clear();
         txt_correo.clear();
         txt_correo.setStyle("-fx-padding: 10;");
+        txt_telefono.setStyle("-fx-padding: 10;");
     }
 }

@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.collections.FXCollections;
@@ -19,6 +21,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
@@ -52,8 +56,6 @@ public class ControladorGUIListaProyectos implements Initializable {
     @FXML
     private TableColumn<Proyecto, String> col_prioridad; 
     @FXML
-    private Button btn_guardar;
-    @FXML
     private Button btn_masInformacion;
 
     @Override
@@ -63,6 +65,82 @@ public class ControladorGUIListaProyectos implements Initializable {
         col_cupos.setCellValueFactory(new PropertyValueFactory<>("cupo"));
         tabla_proyectos.setEditable(true);
         col_prioridad.setCellValueFactory(new PropertyValueFactory<>("prioridadSeleccionada"));
+        col_prioridad.setCellFactory(tc -> new javafx.scene.control.TableCell<Proyecto, String>() {
+            private javafx.scene.control.ComboBox<String> combo;
+            private boolean isInitializing = false;
+
+            @Override
+            public void startEdit() {
+                if (!isEmpty()) {
+                    super.startEdit();
+                    if (combo == null) {
+                        combo = new javafx.scene.control.ComboBox<>();
+                        combo.valueProperty().addListener((obs, oldVal, newVal) -> {
+                            if (!isInitializing && isEditing() && newVal != null) {
+                                commitEdit(newVal);
+                            }
+                        });
+                        combo.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+                            if (!isNowFocused && isEditing()) {
+                                cancelEdit();
+                            }
+                        });
+                    }
+                    
+                    isInitializing = true;
+                    List<String> disponibles = new ArrayList<>();
+                    disponibles.add("Ninguna");
+                    int total = getTableView().getItems().size();
+                    Proyecto pActual = getTableView().getItems().get(getIndex());
+                    for (int i = 1; i <= total; i++) {
+                        String val = String.valueOf(i);
+                        boolean enUso = false;
+                        for (Proyecto p : getTableView().getItems()) {
+                            if (p != pActual && val.equals(p.getPrioridadSeleccionada())) {
+                                enUso = true;
+                                break;
+                            }
+                        }
+                        if (!enUso) {
+                            disponibles.add(val);
+                        }
+                    }
+                    combo.setItems(FXCollections.observableArrayList(disponibles));
+                    combo.getSelectionModel().select(getItem() != null ? getItem() : "Ninguna");
+                    isInitializing = false;
+                    
+                    setText(null);
+                    setGraphic(combo);
+                    combo.requestFocus();
+                    combo.show();
+                }
+            }
+
+            @Override
+            public void cancelEdit() {
+                super.cancelEdit();
+                setText(getItem() != null ? getItem() : "Ninguna");
+                setGraphic(null);
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    if (isEditing()) {
+                        setText(null);
+                        setGraphic(combo);
+                    } else {
+                        setText(item != null ? item : "Ninguna");
+                        setGraphic(null);
+                    }
+                }
+            }
+        });
+
         col_prioridad.setOnEditCommit(event -> {
             Proyecto p = event.getRowValue();
             p.setPrioridadSeleccionada(event.getNewValue());
@@ -73,19 +151,33 @@ public class ControladorGUIListaProyectos implements Initializable {
 
     private void cargarProyectos() {
         try {
+            int idUsuarioLogueado = SesionGlobal.getInstancia().getUsuarioActual() != null ? 
+                                    SesionGlobal.getInstancia().getUsuarioActual().getIdUsuario() : -1;
+            int idEstudianteActual = -1;
+            
+            if (idUsuarioLogueado != -1) {
+                idEstudianteActual = EstudianteDAO.obtenerIdEstudiantePorUsuario(idUsuarioLogueado);
+            }
+            
+            Map<Integer, Integer> selecciones = new HashMap<>();
+            if (idEstudianteActual != -1) {
+                selecciones = SolicitudPracticaDAO.obtenerSeleccionesEstudiante(idEstudianteActual);
+            }
+            
             ProyectoDAO dao = new ProyectoDAO();
             List<Proyecto> lista = dao.obtenerProyectosDisponibles();
-            tabla_proyectos.setItems(FXCollections.observableArrayList(lista));
-            ObservableList<String> opcionesPrioridad = 
-                    FXCollections.observableArrayList();
-            int totalProyectos = lista.size();
-            for (int i = 1; i <= totalProyectos; i++) {
-                opcionesPrioridad.add(String.valueOf(i));
+            
+            for (Proyecto p : lista) {
+                if (selecciones.containsKey(p.getIdProyecto())) {
+                    p.setPrioridadSeleccionada(String.valueOf(selecciones.get(p.getIdProyecto())));
+                } else {
+                    p.setPrioridadSeleccionada("Ninguna");
+                }
             }
-            col_prioridad.setCellFactory(ComboBoxTableCell.forTableColumn(
-                    opcionesPrioridad));
+            
+            tabla_proyectos.setItems(FXCollections.observableArrayList(lista));
 
-        } catch (Exception e) {
+        } catch (ExcepcionDAO e) {
             e.printStackTrace();
             Utilidades.mostrarAlertaSimple("Error",
                     "No se pudieron cargar los proyectos.",
@@ -130,7 +222,7 @@ public class ControladorGUIListaProyectos implements Initializable {
     }  
 
     @FXML
-    private void btn_guardarOnAction(ActionEvent event) {
+    private void btn_guardar(ActionEvent event) {
         List<SolicitudEstudiante> listaAEnviar = new ArrayList<>();
         if (SesionGlobal.getInstancia().getUsuarioActual() == null) {
             Utilidades.mostrarAlertaSimple("Error de sesión",

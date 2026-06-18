@@ -119,7 +119,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="68.0" prefWidth="260.0">
                <children>
-                  <Button layoutX="62.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: #C60139; -fx-text-fill: white; -fx-cursor: hand;" text="Cerrar Sesión">
+                  <Button layoutX="62.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn_cerrar" style="-fx-background-color: #C60139; -fx-text-fill: white; -fx-cursor: hand;" text="Cerrar Sesión">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

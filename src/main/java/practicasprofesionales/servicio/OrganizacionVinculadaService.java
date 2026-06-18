@@ -9,8 +9,11 @@ import practicasprofesionales.modelo.pojo.RespuestaOperacion;
 public class OrganizacionVinculadaService {
 
     private static final String CORREO_REGEX = 
-                          "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,}$";
+                          "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
     private static final Pattern PATRON_CORREO = Pattern.compile(CORREO_REGEX);
+
+    private static final String TELEFONO_REGEX = "^[0-9]{10}$";
+    private static final Pattern PATRON_TELEFONO = Pattern.compile(TELEFONO_REGEX);
 
     public static RespuestaOperacion guardarOrganizacion(
                                                     OrganizacionVinculada ov) {
@@ -26,6 +29,12 @@ public class OrganizacionVinculadaService {
         if (!PATRON_CORREO.matcher(ov.getCorreo()).matches()) {
             respuesta.setIsError(true);
             respuesta.setMensaje("Formato de correo electrónico no válido");
+            return respuesta;
+        }
+
+        if (!PATRON_TELEFONO.matcher(ov.getTelefono()).matches()) {
+            respuesta.setIsError(true);
+            respuesta.setMensaje("El número de teléfono debe tener exactamente 10 dígitos");
             return respuesta;
         }
         try {

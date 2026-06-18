@@ -80,6 +80,7 @@ public class ControladorGUIMenuPracticante implements Initializable {
 
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
+        Utilidades.cerrarSesion(event);
     }
     
 }

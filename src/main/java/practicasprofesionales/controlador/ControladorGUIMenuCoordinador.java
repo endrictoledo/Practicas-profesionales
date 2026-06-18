@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import practicasprofesionales.utilidades.Utilidades;
 
 /**
  * Controlador de la vista MenuCoordinadorGUI
@@ -52,6 +53,11 @@ public class ControladorGUIMenuCoordinador implements Initializable {
             System.err.println("Error crítico: No se pudo cargar el archivo FXML: " + nombreFxml);
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void btn_cerrar(ActionEvent event) {
+        Utilidades.cerrarSesion(event);
     }
 
 }
