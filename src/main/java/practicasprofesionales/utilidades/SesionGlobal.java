@@ -1,6 +1,6 @@
 package practicasprofesionales.utilidades;
 
-import practicasprofesionales.modelo.pojo.Usuario;
+import practicasprofesionales.modelo.DTO.Usuario;
 
 public class SesionGlobal {
     private static SesionGlobal instancia;

@@ -25,7 +25,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion;
+import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 import practicasprofesionales.modelo.servicios.SubirDocumentoService;
 import practicasprofesionales.utilidades.Utilidades;
 

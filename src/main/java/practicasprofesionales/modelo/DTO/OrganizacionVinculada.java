@@ -1,4 +1,4 @@
-package practicasprofesionales.modelo.pojo;
+package practicasprofesionales.modelo.DTO;
 
 public class OrganizacionVinculada {
     private int idOrganizacionVinculada;

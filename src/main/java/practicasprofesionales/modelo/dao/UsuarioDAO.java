@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.ConexionBD;
 import practicasprofesionales.modelo.TipoUsuario;
-import practicasprofesionales.modelo.pojo.Usuario;
+import practicasprofesionales.modelo.DTO.Usuario;
 import practicasprofesionales.utilidades.UtilidadContrasena;
 
 public class UsuarioDAO {

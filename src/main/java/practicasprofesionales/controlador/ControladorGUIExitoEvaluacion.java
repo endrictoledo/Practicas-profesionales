@@ -19,15 +19,14 @@ import practicasprofesionales.utilidades.Utilidades;
 
 public class ControladorGUIExitoEvaluacion implements Initializable {
 
-    @FXML private Button btn_descargar;
+    private Button btn_descargar;
     private byte[] archivoBytes;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }    
+    }
 
-    // Método para recibir los bytes del controlador anterior
-    public void initData(byte[] bytes) {
+    public void inicializarDatos(byte[] bytes) {
         this.archivoBytes = bytes;
     }
 
@@ -39,7 +38,7 @@ public class ControladorGUIExitoEvaluacion implements Initializable {
         }
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Guardar Evaluación OV");
+        fileChooser.setTitle("Guardar evaluación OV");
         fileChooser.setInitialFileName("Evaluacion_OV.txt");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de Texto", "*.txt"));
 
@@ -50,18 +49,16 @@ public class ControladorGUIExitoEvaluacion implements Initializable {
             try (FileOutputStream fos = new FileOutputStream(archivoDestino)) {
                 fos.write(archivoBytes);
                 Utilidades.mostrarAlertaSimple("Éxito", "El archivo se ha descargado correctamente en tu PC.", Alert.AlertType.INFORMATION);
-                
-                // Regresar al menú principal
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/practicasprofesionales/vista/GUIMenuPracticante.fxml"));
                 Parent root = loader.load();
                 stage.setScene(new Scene(root));
-                
+
             } catch (IOException e) {
-                // EX 1: Error en descarga
                 Utilidades.mostrarAlertaSimple("Error de Descarga", "No se pudo descargar correctamente el archivo. Intenta de nuevo.", Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
         }
-        // FA 2: Si archivoDestino es null (el usuario canceló), el estado se mantiene y puede darle clic a otros lados.
+
     }
 }

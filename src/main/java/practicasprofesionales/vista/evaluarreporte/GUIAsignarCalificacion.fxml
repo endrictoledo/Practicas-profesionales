@@ -25,7 +25,7 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label text="Fecha: 19/feb/2026 - 12:06 hrs." textFill="#64748b">
+                <Label fx:id="lbl_fecha" text="Fecha: 19/feb/2026 - 12:06 hrs." textFill="#64748b">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -37,14 +37,17 @@
         <VBox spacing="15.0">
             <children>
             
-                <Label alignment="TOP_LEFT" prefWidth="540.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." textFill="#334155" wrapText="true">
+                <Label alignment="TOP_LEFT" prefWidth="540.0" text="Instrucciones de la actividad a subir a continuación" textFill="#334155" wrapText="true">
                     <font>
                         <Font size="13.0" />
                     </font>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
                 </Label>
             
             
-                <Button fx:id="btn_descargar" onAction="#btn_descargarOnAction" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #C70039; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="⬇ Descargar archivo adjunto" textFill="WHITE">
+                <Button fx:id="btn_descargar" mnemonicParsing="false" onAction="#btn_descargarOnAction" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #C70039; -fx-cursor: hand;" text="Descargar archivo adjunto" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
@@ -80,7 +83,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txt_calificacion" prefWidth="60.0" promptText="0-10" style="-fx-border-color: #cbd5e1; -fx-border-radius: 4;" />
+                                <TextField fx:id="txt_calificacion" prefWidth="60.0" promptText="0-10" />
                                 <Label text="de 10 pts." textFill="#475569">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
@@ -100,27 +103,6 @@
                   
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="15.0" style="-fx-background-color: #f8fafc; -fx-border-color: transparent transparent #cbd5e1 transparent; -fx-border-width: 1; -fx-background-radius: 4 4 0 0;">
                             <children>
-                                <Label text="B" textFill="#475569">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="I" textFill="#475569">
-                                    <font>
-                                        <Font name="System Italic" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="U" textFill="#475569" underline="true">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="S" textFill="#475569">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Label>
-                                <AnchorPane prefWidth="1.0" style="-fx-background-color: #cbd5e1;" />
                                 <Label text="Observaciones de la evaluación" textFill="#64748b">
                                     <font>
                                         <Font size="12.0" />
@@ -132,7 +114,7 @@
                             </padding>
                         </HBox>
                   
-                        <TextArea fx:id="txt_observaciones" promptText="Actividad recibida. Escribe aquí tus observaciones..." style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true" VBox.vgrow="ALWAYS">
+                        <TextArea fx:id="txt_observaciones" promptText="Actividad recibida. Escribe aquí tus observaciones..." style="-fx-background-color: transparent;" wrapText="true" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -146,7 +128,7 @@
             
                 <HBox alignment="CENTER_RIGHT">
                     <children>
-                        <Button fx:id="btn_guardar" onAction="#btn_guardarOnAction" mnemonicParsing="false" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 4; -fx-cursor: hand;" text="Guardar">
+                        <Button fx:id="btn_guardar" mnemonicParsing="false" onAction="#btn_guardarOnAction" style="-fx-background-color: #185244; -fx-cursor: hand;" text="Guardar" textFill="#fcfcfc">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>

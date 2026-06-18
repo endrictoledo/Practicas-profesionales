@@ -4,15 +4,24 @@
  */
 package practicasprofesionales.controlador;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import practicasprofesionales.modelo.DTO.ReporteEstudiante;
+import practicasprofesionales.modelo.servicios.EvaluacionReporteService;
 import practicasprofesionales.utilidades.Utilidades;
 
 /**
@@ -22,14 +31,13 @@ import practicasprofesionales.utilidades.Utilidades;
  */
 public class ControladorGUISeleccionEstudiante implements Initializable {
 
-    @FXML
     private TextField txt_buscar;
-    @FXML
-    private Button btn_buscar;
     @FXML
     private VBox vb_listaEstudiantes;
     @FXML
     private StackPane pn_panelBlancoDerecho;
+
+    private List<ReporteEstudiante> listaReportesOriginal;
 
     /**
      * Initializes the controller class.
@@ -37,62 +45,65 @@ public class ControladorGUISeleccionEstudiante implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         vb_listaEstudiantes.getChildren().clear();
-    }    
 
-    public void initData(String tipoReporte) {
+    }
+
+    public void inicializarDatos(String tipoReporte) {
         try {
-            practicasprofesionales.modelo.servicios.EvaluacionReporteService service = new practicasprofesionales.modelo.servicios.EvaluacionReporteService();
-            java.util.List<practicasprofesionales.modelo.pojo.ReporteEstudiante> reportes = service.obtenerReportesPorTipo(tipoReporte);
-            
-            vb_listaEstudiantes.getChildren().clear();
-            
-            if (reportes.isEmpty()) {
-                javafx.scene.control.Label lblEmpty = new javafx.scene.control.Label("No hay estudiantes que hayan entregado este reporte aún.");
-                lblEmpty.setStyle("-fx-text-fill: #64748b; -fx-padding: 20;");
-                vb_listaEstudiantes.getChildren().add(lblEmpty);
-                return;
-            }
-
-            for (practicasprofesionales.modelo.pojo.ReporteEstudiante reporte : reportes) {
-                Button btn = new Button(reporte.getNombreEstudiante() + " - " + reporte.getMatricula());
-                btn.setStyle("-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-padding: 10 20; -fx-cursor: hand; -fx-text-fill: #334155; -fx-alignment: CENTER_LEFT; -fx-font-size: 14px;");
-                btn.setMaxWidth(Double.MAX_VALUE);
-                
-                btn.setOnAction(e -> {
-                    if (reporte.getArchivoFisico() == null || reporte.getArchivoFisico().length == 0) {
-                        Utilidades.mostrarAlertaSimple("Error", "Reporte no encontrado. Intente de nuevo", javafx.scene.control.Alert.AlertType.ERROR);
-                        return; // EX1
-                    }
-                    cargarAsignarCalificacion(reporte);
-                });
-                
-                vb_listaEstudiantes.getChildren().add(btn);
-            }
+            EvaluacionReporteService service = new EvaluacionReporteService();
+            listaReportesOriginal = service.obtenerReportesPorTipo(tipoReporte);
+            mostrarEstudiantes(listaReportesOriginal);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void cargarAsignarCalificacion(practicasprofesionales.modelo.pojo.ReporteEstudiante reporte) {
+    private void mostrarEstudiantes(List<ReporteEstudiante> reportes) {
+        vb_listaEstudiantes.getChildren().clear();
+
+        if (reportes.isEmpty()) {
+            Label etiquetaVacia = new Label("No hay resultados para mostrar.");
+            vb_listaEstudiantes.getChildren().add(etiquetaVacia);
+            return;
+        }
+
+        for (ReporteEstudiante reporte : reportes) {
+            Button btn = new Button(reporte.getNombreEstudiante() + " - " + reporte.getMatricula());
+            btn.setMaxWidth(Double.MAX_VALUE);
+
+            btn.setOnAction(e -> {
+                if (reporte.getArchivoFisico() == null || reporte.getArchivoFisico().length == 0) {
+                    Utilidades.mostrarAlertaSimple("Error", "Reporte no encontrado. Intente de nuevo", Alert.AlertType.ERROR);
+                    return;
+                }
+                cargarAsignarCalificacion(reporte);
+            });
+
+            vb_listaEstudiantes.getChildren().add(btn);
+        }
+    }
+
+    private void cargarAsignarCalificacion(ReporteEstudiante reporte) {
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIAsignarCalificacion.fxml"));
-            javafx.scene.layout.Region subVista = loader.load();
-            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIAsignarCalificacion.fxml"));
+            Region subVista = loader.load();
+
             ControladorGUIAsignarCalificacion controlador = loader.getController();
-            controlador.initData(reporte);
-            
+            controlador.inicializarDatos(reporte);
+
             subVista.prefWidthProperty().bind(pn_panelBlancoDerecho.widthProperty());
             subVista.prefHeightProperty().bind(pn_panelBlancoDerecho.heightProperty());
-            
+
             pn_panelBlancoDerecho.getChildren().clear();
             pn_panelBlancoDerecho.getChildren().add(subVista);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @FXML
     private void btn_asignarProrroga(ActionEvent event) {
-        // Funcionalidad no requerida por el momento según solicitud del usuario.
+
     }
+
 }

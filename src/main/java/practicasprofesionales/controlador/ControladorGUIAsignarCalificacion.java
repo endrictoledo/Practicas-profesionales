@@ -6,12 +6,16 @@ package practicasprofesionales.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion;
+import practicasprofesionales.modelo.DTO.ReporteEstudiante;
+import practicasprofesionales.modelo.DTO.RespuestaOperacion;
+import practicasprofesionales.modelo.servicios.EvaluacionReporteService;
 
 /**
  * FXML Controller class
@@ -28,9 +32,11 @@ public class ControladorGUIAsignarCalificacion implements Initializable {
     private TextArea txt_observaciones;
     @FXML
     private Button btn_guardar;
-
-    private practicasprofesionales.modelo.pojo.ReporteEstudiante reporte;
-    private practicasprofesionales.modelo.servicios.EvaluacionReporteService service;
+    @FXML
+    private Label lbl_fecha;
+    
+    private ReporteEstudiante reporte;
+    private EvaluacionReporteService service;
 
     /**
      * Initializes the controller class.
@@ -40,9 +46,13 @@ public class ControladorGUIAsignarCalificacion implements Initializable {
         // TODO
     }
 
-    public void initData(practicasprofesionales.modelo.pojo.ReporteEstudiante reporte) {
+    public void inicializarDatos(ReporteEstudiante reporte) {
         this.reporte = reporte;
-        this.service = new practicasprofesionales.modelo.servicios.EvaluacionReporteService();
+        this.service = new EvaluacionReporteService();
+
+        // Mostrar la fecha actual en la etiqueta
+        java.time.format.DateTimeFormatter formato = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        lbl_fecha.setText(java.time.LocalDate.now().format(formato));
 
         if (reporte.getCalificacion() != null && !reporte.getCalificacion().equals("N/A")) {
             txt_calificacion.setText(reporte.getCalificacion());
@@ -52,8 +62,7 @@ public class ControladorGUIAsignarCalificacion implements Initializable {
         }
     }
 
-    @FXML
-    private void btn_descargarOnAction(javafx.event.ActionEvent event) {
+    private void btn_descargar(javafx.event.ActionEvent event) {
         try {
             javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
             fileChooser.setTitle("Guardar documento");
@@ -98,5 +107,9 @@ public class ControladorGUIAsignarCalificacion implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void btn_descargarOnAction(ActionEvent event) {
     }
 }

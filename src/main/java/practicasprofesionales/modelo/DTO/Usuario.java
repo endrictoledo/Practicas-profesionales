@@ -1,4 +1,4 @@
-package practicasprofesionales.modelo.pojo;
+package practicasprofesionales.modelo.DTO;
 
 import practicasprofesionales.modelo.TipoUsuario;
 

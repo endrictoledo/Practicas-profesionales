@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.ConexionBD;
-import practicasprofesionales.modelo.pojo.Proyecto;
+import practicasprofesionales.modelo.DTO.Proyecto;
 
 public class SolicitudProyectoDAO {
 

@@ -11,8 +11,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import practicasprofesionales.utilidades.Utilidades;
 
 /**
  * FXML Controller class
@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
  * @author endri
  */
 public class ControladorGUIMenuProfesor implements Initializable {
-
+    
     @FXML
     private Pane pn_principal;
 
@@ -31,7 +31,7 @@ public class ControladorGUIMenuProfesor implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    
     @FXML
     private void btnEvaluarReportes(ActionEvent event) {
         try {
@@ -44,17 +44,18 @@ public class ControladorGUIMenuProfesor implements Initializable {
             e.printStackTrace();
         }
     }
-
+    
     @FXML
     private void btnFormatos(ActionEvent event) {
     }
-
+    
     @FXML
     private void btnBuzon(ActionEvent event) {
     }
-
+    
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
+        Utilidades.cerrarSesion(event);
     }
-
+    
 }

@@ -142,12 +142,12 @@
                   
                         <HBox alignment="CENTER_RIGHT" spacing="20.0">
                             <children>
-                                <Button fx:id="btn_cancelar" mnemonicParsing="false" onAction="#btn_cancelarOnAction" prefHeight="46.0" prefWidth="107.0" style="-fx-background-color: transparent; -fx-text-fill: #64748b; -fx-cursor: hand;" text="Cancelar">
+                                <Button mnemonicParsing="false" onAction="#btn_cancelar" prefHeight="46.0" prefWidth="107.0" style="-fx-background-color: transparent; -fx-text-fill: #64748b; -fx-cursor: hand;" text="Cancelar">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="btn_finalizar" mnemonicParsing="false" onAction="#btn_finalizarOnAction" prefHeight="44.0" prefWidth="103.0" style="-fx-background-color: #185244; -fx-cursor: hand;" text="Finalizar" textFill="WHITE">
+                                <Button mnemonicParsing="false" onAction="#btn_finalizar" prefHeight="44.0" prefWidth="103.0" style="-fx-background-color: #185244; -fx-cursor: hand;" text="Finalizar" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>

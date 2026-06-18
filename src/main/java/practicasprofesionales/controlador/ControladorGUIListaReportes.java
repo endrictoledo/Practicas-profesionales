@@ -8,7 +8,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 /**
  * FXML Controller class
@@ -27,15 +31,16 @@ public class ControladorGUIListaReportes implements Initializable {
 
     private void cargarSeleccionEstudiante(String tipoReporte, ActionEvent event) {
         try {
-            javafx.scene.Node source = (javafx.scene.Node) event.getSource();
-            javafx.scene.layout.Pane parentPane = (javafx.scene.layout.Pane) source.getScene().lookup("#pn_principal");
+            //Averigua que bot+on fue presionado 
+            Node fuente = (Node) event.getSource();
+            Pane parentPane = (Pane) fuente.getScene().lookup("#pn_principal");
             if (parentPane == null) return;
             
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUISeleccionEstudiante.fxml"));
-            javafx.scene.layout.Region subVista = loader.load();
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUISeleccionEstudiante.fxml"));
+            Region subVista = cargador.load();
             
-            ControladorGUISeleccionEstudiante controlador = loader.getController();
-            controlador.initData(tipoReporte);
+            ControladorGUISeleccionEstudiante controlador = cargador.getController();
+            controlador.inicializarDatos(tipoReporte);
             
             subVista.prefWidthProperty().bind(parentPane.widthProperty());
             subVista.prefHeightProperty().bind(parentPane.heightProperty());

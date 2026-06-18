@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import practicasprofesionales.modelo.ConexionBD;
-import practicasprofesionales.modelo.pojo.OrganizacionVinculada;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion;
+import practicasprofesionales.modelo.DTO.OrganizacionVinculada;
+import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 
 public class OrganizacionVinculadaDAO {
 

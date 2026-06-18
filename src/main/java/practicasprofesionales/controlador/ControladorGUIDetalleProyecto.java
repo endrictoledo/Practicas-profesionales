@@ -1,13 +1,23 @@
 package practicasprofesionales.controlador;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import practicasprofesionales.modelo.DTO.Proyecto;
+import practicasprofesionales.modelo.DTO.RespuestaOperacion;
+import practicasprofesionales.modelo.servicios.SolicitarProyectoService;
 import practicasprofesionales.utilidades.Utilidades;
 
 /**
@@ -30,44 +40,56 @@ public class ControladorGUIDetalleProyecto implements Initializable {
     @FXML
     private Label lbl_cupos;
     @FXML
-    private Button btn_cancelar;
-    @FXML
-    private Button btn_anadir;
-    @FXML
     private Label lbl_descripcionGeneral;
 
-    private practicasprofesionales.modelo.pojo.Proyecto proyecto;
+    private Proyecto proyecto;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
 
-    public void initData(practicasprofesionales.modelo.pojo.Proyecto proyecto) {
+    }
+
+    public void inicializarDatos(Proyecto proyecto) {
         this.proyecto = proyecto;
-        
-        if(lbl_nombreProyecto != null) lbl_nombreProyecto.setText(proyecto.getNombre());
-        if(lbl_descripcionGeneral != null) lbl_descripcionGeneral.setText(proyecto.getDescripcion());
-        if(lbl_objetivo != null) lbl_objetivo.setText(proyecto.getObjetivo());
-        if(lbl_responsabilidades != null) lbl_responsabilidades.setText(proyecto.getResponsabilidades());
-        if(lbl_actividades != null) lbl_actividades.setText(proyecto.getActividades());
-        if(lbl_duracion != null) lbl_duracion.setText(proyecto.getDuracion());
-        if(lbl_horario != null) lbl_horario.setText(proyecto.getHorario());
-        if(lbl_cupos != null) lbl_cupos.setText(String.valueOf(proyecto.getCupos()));
+
+        if (lbl_nombreProyecto != null) {
+            lbl_nombreProyecto.setText(proyecto.getNombre());
+        }
+        if (lbl_descripcionGeneral != null) {
+            lbl_descripcionGeneral.setText(proyecto.getDescripcion());
+        }
+        if (lbl_objetivo != null) {
+            lbl_objetivo.setText(proyecto.getObjetivo());
+        }
+        if (lbl_responsabilidades != null) {
+            lbl_responsabilidades.setText(proyecto.getResponsabilidades());
+        }
+        if (lbl_actividades != null) {
+            lbl_actividades.setText(proyecto.getActividades());
+        }
+        if (lbl_duracion != null) {
+            lbl_duracion.setText(proyecto.getDuracion());
+        }
+        if (lbl_horario != null) {
+            lbl_horario.setText(proyecto.getHorario());
+        }
+        if (lbl_cupos != null) {
+            lbl_cupos.setText(String.valueOf(proyecto.getCupos()));
+        }
     }
 
     @FXML
     private void btn_cancelar(ActionEvent event) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
         alert.setHeaderText("¿Seguro que desea cancelar?");
-        
-        javafx.scene.control.ButtonType btnSi = new javafx.scene.control.ButtonType("Sí");
-        javafx.scene.control.ButtonType btnNo = new javafx.scene.control.ButtonType("No", javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
-        
+
+        ButtonType btnSi = new ButtonType("Sí");
+        ButtonType btnNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
         alert.getButtonTypes().setAll(btnSi, btnNo);
-        
-        java.util.Optional<javafx.scene.control.ButtonType> result = alert.showAndWait();
+
+        Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == btnSi) {
             regresarAListaProyectos(event);
         }
@@ -75,14 +97,14 @@ public class ControladorGUIDetalleProyecto implements Initializable {
 
     @FXML
     private void btn_anadir(ActionEvent event) {
-        practicasprofesionales.modelo.servicios.SolicitarProyectoService service = new practicasprofesionales.modelo.servicios.SolicitarProyectoService();
+        SolicitarProyectoService service = new SolicitarProyectoService();
         RespuestaOperacion respuesta = service.solicitarProyecto(proyecto);
-        
+
         if (!respuesta.isError()) {
-            Utilidades.mostrarAlertaSimple("Éxito", respuesta.getMensaje(), javafx.scene.control.Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Éxito", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
             regresarAListaProyectos(event);
         } else {
-            Utilidades.mostrarAlertaSimple("Atención", respuesta.getMensaje(), javafx.scene.control.Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Atención", respuesta.getMensaje(), Alert.AlertType.WARNING);
             if (respuesta.getMensaje().contains("cupo")) {
                 regresarAListaProyectos(event);
             }
@@ -91,13 +113,13 @@ public class ControladorGUIDetalleProyecto implements Initializable {
 
     private void regresarAListaProyectos(ActionEvent event) {
         try {
-            javafx.scene.Node source = (javafx.scene.Node) event.getSource();
-            javafx.scene.layout.Pane parentPane = (javafx.scene.layout.Pane) source.getScene().lookup("#pn_principal");
-            
-            javafx.scene.layout.Region subVista = (javafx.scene.layout.Region) javafx.fxml.FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/solicitarproyecto/GUIListaProyectos.fxml"));
+            Node source = (Node) event.getSource();
+            Pane parentPane = (Pane) source.getScene().lookup("#pn_principal");
+
+            Region subVista = (Region) FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/solicitarproyecto/GUIListaProyectos.fxml"));
             subVista.prefWidthProperty().bind(parentPane.widthProperty());
             subVista.prefHeightProperty().bind(parentPane.heightProperty());
-            
+
             parentPane.getChildren().clear();
             parentPane.getChildren().add(subVista);
         } catch (Exception e) {

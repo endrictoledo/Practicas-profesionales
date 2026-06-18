@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.TipoUsuario;
 import practicasprofesionales.modelo.dao.UsuarioDAO;
-import practicasprofesionales.modelo.pojo.Usuario;
+import practicasprofesionales.modelo.DTO.Usuario;
 
 /**
  * Controlador de la vista InicioSesionGUI
@@ -61,8 +61,8 @@ public class ControladorGUIInicioSesion implements Initializable {
                 practicasprofesionales.utilidades.SesionGlobal.getInstancia().setUsuarioActual(usuario);
                 navegarAMenu(usuario);
             } else {
-                mostrarError("Correo o contraseña incorrectos. Intenta de nuevo.");
                 txt_contrasena.clear();
+                mostrarError("Correo o contraseña incorrectos. Intenta de nuevo.");
             }
 
         } catch (ExcepcionDAO e) {

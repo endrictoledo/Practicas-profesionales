@@ -34,7 +34,7 @@
                 </HBox>
 
             
-                <VBox spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: #e2e8f0; -fx-border-radius: 10; -fx-padding: 35;">
+                <VBox spacing="25.0" style="-fx-background-color: white; -fx-padding: 35;">
                     <children>
                   
                   
@@ -64,7 +64,7 @@
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lbl_descripcionGeneral" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Descripción del proyecto" textFill="#334155" wrapText="true">
+                                <Label fx:id="lbl_descripcionGeneral" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-padding: 15;" text="Descripción del proyecto" textFill="#334155" wrapText="true">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -80,7 +80,7 @@
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lbl_responsabilidades" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Responsabilidades del estudiante dentro del proyecto" textFill="#334155" wrapText="true">
+                                <Label fx:id="lbl_responsabilidades" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-padding: 15;" text="Responsabilidades del estudiante dentro del proyecto" textFill="#334155" wrapText="true">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -96,7 +96,7 @@
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lbl_objetivo" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="El objetivo del proyecto" textFill="#334155" wrapText="true">
+                                <Label fx:id="lbl_objetivo" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-padding: 15;" text="El objetivo del proyecto" textFill="#334155" wrapText="true">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -112,7 +112,7 @@
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lbl_actividades" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Lista de actividades que se realizan dentro del proyecto&#10;" textFill="#334155" wrapText="true">
+                                <Label fx:id="lbl_actividades" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-padding: 15;" text="Lista de actividades que se realizan dentro del proyecto&#10;" textFill="#334155" wrapText="true">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -128,7 +128,7 @@
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lbl_duracion" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Duración del proyecto en meses" textFill="#334155" wrapText="true">
+                                <Label fx:id="lbl_duracion" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-padding: 15;" text="Duración del proyecto en meses" textFill="#334155" wrapText="true">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
@@ -144,7 +144,7 @@
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lbl_horario" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-background-radius: 8; -fx-padding: 15;" text="Horario laboral Dias, Horas" textFill="#334155" wrapText="true">
+                                <Label fx:id="lbl_horario" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f8fafc; -fx-padding: 15;" text="Horario laboral Dias, Horas" textFill="#334155" wrapText="true">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
@@ -175,12 +175,12 @@
                   
                         <HBox alignment="CENTER_RIGHT" spacing="20.0">
                             <children>
-                                <Button fx:id="btn_cancelar" mnemonicParsing="false" onAction="#btn_cancelar" style="-fx-background-color: transparent; -fx-text-fill: #64748b; -fx-cursor: hand;" text="Cancelar">
+                                <Button mnemonicParsing="false" onAction="#btn_cancelar" prefHeight="47.0" prefWidth="93.0" style="-fx-background-color: transparent; -fx-text-fill: #64748b; -fx-cursor: hand;" text="Cancelar">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="btn_anadir" mnemonicParsing="false" onAction="#btn_anadir" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 12 30; -fx-cursor: hand;" text="Añadir">
+                                <Button mnemonicParsing="false" onAction="#btn_anadir" style="-fx-background-color: #185244; -fx-padding: 12 30; -fx-cursor: hand;" text="Añadir" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>

@@ -12,8 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import practicasprofesionales.modelo.pojo.OrganizacionVinculada;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion;
+import practicasprofesionales.modelo.DTO.OrganizacionVinculada;
+import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 import practicasprofesionales.servicio.OrganizacionVinculadaService;
 import practicasprofesionales.utilidades.Utilidades;
 

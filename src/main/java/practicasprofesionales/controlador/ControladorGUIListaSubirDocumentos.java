@@ -34,17 +34,15 @@ public class ControladorGUIListaSubirDocumentos implements Initializable {
 
     private void cargarSubirDocumento(String nombreDocumento, ActionEvent event) {
         try {
-            Node fuente = (Node) event.getSource(); //Decubre qué botón fue el que se disparó el evento
+            Node fuente = (Node) event.getSource();
             Pane panelPadre = (Pane) fuente.getScene().lookup("#pn_principal"); //Este escala y descubre cuál es el contenedor central
             if (panelPadre == null) {
                 return;
             }
-            
-            //Esta parte se hace de esta forma para poder transferir datos entre las pantallas fácilmente
+
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("/practicasprofesionales/vista/anadirdocumentospractica/GUISubirDocumento.fxml"));
             Region subVista = cargador.load();
-            
-            //De esta forma podemos enviar el nombre dle documento 
+
             ControladorGUISubirDocumento controlador = cargador.getController();
             controlador.inicializarDatos(nombreDocumento);
 

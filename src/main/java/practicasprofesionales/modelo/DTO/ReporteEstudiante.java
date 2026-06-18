@@ -1,4 +1,4 @@
-package practicasprofesionales.modelo.pojo;
+package practicasprofesionales.modelo.DTO;
 
 import java.sql.Date;
 

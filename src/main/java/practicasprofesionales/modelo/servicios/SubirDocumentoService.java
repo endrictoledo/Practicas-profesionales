@@ -6,10 +6,10 @@ import java.nio.file.Files;
 import java.sql.Date;
 import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.dao.DocumentoDAO;
-import practicasprofesionales.modelo.pojo.Documento;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion;
+import practicasprofesionales.modelo.DTO.Documento;
+import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 import practicasprofesionales.utilidades.SesionGlobal;
-import practicasprofesionales.modelo.pojo.Usuario;
+import practicasprofesionales.modelo.DTO.Usuario;
 
 public class SubirDocumentoService {
     

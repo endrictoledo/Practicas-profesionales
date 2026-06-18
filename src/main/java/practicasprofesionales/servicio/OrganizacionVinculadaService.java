@@ -3,8 +3,8 @@ package practicasprofesionales.servicio;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 import practicasprofesionales.modelo.dao.OrganizacionVinculadaDAO;
-import practicasprofesionales.modelo.pojo.OrganizacionVinculada;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion;
+import practicasprofesionales.modelo.DTO.OrganizacionVinculada;
+import practicasprofesionales.modelo.DTO.RespuestaOperacion;
 
 public class OrganizacionVinculadaService {
 

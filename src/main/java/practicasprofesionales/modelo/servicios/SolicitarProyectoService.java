@@ -3,9 +3,9 @@ package practicasprofesionales.modelo.servicios;
 import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.dao.ProyectoDAO;
 import practicasprofesionales.modelo.dao.SolicitudProyectoDAO;
-import practicasprofesionales.modelo.pojo.Proyecto;
-import practicasprofesionales.modelo.pojo.RespuestaOperacion;
-import practicasprofesionales.modelo.pojo.Usuario;
+import practicasprofesionales.modelo.DTO.Proyecto;
+import practicasprofesionales.modelo.DTO.RespuestaOperacion;
+import practicasprofesionales.modelo.DTO.Usuario;
 import practicasprofesionales.utilidades.SesionGlobal;
 
 public class SolicitarProyectoService {
