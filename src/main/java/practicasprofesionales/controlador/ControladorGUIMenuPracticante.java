@@ -5,13 +5,17 @@
 package practicasprofesionales.controlador;
 
 import java.awt.Desktop;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import practicasprofesionales.utilidades.Utilidades;
 
 /**
  * FXML Controller class
@@ -19,7 +23,7 @@ import javafx.scene.layout.Pane;
  * @author endri
  */
 public class ControladorGUIMenuPracticante implements Initializable {
-
+    
     @FXML
     private Pane pn_principal;
 
@@ -28,45 +32,54 @@ public class ControladorGUIMenuPracticante implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        cambiarVista("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml");
     }
-
+    
     @FXML
     private void btnBuzon(ActionEvent event) {
     }
-
-    @FXML
-    private void btnCerrarSesion(ActionEvent event) {
-        practicasprofesionales.utilidades.Utilidades.cerrarSesion(event);
+    
+    private void btn_cerrarSesion(ActionEvent event) {
+        Utilidades.navegar(event, "/practicasprofesionales/vista/GUIInicioSesion.fxml", "Inicio de Sesión");
     }
-
+    
     @FXML
     private void btn_reportes(ActionEvent event) {
+        cambiarVista("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml");
     }
-
+    
     @FXML
     private void btn_solicitarProyecto(ActionEvent event) {
+        cambiarVista("/practicasprofesionales/vista/solicitarproyecto/GUIListaProyectos.fxml");
     }
-
+    
     @FXML
     private void btn_documentosIniciales(ActionEvent event) {
+        cambiarVista("/practicasprofesionales/vista/anadirdocumentospractica/GUIDocumentos.fxml");
     }
-
+    
     @FXML
     private void btn_evaluarOV(ActionEvent event) {
+        cambiarVista("/practicasprofesionales/vista/evaluarov/GUIEvaluacionOV.fxml");
+    }
+    
+    private void cambiarVista(String ruta) {
         try {
-            javafx.scene.layout.Region subVista = (javafx.scene.layout.Region) javafx.fxml.FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarov/GUIEvaluacionOV.fxml"));
+            Region subVista = (Region) FXMLLoader.load(getClass().getResource(ruta));
             
-            // Obligar a la vista (ScrollPane) a estirarse al mismo tamaño que el panel principal
             subVista.prefWidthProperty().bind(pn_principal.widthProperty());
             subVista.prefHeightProperty().bind(pn_principal.heightProperty());
             
             pn_principal.getChildren().clear();
             pn_principal.getChildren().add(subVista);
-        } catch (java.io.IOException e) {
-            System.err.println("Error al cargar la subvista de Evaluación OV: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error al cargar la nueva vista" + e.getMessage());
             e.printStackTrace();
         }
     }
 
+    @FXML
+    private void btnCerrarSesion(ActionEvent event) {
+    }
+    
 }

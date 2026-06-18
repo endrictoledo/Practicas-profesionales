@@ -6,9 +6,13 @@ package practicasprofesionales.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 /**
  * FXML Controller class
@@ -27,7 +31,29 @@ public class ControladorGUIDocumentos implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
+    }
+
+    @FXML
+    private void btn_seleccionarArchivo(ActionEvent event) {
+        try {
+            Pane panelPadre = (Pane) btn_seleccionarArchivo.getScene().lookup("#pn_principal");
+            if (panelPadre == null) {
+                System.err.println("No se encontró el pn_principal en la escena.");
+                return;
+            }
+
+            Region subVista = (Region) FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/anadirdocumentospractica/GUIListaSubirDocumentos.fxml"));
+
+            subVista.prefWidthProperty().bind(panelPadre.widthProperty());
+            subVista.prefHeightProperty().bind(panelPadre.heightProperty());
+
+            panelPadre.getChildren().clear();
+            panelPadre.getChildren().add(subVista);
+        } catch (java.io.IOException e) {
+            System.err.println("Error al cargar la nueva vista: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 }

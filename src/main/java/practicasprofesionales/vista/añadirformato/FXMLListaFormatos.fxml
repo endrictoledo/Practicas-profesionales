@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.FXMLListaFormatosController">
+    <children>
+      <VBox layoutX="20.0" layoutY="20.0" spacing="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0">
+               <children>
+                  <Label text="Formatos de Documentación" textFill="#185244">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button onAction="#btnAgregarDocumento" style="-fx-background-color: #185244; -fx-text-fill: white;" text="+ Agregar Documento" />
+               </children>
+            </HBox>
+            <TableView fx:id="tblFormatos" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="colNombre" prefWidth="400.0" text="Nombre del documento" />
+                  <TableColumn fx:id="colEstado" prefWidth="250.0" text="Tipo de documento" />
+               </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

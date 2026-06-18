@@ -10,6 +10,11 @@ public class Documento {
     private int idCatalogoDocumento;
     private int idExpediente;
     private byte[] archivoFisico;
+    private String estadoDocumento;
+    private String nombreDocumento;
+    private String nombreEstudiante;
+    private String matriculaEstudiante;
+
 
     public Documento() {
     }
@@ -34,4 +39,38 @@ public class Documento {
 
     public byte[] getArchivoFisico() { return archivoFisico; }
     public void setArchivoFisico(byte[] archivoFisico) { this.archivoFisico = archivoFisico; }
+
+    public String getEstadoDocumento() {
+        return estadoDocumento;
+    }
+
+    public void setEstadoDocumento(String estadoDocumento) {
+        this.estadoDocumento = estadoDocumento;
+    }
+
+    public String getNombreDocumento() {
+        return nombreDocumento;
+    }
+
+    public void setNombreDocumento(String nombreDocumento) {
+        this.nombreDocumento = nombreDocumento;
+    }
+
+    public String getNombreEstudiante() {
+        return nombreEstudiante;
+    }
+
+    public void setNombreEstudiante(String nombreEstudiante) {
+        this.nombreEstudiante = nombreEstudiante;
+    }
+
+    public String getMatriculaEstudiante() {
+        return matriculaEstudiante;
+    }
+
+    public void setMatriculaEstudiante(String matriculaEstudiante) {
+        this.matriculaEstudiante = matriculaEstudiante;
+    }
+    
+    
 }

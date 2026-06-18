@@ -11,10 +11,10 @@ public class Usuario {
     private int idUsuario;
     private String correo;
     private String contrasenaPlana;
-
+    
     private TipoUsuario tipoUsuario;
     private boolean activo;
-
+    private int estado;
     public Usuario() {
         this.activo = true;
     }
@@ -59,4 +59,13 @@ public class Usuario {
         this.activo = activo;
     }
 
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    
 }

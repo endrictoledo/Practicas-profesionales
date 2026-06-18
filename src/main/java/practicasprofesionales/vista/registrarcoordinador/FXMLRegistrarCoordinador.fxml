@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.FXMLRegistrarCoordinadorController">
+    <children>
+        <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+           <children>
+               
+               <Label fx:id="titulo" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Registrar Coordinador" textFill="#185244" />
+               
+               <GridPane hgap="10.0" vgap="10.0">
+                   <columnConstraints>
+                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
+                   </columnConstraints>
+                   <children>
+                       <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                       <TextField fx:id="txfNombre" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                       
+                       <Label text="Apellido Paterno:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                       <TextField fx:id="txfApellidoPa" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                       
+                       <Label text="Apellido Materno:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                       <TextField fx:id="txfApellidoMa" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                       
+                       <Label text="No. Personal:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                       <TextField fx:id="txfNoPersonal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                       
+                       <Label text="Cubículo:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                       <TextField fx:id="txfCubiculo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+   
+                       <Label text="Correo Institucional:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                       <TextField fx:id="txfCorreo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                       
+                       <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                       <PasswordField fx:id="txfContrasena" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                   </children>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+               </GridPane>
+               <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                   <children>
+                       <Button onAction="#btnCancelar" text="Cancelar" />
+                       <Button onAction="#btnRegistrar" style="-fx-background-color: #185244; -fx-text-fill: white;" text="Registrar" />
+                   </children>
+               </HBox>
+           </children>
+        </VBox>
+    </children>
+</AnchorPane>

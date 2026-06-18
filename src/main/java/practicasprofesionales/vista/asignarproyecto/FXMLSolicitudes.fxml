@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="538.0" prefWidth="713.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="practicasprofesionales.controlador.FXMLSolicitudesController">
+    <children>
+      <BorderPane layoutY="-4.0" prefHeight="538.0" prefWidth="713.0">
+         <center>
+              <TableView fx:id="tblSolicitudes" prefHeight="400.0" prefWidth="560.0" BorderPane.alignment="CENTER">
+                  <columns>
+                      <TableColumn fx:id="colEstudiante" prefWidth="280.0" text="Estudiante" />
+                      <TableColumn fx:id="colIdSolicitud" prefWidth="280.0" text="ID Solicitud" />
+                  </columns>
+              </TableView>
+         </center>
+         <bottom>
+              <Button onAction="#btnVerDetalles" style="-fx-background-color: #185244; -fx-text-fill: white;" text="Ver Detalles " BorderPane.alignment="CENTER" />
+         </bottom>
+         <top>
+            <Label text="Lista de solicitudes" textFill="#185244" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </top>
+      </BorderPane>
+    </children>
+</AnchorPane>

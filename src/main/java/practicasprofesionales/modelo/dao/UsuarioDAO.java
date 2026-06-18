@@ -37,7 +37,7 @@ public class UsuarioDAO {
             preparedStatement.setString(1, usuario.getCorreo().trim().toLowerCase());
             preparedStatement.setString(2, hashedPassword);
             preparedStatement.setString(3, usuario.getTipoUsuario().getDbValue());
-            preparedStatement.setInt(4, usuario.isActivo() ? 1 : 2); // 1 = Activo, 2 = Inactivo
+            preparedStatement.setInt(4, usuario.isActivo() ? 1 : 2);
 
             preparedStatement.executeUpdate();
 

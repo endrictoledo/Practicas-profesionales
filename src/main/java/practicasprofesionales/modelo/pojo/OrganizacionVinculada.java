@@ -66,4 +66,9 @@ public class OrganizacionVinculada {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+    
+    @Override
+    public String toString() {
+        return this.razonSocial;
+    }
 }

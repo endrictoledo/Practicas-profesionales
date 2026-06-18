@@ -21,157 +21,141 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUISeleccionEstudiante">
+    <top>
+        <HBox alignment="BOTTOM_LEFT" prefHeight="50.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1;">
+            <children>
+                <VBox alignment="CENTER" prefHeight="42.0" prefWidth="250.0" style="-fx-border-color: transparent transparent #4ade80 transparent; -fx-border-width: 0;">
+                    <children>
+                        <Label text="Revisión de reportes" textFill="#185244">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="10.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" prefWidth="200.0" />
+                <VBox prefHeight="51.0" prefWidth="189.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#btn_asignarProrroga" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #185244;" text="Asignar prorroga" textFill="WHITE">
+                            <VBox.margin>
+                                <Insets bottom="10.0" left="20.0" top="10.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </top>
+
    
-   <!-- CABECERA PRINCIPAL (PESTAÑAS) -->
-   <top>
-      <HBox alignment="BOTTOM_LEFT" prefHeight="50.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1;">
-         <children>
-            <VBox alignment="CENTER" prefHeight="42.0" prefWidth="250.0" style="-fx-border-color: transparent transparent #4ade80 transparent; -fx-border-width: 0;">
-               <children>
-                  <Label text="Revisión de reportes" textFill="#185244">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" prefWidth="200.0" />
-            <VBox prefHeight="51.0" prefWidth="189.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#btn_asignarProrroga" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #185244;" text="Asignar prorroga" textFill="WHITE">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="20.0" top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </top>
+    <left>
+        <VBox prefWidth="250.0" style="-fx-border-color: transparent #e2e8f0 transparent transparent; -fx-border-width: 1;" BorderPane.alignment="CENTER">
+            <children>
 
-   <!-- PANEL IZQUIERDO: LISTA DE ESTUDIANTES -->
-   <left>
-      <VBox prefWidth="250.0" style="-fx-border-color: transparent #e2e8f0 transparent transparent; -fx-border-width: 1;" BorderPane.alignment="CENTER">
-         <children>
-            <!-- Barra de Búsqueda -->
-            <HBox alignment="CENTER" prefHeight="60.0" spacing="0.0">
-               <children>
-                  <TextField fx:id="txt_buscar" prefHeight="35.0" prefWidth="180.0" promptText="Buscar" style="-fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-border-radius: 4 0 0 4; -fx-background-radius: 4 0 0 4;" />
-                  <Button fx:id="btn_buscar" mnemonicParsing="false" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: #185244; -fx-background-radius: 0 4 4 0; -fx-cursor: hand;" text="🔍" textFill="WHITE" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </HBox>
-
-            <!-- Lista con Scroll -->
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-border-color: transparent;" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
-               <content>
-                  <!-- VBox donde se inyectarán los estudiantes desde Java -->
-                  <VBox fx:id="vb_listaEstudiantes" spacing="0.0">
-                     <children>
-                        <!-- ESTUDIANTE DE EJEMPLO 1 -->
-                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1; -fx-border-left-color: #f97316; -fx-border-left-width: 4; -fx-background-color: white; -fx-cursor: hand;">
-                           <children>
-                              <Circle fill="#cbd5e1" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                              <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label text="ALONSO MENDEZ, MARIA">
-                                       <font>
-                                          <Font name="System Bold" size="11.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Pendiente" textFill="#ea580c">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </padding>
-                        </HBox>
-
-                        <!-- ESTUDIANTE DE EJEMPLO 2 -->
-                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1; -fx-border-left-color: #f97316; -fx-border-left-width: 4; -fx-background-color: white; -fx-cursor: hand;">
-                           <children>
-                              <Circle fill="#cbd5e1" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                              <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label text="BOLAÑOS ISIDRO, JOEL">
-                                       <font>
-                                          <Font name="System Bold" size="11.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Pendiente" textFill="#ea580c">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </padding>
-                        </HBox>
-
-                        <!-- ESTUDIANTE DE EJEMPLO 3 (SIN PENDIENTE) -->
-                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1; -fx-background-color: white; -fx-cursor: hand;">
-                           <children>
-                              <Circle fill="#e2e8f0" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                              <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Label text="GUIOT LIMON, ISAIAS">
-                                       <font>
-                                          <Font name="System Bold" size="11.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="-" textFill="#94a3b8">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </padding>
-                        </HBox>
-
-                     </children>
-                  </VBox>
-               </content>
-            </ScrollPane>
-         </children>
-      </VBox>
-   </left>
-
-   <!-- PANEL DERECHO: DETALLES DE LA ACTIVIDAD -->
-   <center>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
             
-            <!-- PANEL EN BLANCO PARA CARGAR INFORMACIÓN -->
-            <StackPane fx:id="pn_panelBlancoDerecho" style="-fx-background-color: #f8fafc;" VBox.vgrow="ALWAYS">
-               <children>
-                  <Label text="Selecciona un estudiante a la izquierda para cargar los detalles..." textFill="#94a3b8">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-         </children>
-      </VBox>
-   </center>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-border-color: transparent;" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                    <content>
+                  
+                        <VBox fx:id="vb_listaEstudiantes" spacing="0.0">
+                            <children>
+                        
+                                <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1; -fx-border-left-color: #f97316; -fx-border-left-width: 4; -fx-background-color: white; -fx-cursor: hand;">
+                                    <children>
+                                        <Circle fill="#cbd5e1" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                        <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="ALONSO MENDEZ, MARIA">
+                                                    <font>
+                                                        <Font name="System Bold" size="11.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label text="Pendiente" textFill="#ea580c">
+                                                    <font>
+                                                        <Font size="10.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                    </padding>
+                                </HBox>
+
+                        
+                                <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1; -fx-border-left-color: #f97316; -fx-border-left-width: 4; -fx-background-color: white; -fx-cursor: hand;">
+                                    <children>
+                                        <Circle fill="#cbd5e1" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                        <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="BOLAÑOS ISIDRO, JOEL">
+                                                    <font>
+                                                        <Font name="System Bold" size="11.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label text="Pendiente" textFill="#ea580c">
+                                                    <font>
+                                                        <Font size="10.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                    </padding>
+                                </HBox>
+
+                        
+                                <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1; -fx-background-color: white; -fx-cursor: hand;">
+                                    <children>
+                                        <Circle fill="#e2e8f0" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                        <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="GUIOT LIMON, ISAIAS">
+                                                    <font>
+                                                        <Font name="System Bold" size="11.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label text="-" textFill="#94a3b8">
+                                                    <font>
+                                                        <Font size="10.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                    </padding>
+                                </HBox>
+
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <StackPane fx:id="pn_panelBlancoDerecho" style="-fx-background-color: #f8fafc;" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label text="Selecciona un estudiante a la izquierda para cargar los detalles..." textFill="#94a3b8">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </StackPane>
+            </children>
+        </VBox>
+    </center>
 </BorderPane>

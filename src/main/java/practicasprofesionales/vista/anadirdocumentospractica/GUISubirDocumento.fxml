@@ -18,151 +18,151 @@
 <?import javafx.scene.text.Font?>
 
 <ScrollPane fitToWidth="true" prefHeight="792.0" prefWidth="1084.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUISubirDocumento">
-   <content>
-      <VBox prefHeight="780.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #f8fafc; -fx-padding: 30;">
-         <children>
+    <content>
+        <VBox prefHeight="780.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #f8fafc; -fx-padding: 30;">
+            <children>
             
-            <!-- Título / Combobox superior -->
-            <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1; -fx-padding: 0 0 10 0;">
-               <children>
-                  <Label text="Documento seleccionado...">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
+            
+                <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-border-color: transparent transparent #e2e8f0 transparent; -fx-border-width: 1; -fx-padding: 0 0 10 0;">
+                    <children>
+                        <Label fx:id="lbl_tipoDocumentoTitulo" text="Documento seleccionado...">
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
 
-            <!-- Área de texto del estudiante -->
-            <VBox spacing="10.0">
-               <children>
-                  <Label text="Entrega del estudiante" textFill="#1e293b">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
+            
+                <VBox spacing="10.0">
+                    <children>
+                        <Label text="Entrega del estudiante" textFill="#1e293b">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
                   
-                  <VBox style="-fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4;">
-                     <children>
-                        <!-- Toolbar -->
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="15.0" style="-fx-background-color: #f8fafc; -fx-border-color: transparent transparent #cbd5e1 transparent; -fx-border-width: 1; -fx-background-radius: 4 4 0 0;">
-                           <children>
-                              <Label text="B" textFill="#475569">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label text="I" textFill="#475569">
-                                 <font>
-                                    <Font name="System Italic" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label text="U" textFill="#475569" underline="true">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <AnchorPane prefWidth="1.0" style="-fx-background-color: #cbd5e1;" />
-                              <Label text="Enlace" textFill="#475569">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Imagen" textFill="#475569">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets left="15.0" right="15.0" />
-                           </padding>
-                        </HBox>
-                        <!-- Text Area -->
-                        <TextArea fx:id="txt_contenido" prefHeight="150.0" promptText="Escribe tu contenido aquí..." style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </TextArea>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-
-            <!-- Zona de subida de archivos -->
-            <VBox spacing="10.0">
-               <children>
-                  <Label text="Archivos adjuntos (Tamaño máximo por archivo: 20MB)" textFill="#64748b">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  
-                  <!-- Dropzone (Borde punteado) -->
-                  <StackPane fx:id="pn_dropzone" prefHeight="150.0" style="-fx-background-color: #f1f5f9; -fx-border-color: #94a3b8; -fx-border-style: dashed; -fx-border-width: 1.5; -fx-border-radius: 6; -fx-background-radius: 6; -fx-cursor: hand;">
-                     <children>
-                        <VBox alignment="CENTER" spacing="5.0">
-                           <children>
-                              <Label text="Clic aquí para subir archivos." textFill="#334155">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Arrastra y suelta archivos aquí." textFill="#64748b">
-                                 <font>
-                                    <Font size="12.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="btn_seleccionarDocumento" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Seleccionar documento" textFill="#334155">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                           </children>
+                        <VBox style="-fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4;">
+                            <children>
+                        
+                                <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="15.0" style="-fx-background-color: #f8fafc; -fx-border-color: transparent transparent #cbd5e1 transparent; -fx-border-width: 1; -fx-background-radius: 4 4 0 0;">
+                                    <children>
+                                        <Label text="B" textFill="#475569">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="I" textFill="#475569">
+                                            <font>
+                                                <Font name="System Italic" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="U" textFill="#475569" underline="true">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <AnchorPane prefWidth="1.0" style="-fx-background-color: #cbd5e1;" />
+                                        <Label text="Enlace" textFill="#475569">
+                                            <font>
+                                                <Font size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Imagen" textFill="#475569">
+                                            <font>
+                                                <Font size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                    <padding>
+                                        <Insets left="15.0" right="15.0" />
+                                    </padding>
+                                </HBox>
+                        
+                                <TextArea fx:id="txt_contenido" prefHeight="150.0" promptText="Escribe tu contenido aquí..." style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </TextArea>
+                            </children>
                         </VBox>
-                     </children>
-                  </StackPane>
-                  
-                  <Label text="Archivos subidos: 0" textFill="#64748b">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            
-            <!-- Botones inferiores -->
-            <HBox alignment="CENTER_RIGHT" spacing="15.0">
-               <children>
-                  <Button fx:id="btn_guardarBorrador" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #16a34a; -fx-text-fill: #16a34a; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Guardar borrador">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="8.0" left="20.0" right="20.0" top="8.0" />
-                     </padding>
-                  </Button>
-                  <Button fx:id="btn_subir" mnemonicParsing="false" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-background-radius: 4; -fx-cursor: hand;" text="Subir">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="8.0" left="30.0" right="30.0" top="8.0" />
-                     </padding>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
+                    </children>
+                </VBox>
 
-         </children>
-      </VBox>
-   </content>
+            
+                <VBox spacing="10.0">
+                    <children>
+                        <Label text="Archivos adjuntos (Tamaño máximo por archivo: 20MB)" textFill="#64748b">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                  
+                  
+                        <StackPane fx:id="pn_dropzone" prefHeight="150.0" style="-fx-background-color: #f1f5f9; -fx-border-color: #94a3b8; -fx-border-style: dashed; -fx-border-width: 1.5; -fx-border-radius: 6; -fx-background-radius: 6; -fx-cursor: hand;">
+                            <children>
+                                <VBox alignment="CENTER" spacing="5.0">
+                                    <children>
+                                        <Label text="Clic aquí para subir archivos." textFill="#334155">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Arrastra y suelta archivos aquí." textFill="#64748b">
+                                            <font>
+                                                <Font size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="btn_seleccionarDocumento" mnemonicParsing="false" onAction="#btn_seleccionarDocumentoOnAction" style="-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Seleccionar documento" textFill="#334155">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Button>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </StackPane>
+                  
+                        <Label fx:id="lbl_archivosSubidos" text="Archivos subidos: 0" textFill="#64748b">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            
+            
+                <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                    <children>
+                        <Button fx:id="btn_cancelar" mnemonicParsing="false" onAction="#btn_cancelarOnAction" style="-fx-background-color: white; -fx-border-color: #ef4444; -fx-text-fill: #ef4444; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand;" text="Cancelar">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="8.0" left="20.0" right="20.0" top="8.0" />
+                            </padding>
+                        </Button>
+                        <Button fx:id="btn_subir" disable="true" mnemonicParsing="false" onAction="#btn_subirOnAction" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-cursor: hand;" text="Subir">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="8.0" left="30.0" right="30.0" top="8.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </HBox>
+
+            </children>
+        </VBox>
+    </content>
 </ScrollPane>

@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import practicasprofesionales.utilidades.Utilidades;
 
 /**
  * FXML Controller class
@@ -35,7 +37,9 @@ public class ControladorGUIMenuProfesor implements Initializable {
     @FXML
     private void btnEvaluarReportes(ActionEvent event) {
         try {
-            Parent vista = FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml"));
+            Region vista = (Region) FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/evaluarreporte/GUIListaReportes.fxml"));
+            vista.prefWidthProperty().bind(pn_principal.widthProperty());
+            vista.prefHeightProperty().bind(pn_principal.heightProperty());
             pn_principal.getChildren().clear();
             pn_principal.getChildren().add(vista);
         } catch (IOException e) {
@@ -45,6 +49,7 @@ public class ControladorGUIMenuProfesor implements Initializable {
 
     @FXML
     private void btnFormatos(ActionEvent event) {
+        cargarSubVista("añadirformato/FXMLListaFormatos.fxml");
     }
 
     @FXML
@@ -53,6 +58,19 @@ public class ControladorGUIMenuProfesor implements Initializable {
 
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
+        Utilidades.cerrarSesion(event);
+    }
+
+    
+    private void cargarSubVista(String nombreFxml) {
+        try {
+            Parent subVista = FXMLLoader.load(getClass().getResource("/practicasprofesionales/vista/" + nombreFxml));
+            pn_principal.getChildren().clear();
+            pn_principal.getChildren().add(subVista);
+        } catch (IOException e) {
+            System.err.println("Error crítico: No se pudo cargar el archivo FXML: " + nombreFxml);
+            e.printStackTrace();
+        }
     }
 
 }

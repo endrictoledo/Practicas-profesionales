@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #f1f5f9; -fx-padding: 30;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIListaProyectos">
-   <children>
+    <children>
        <HBox alignment="CENTER_LEFT" spacing="20.0">
           <children>
               <VBox>
@@ -33,7 +33,7 @@
        </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#btn_masInformacion" text="Mostrar más información" />
+            <Button fx:id="btn_masInformacion" mnemonicParsing="false" onAction="#btn_masInformacion" text="Mostrar más información" />
          </children>
       </HBox>
    </children>

@@ -24,12 +24,23 @@ public class ControladorGUIMenuCoordinador implements Initializable {
     }
 
     @FXML
-    private void accionBtnConsultarProfesor(ActionEvent event) {
+    private void accionBtnRegistrarProyecto(ActionEvent event) {
+        cargarSubVista("registrarproyecto/FXMLRegistrarProyecto.fxml");
     }
 
     @FXML
     private void accionBtnRegistrarOrganizacion(ActionEvent event) {
         cargarSubVista("registrarorganizacionvinculada/GUIRegistroOV.fxml");
+    }
+    
+    @FXML
+    private void accionBtnRegistrarPracticante(ActionEvent event){
+        cargarSubVista("registrarpracticante/FXMLRegistrarPracticante.fxml");
+    }
+    
+    @FXML
+    private void btnSolicitudesProyecto(ActionEvent event) {
+        cargarSubVista("asignarproyecto/FXMLSolicitudes.fxml");
     }
 
     private void cargarSubVista(String nombreFxml) {
@@ -42,4 +53,5 @@ public class ControladorGUIMenuCoordinador implements Initializable {
             e.printStackTrace();
         }
     }
+
 }
