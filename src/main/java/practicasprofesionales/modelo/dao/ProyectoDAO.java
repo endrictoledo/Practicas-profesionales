@@ -20,7 +20,7 @@ public class ProyectoDAO {
                 + "o.razonSocial AS nombreOrganizacion, "
                 + "CONCAT(e.nombreEncargado, ' ', e.apellidoPaterno, ' ', e.apellidoMaterno) AS nombreEncargado "
                 + "FROM proyecto p "
-                + "JOIN organizacion_vinculada o ON p.Organizacion_vinculada_id_organizacion_vinculada = o.id_organizacion_vinculada "
+                + "JOIN organizacion_vinculada o ON p.Organizacion_vinculada_id_organizacion_vinculada = o.idOrganizacionVinculada "
                 + "LEFT JOIN encargadoproyecto e ON p.EncargadoProyecto_idEncargadoProyecto = e.idEncargadoProyecto "
                 + "WHERE p.cupos > 0";
 
