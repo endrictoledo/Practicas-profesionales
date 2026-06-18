@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.ConexionBD;
 import practicasprofesionales.modelo.pojo.Proyecto;
@@ -103,6 +104,65 @@ public class SolicitudPracticaDAO {
         } catch (SQLException e) {
             throw new ExcepcionDAO("Error al registrar la solicitud"
                     + " de práctica en la base de datos", e);
+        }
+    }
+    
+    public static boolean registrarSolicitudMultipe(int idEstudiante, 
+                    List<SolicitudEstudiante> selecciones) throws ExcepcionDAO {
+        String sentenciaPractica = "INSERT INTO solicitud_practica "
+                + "(Estudiante_idEstudiante, estado) VALUES (?, 'PENDIENTE')";
+        String sentenciaEstudiante = "INSERT INTO solicitud_estudiante"
+                + " (idSolicitudPractica, idEstudiante, idProyecto, prioridad)"
+                + " VALUES (?, ?, ?, ?)";
+
+        Connection conn = null;
+        try {
+            conn = ConexionBD.obtenerConexion();
+            conn.setAutoCommit(false);
+            PreparedStatement psPractica = conn.prepareStatement(
+                    sentenciaPractica, PreparedStatement.RETURN_GENERATED_KEYS);
+            psPractica.setInt(1, idEstudiante);
+            psPractica.executeUpdate();
+
+            ResultSet rs = psPractica.getGeneratedKeys();
+            int idSolicitudPracticaGenerado = -1;
+            if (rs.next()) {
+                idSolicitudPracticaGenerado = rs.getInt(1);
+            } else {
+                throw new SQLException("Falló la creación de la solicitud,"
+                        + " no se obtuvo el ID.");
+            }
+            PreparedStatement psEstudiante = conn.prepareStatement(
+                                                           sentenciaEstudiante);
+            for (SolicitudEstudiante seleccion : selecciones) {
+                psEstudiante.setInt(1, idSolicitudPracticaGenerado);
+                psEstudiante.setInt(2, idEstudiante);
+                psEstudiante.setInt(3, seleccion.getProyecto().getIdProyecto());
+                psEstudiante.setInt(4, seleccion.getPrioridad());
+                psEstudiante.addBatch();
+            }
+            psEstudiante.executeBatch();
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            throw new ExcepcionDAO("Error al registrar la solicitud"
+                    + " múltiple en la base de datos", e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
     }
 }

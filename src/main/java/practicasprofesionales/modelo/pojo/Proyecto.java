@@ -22,6 +22,7 @@ public class Proyecto {
     private String actividades;
     private String duracion;
     private String horario;
+    private String prioridadSeleccionada;
 
     public Proyecto() {
     }
@@ -129,6 +130,12 @@ public class Proyecto {
     public void setHorario(String horario) {
         this.horario = horario;
     }
-    
-    
+
+    public String getPrioridadSeleccionada() {
+        return prioridadSeleccionada;
+    }
+
+    public void setPrioridadSeleccionada(String prioridadSeleccionada) {
+        this.prioridadSeleccionada = prioridadSeleccionada;
+    }
 }

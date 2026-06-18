@@ -95,22 +95,6 @@ public class ControladorGUIDetalleProyecto implements Initializable {
         }
     }
 
-    @FXML
-    private void btn_anadir(ActionEvent event) {
-        SolicitarProyectoService service = new SolicitarProyectoService();
-        RespuestaOperacion respuesta = service.solicitarProyecto(proyecto);
-
-        if (!respuesta.isError()) {
-            Utilidades.mostrarAlertaSimple("Éxito", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
-            regresarAListaProyectos(event);
-        } else {
-            Utilidades.mostrarAlertaSimple("Atención", respuesta.getMensaje(), Alert.AlertType.WARNING);
-            if (respuesta.getMensaje().contains("cupo")) {
-                regresarAListaProyectos(event);
-            }
-        }
-    }
-
     private void regresarAListaProyectos(ActionEvent event) {
         try {
             Node source = (Node) event.getSource();

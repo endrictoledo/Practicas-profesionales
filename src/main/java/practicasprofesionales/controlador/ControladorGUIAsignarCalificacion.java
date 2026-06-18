@@ -114,9 +114,4 @@ public class ControladorGUIAsignarCalificacion implements Initializable {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    private void btn_descargarOnAction(ActionEvent event) {
-    }
-    
 }

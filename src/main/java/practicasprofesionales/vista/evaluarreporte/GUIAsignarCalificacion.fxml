@@ -47,7 +47,7 @@
                 </Label>
             
             
-                <Button fx:id="btn_descargar" mnemonicParsing="false" onAction="#btn_descargarOnAction" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #C70039; -fx-cursor: hand;" text="Descargar archivo adjunto" textFill="WHITE">
+                <Button fx:id="btn_descargar" mnemonicParsing="false" onAction="#btn_descargar" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #C70039; -fx-cursor: hand;" text="Descargar archivo adjunto" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>

@@ -155,11 +155,6 @@
                                         <Font name="System Bold" size="15.0" />
                                     </font>
                                 </Button>
-                                <Button mnemonicParsing="false" onAction="#btn_anadir" style="-fx-background-color: #185244; -fx-padding: 12 30; -fx-cursor: hand;" text="Añadir" textFill="WHITE">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
                             </children>
                             <VBox.margin>
                                 <Insets top="15.0" />

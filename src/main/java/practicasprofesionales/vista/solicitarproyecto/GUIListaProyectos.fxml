@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
@@ -18,22 +19,40 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                     <Label text="Explore las opciones y envíe una solicitud de asignación. Solo puede solicitar un proyecto a la vez." textFill="#64748b" />
+                     <Label text="Explore las opciones y asigne una prioridad (1, 2, 3, ...) a los proyectos que desea solicitar." textFill="#64748b" />
                  </children>
               </VBox>
               <Region HBox.hgrow="ALWAYS" />
           </children>
        </HBox>
+       
        <TableView fx:id="tabla_proyectos" prefHeight="429.0" prefWidth="740.0" style="-fx-background-radius: 10;" VBox.vgrow="ALWAYS">
            <columns>
-               <TableColumn fx:id="col_nombre" prefWidth="237.0" text="Nombre del Proyecto" />
-               <TableColumn fx:id="col_organizacion" prefWidth="296.0" text="Organización" />
-               <TableColumn fx:id="col_cupos" prefWidth="206.0" text="Lugares Disp." />
+               <TableColumn fx:id="col_nombre" prefWidth="220.0" text="Nombre del Proyecto" />
+               <TableColumn fx:id="col_organizacion" prefWidth="250.0" text="Organización" />
+               <TableColumn fx:id="col_cupos" prefWidth="130.0" text="Lugares Disp." />
+               <TableColumn fx:id="col_prioridad" prefWidth="138.0" text="Prioridad" />
            </columns>
        </TableView>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+       
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button fx:id="btn_masInformacion" mnemonicParsing="false" onAction="#btn_masInformacion" text="Mostrar más información" />
+            <Button fx:id="btn_masInformacion" mnemonicParsing="false" onAction="#btn_masInformacion" style="-fx-cursor: hand;" text="Mostrar más información">
+                <padding>
+                    <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+                </padding>
+            </Button>
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <Button fx:id="btn_guardar" mnemonicParsing="false" onAction="#btn_guardarOnAction" style="-fx-background-color: #185244; -fx-cursor: hand;" text="Guardar Solicitud" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+               </padding>
+            </Button>
          </children>
       </HBox>
    </children>
