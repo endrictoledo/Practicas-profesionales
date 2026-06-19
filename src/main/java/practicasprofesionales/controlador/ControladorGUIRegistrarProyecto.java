@@ -31,7 +31,7 @@ import practicasprofesionales.utilidades.Utilidades;
  *
  * @author basa2
  */
-public class FXMLRegistrarProyectoController implements Initializable {
+public class ControladorGUIRegistrarProyecto implements Initializable {
     @FXML
     private TextField txfNombreProyecto;
     @FXML

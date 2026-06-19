@@ -32,7 +32,7 @@ import practicasprofesionales.utilidades.Utilidades;
  *
  * @author basa2
  */
-public class FXMLAsignarProyectoController implements Initializable {
+public class ControladorGUIAsignarProyecto implements Initializable {
 
     @FXML
     private TableView<SolicitudEstudiante> tblProyectosPrioridad;

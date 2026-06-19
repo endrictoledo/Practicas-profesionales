@@ -32,7 +32,7 @@ import practicasprofesionales.utilidades.Utilidades;
  *
  * @author basa2
  */
-public class FXMLSolicitudesController implements Initializable {
+public class ControladorGUISolicitudes implements Initializable {
 
     @FXML
     private TableView<SolicitudPractica> tblSolicitudes;
@@ -85,7 +85,7 @@ public class FXMLSolicitudesController implements Initializable {
                                 "/practicasprofesionales/vista/"
                                 + "asignarproyecto/FXMLAsignarProyecto.fxml"));
             Parent root = loader.load();
-            FXMLAsignarProyectoController controller = loader.getController();
+            ControladorGUIAsignarProyecto controller = loader.getController();
             controller.setSolicitudSeleccionada(solicitud);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

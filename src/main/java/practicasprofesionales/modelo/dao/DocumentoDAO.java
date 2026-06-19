@@ -10,7 +10,10 @@ import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.ConexionBD;
 import practicasprofesionales.modelo.pojo.Documento;
 import practicasprofesionales.modelo.pojo.ReporteEstudiante;
-
+/**
+ *
+ * @author endri
+ */
 public class DocumentoDAO {
 
     public boolean registrarDocumento(Documento documento) throws ExcepcionDAO {

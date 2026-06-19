@@ -74,4 +74,3 @@ public class OrganizacionVinculadaService {
 }
 
 
-//^[A-Za-z0-9+_.-]+@(.+\\.com)$

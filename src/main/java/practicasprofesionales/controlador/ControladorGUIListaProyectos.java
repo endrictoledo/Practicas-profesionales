@@ -54,7 +54,7 @@ public class ControladorGUIListaProyectos implements Initializable {
     @FXML
     private TableColumn<Proyecto, Integer> col_cupos;
     @FXML
-    private TableColumn<Proyecto, String> col_prioridad; 
+    private TableColumn<Proyecto, String> col_prioridad;
     @FXML
     private Button btn_masInformacion;
 
@@ -65,8 +65,169 @@ public class ControladorGUIListaProyectos implements Initializable {
         col_cupos.setCellValueFactory(new PropertyValueFactory<>("cupo"));
         tabla_proyectos.setEditable(true);
         col_prioridad.setCellValueFactory(new PropertyValueFactory<>("prioridadSeleccionada"));
-        col_prioridad.setCellFactory(tc -> new javafx.scene.control.TableCell<Proyecto, String>() {
-            private javafx.scene.control.ComboBox<String> combo;
+
+        configurarColumnaPrioridad();
+
+        cargarProyectos();
+    }
+
+    private void cargarProyectos() {
+        try {
+            int idUsuarioLogueado = SesionGlobal.getInstancia().getUsuarioActual() != null
+                    ? SesionGlobal.getInstancia().getUsuarioActual().getIdUsuario() : -1;
+            int idEstudianteActual = -1;
+
+            if (idUsuarioLogueado != -1) {
+                idEstudianteActual = EstudianteDAO.obtenerIdEstudiantePorUsuario(idUsuarioLogueado);
+            }
+
+            Map<Integer, Integer> selecciones = new HashMap<>();
+            if (idEstudianteActual != -1) {
+                selecciones = SolicitudPracticaDAO.obtenerSeleccionesEstudiante(idEstudianteActual);
+            }
+
+            ProyectoDAO dao = new ProyectoDAO();
+            List<Proyecto> lista = dao.obtenerProyectosDisponibles();
+
+            for (Proyecto p : lista) {
+                if (selecciones.containsKey(p.getIdProyecto())) {
+                    p.setPrioridadSeleccionada(String.valueOf(selecciones.get(p.getIdProyecto())));
+                } else {
+                    p.setPrioridadSeleccionada("Ninguna");
+                }
+            }
+
+            tabla_proyectos.setItems(FXCollections.observableArrayList(lista));
+
+        } catch (ExcepcionDAO e) {
+            e.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error",
+                    "No se pudieron cargar los proyectos.",
+                    Alert.AlertType.ERROR);
+        }
+    }
+
+    private void abrirDetalleProyecto(Proyecto proyecto, ActionEvent event) {
+        try {
+            Node source = (Node) event.getSource();
+            Pane parentPane = (Pane) source.getScene().lookup("#pn_principal");
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "/practicasprofesionales/vista/solicitarproyecto/GUIDetalleProyecto.fxml"));
+            Region subVista = loader.load();
+
+            ControladorGUIDetalleProyecto controlador = loader.getController();
+            controlador.inicializarDatos(proyecto);
+
+            subVista.prefWidthProperty().bind(parentPane.widthProperty());
+            subVista.prefHeightProperty().bind(parentPane.heightProperty());
+
+            parentPane.getChildren().clear();
+            parentPane.getChildren().add(subVista);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btn_masInformacion(ActionEvent event) {
+        Proyecto proyectoSeleccionado
+                = tabla_proyectos.getSelectionModel().getSelectedItem();
+
+        if (proyectoSeleccionado != null) {
+            abrirDetalleProyecto(proyectoSeleccionado, event);
+        } else {
+            Utilidades.mostrarAlertaSimple("Atención",
+                    "Por favor selecciona un proyecto de la tabla primero.",
+                    Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    private void btn_guardar(ActionEvent event) {
+        List<SolicitudEstudiante> listaAEnviar = new ArrayList<>();
+        if (SesionGlobal.getInstancia().getUsuarioActual() == null) {
+            Utilidades.mostrarAlertaSimple("Error de sesión",
+                    "No se detectó un usuario activo.", Alert.AlertType.ERROR);
+            return;
+        }
+        int idUsuarioLogueado
+                = SesionGlobal.getInstancia().getUsuarioActual().getIdUsuario();
+        int idEstudianteActual;
+
+        try {
+            idEstudianteActual = EstudianteDAO.obtenerIdEstudiantePorUsuario(
+                    idUsuarioLogueado);
+            if (idEstudianteActual == -1) {
+                Utilidades.mostrarAlertaSimple("Error",
+                        "El usuario no tiene un perfil de estudiante asociado.",
+                        Alert.AlertType.ERROR);
+                return;
+            }
+        } catch (ExcepcionDAO e) {
+            Utilidades.mostrarAlertaSimple("Error",
+                    "No se pudo consultar la información del estudiante.",
+                    Alert.AlertType.ERROR);
+            e.printStackTrace();
+            return;
+        }
+        for (Proyecto p : tabla_proyectos.getItems()) {
+            if (p.getPrioridadSeleccionada() != null
+                    && !p.getPrioridadSeleccionada().equals("Ninguna")) {
+                SolicitudEstudiante se = new SolicitudEstudiante();
+                se.setProyecto(p);
+                se.setPrioridad(Integer.parseInt(p.getPrioridadSeleccionada()));
+                listaAEnviar.add(se);
+            }
+        }
+        int totalProyectosEnTabla = tabla_proyectos.getItems().size();
+        if (!sonPrioridadesValidas(listaAEnviar, totalProyectosEnTabla)) {
+            return;
+        }
+        try {
+            SolicitudPracticaDAO dao = new SolicitudPracticaDAO();
+            boolean exito = dao.registrarSolicitudMultipe(idEstudianteActual,
+                    listaAEnviar);
+            if (exito) {
+                Utilidades.mostrarAlertaSimple("Éxito",
+                        "Tus solicitudes han sido registradas correctamente.",
+                        Alert.AlertType.INFORMATION);
+                cargarProyectos();
+            }
+        } catch (ExcepcionDAO e) {
+            Utilidades.mostrarAlertaSimple("Error",
+                    "Ocurrió un error al guardar en la base de datos.",
+                    Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
+
+    private boolean sonPrioridadesValidas(List<SolicitudEstudiante> lista,
+            int totalProyectos) {
+        if (lista.size() != totalProyectos) {
+            Utilidades.mostrarAlertaSimple("Atención",
+                    "Debes asignar una prioridad a TODOS los"
+                    + " proyectos de la lista antes de guardar.",
+                    Alert.AlertType.WARNING);
+            return false;
+        }
+        Set<Integer> prioridadesUnicas = new HashSet<>();
+        for (SolicitudEstudiante se : lista) {
+            if (!prioridadesUnicas.add(se.getPrioridad())) {
+                Utilidades.mostrarAlertaSimple("Prioridad duplicada",
+                        "Has asignado la prioridad " + se.getPrioridad()
+                        + " a más de un proyecto. Las prioridades deben ser únicas.",
+                        Alert.AlertType.WARNING);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void configurarColumnaPrioridad() {
+        col_prioridad.setCellFactory(tc -> new TableCell<Proyecto, String>() {
+            private ComboBox<String> combo;
             private boolean isInitializing = false;
 
             @Override
@@ -74,7 +235,7 @@ public class ControladorGUIListaProyectos implements Initializable {
                 if (!isEmpty()) {
                     super.startEdit();
                     if (combo == null) {
-                        combo = new javafx.scene.control.ComboBox<>();
+                        combo = new ComboBox<>();
                         combo.valueProperty().addListener((obs, oldVal, newVal) -> {
                             if (!isInitializing && isEditing() && newVal != null) {
                                 commitEdit(newVal);
@@ -86,7 +247,7 @@ public class ControladorGUIListaProyectos implements Initializable {
                             }
                         });
                     }
-                    
+
                     isInitializing = true;
                     List<String> disponibles = new ArrayList<>();
                     disponibles.add("Ninguna");
@@ -108,7 +269,7 @@ public class ControladorGUIListaProyectos implements Initializable {
                     combo.setItems(FXCollections.observableArrayList(disponibles));
                     combo.getSelectionModel().select(getItem() != null ? getItem() : "Ninguna");
                     isInitializing = false;
-                    
+
                     setText(null);
                     setGraphic(combo);
                     combo.requestFocus();
@@ -145,162 +306,6 @@ public class ControladorGUIListaProyectos implements Initializable {
             Proyecto p = event.getRowValue();
             p.setPrioridadSeleccionada(event.getNewValue());
         });
-
-        cargarProyectos();
     }
 
-    private void cargarProyectos() {
-        try {
-            int idUsuarioLogueado = SesionGlobal.getInstancia().getUsuarioActual() != null ? 
-                                    SesionGlobal.getInstancia().getUsuarioActual().getIdUsuario() : -1;
-            int idEstudianteActual = -1;
-            
-            if (idUsuarioLogueado != -1) {
-                idEstudianteActual = EstudianteDAO.obtenerIdEstudiantePorUsuario(idUsuarioLogueado);
-            }
-            
-            Map<Integer, Integer> selecciones = new HashMap<>();
-            if (idEstudianteActual != -1) {
-                selecciones = SolicitudPracticaDAO.obtenerSeleccionesEstudiante(idEstudianteActual);
-            }
-            
-            ProyectoDAO dao = new ProyectoDAO();
-            List<Proyecto> lista = dao.obtenerProyectosDisponibles();
-            
-            for (Proyecto p : lista) {
-                if (selecciones.containsKey(p.getIdProyecto())) {
-                    p.setPrioridadSeleccionada(String.valueOf(selecciones.get(p.getIdProyecto())));
-                } else {
-                    p.setPrioridadSeleccionada("Ninguna");
-                }
-            }
-            
-            tabla_proyectos.setItems(FXCollections.observableArrayList(lista));
-
-        } catch (ExcepcionDAO e) {
-            e.printStackTrace();
-            Utilidades.mostrarAlertaSimple("Error",
-                    "No se pudieron cargar los proyectos.",
-                    Alert.AlertType.ERROR);
-        }
-    }
-
-    private void abrirDetalleProyecto(Proyecto proyecto, ActionEvent event) {
-        try {
-            Node source = (Node) event.getSource();
-            Pane parentPane = (Pane) source.getScene().lookup("#pn_principal");
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(
-            "/practicasprofesionales/vista/solicitarproyecto/GUIDetalleProyecto.fxml"));
-            Region subVista = loader.load();
-
-            ControladorGUIDetalleProyecto controlador = loader.getController();
-            controlador.inicializarDatos(proyecto);
-
-            subVista.prefWidthProperty().bind(parentPane.widthProperty());
-            subVista.prefHeightProperty().bind(parentPane.heightProperty());
-
-            parentPane.getChildren().clear();
-            parentPane.getChildren().add(subVista);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void btn_masInformacion(ActionEvent event) {
-        Proyecto proyectoSeleccionado =
-                tabla_proyectos.getSelectionModel().getSelectedItem();
-
-        if (proyectoSeleccionado != null) {
-            abrirDetalleProyecto(proyectoSeleccionado, event);
-        } else {
-            Utilidades.mostrarAlertaSimple("Atención",
-                    "Por favor selecciona un proyecto de la tabla primero.",
-                    Alert.AlertType.WARNING);
-        }
-    }  
-
-    @FXML
-    private void btn_guardar(ActionEvent event) {
-        List<SolicitudEstudiante> listaAEnviar = new ArrayList<>();
-        if (SesionGlobal.getInstancia().getUsuarioActual() == null) {
-            Utilidades.mostrarAlertaSimple("Error de sesión",
-                    "No se detectó un usuario activo.", Alert.AlertType.ERROR);
-            return;
-        }
-        int idUsuarioLogueado = 
-                SesionGlobal.getInstancia().getUsuarioActual().getIdUsuario();
-        int idEstudianteActual;
-        
-        try {
-            idEstudianteActual = EstudianteDAO.obtenerIdEstudiantePorUsuario(
-                                                            idUsuarioLogueado);
-            if (idEstudianteActual == -1) {
-                 Utilidades.mostrarAlertaSimple("Error",
-                        "El usuario no tiene un perfil de estudiante asociado.",
-                        Alert.AlertType.ERROR);
-                 return;
-            }
-        } catch (ExcepcionDAO e) {
-            Utilidades.mostrarAlertaSimple("Error",
-                    "No se pudo consultar la información del estudiante.",
-                    Alert.AlertType.ERROR);
-            e.printStackTrace();
-            return;
-        }
-        for (Proyecto p : tabla_proyectos.getItems()) {
-            if (p.getPrioridadSeleccionada() != null &&
-                              !p.getPrioridadSeleccionada().equals("Ninguna")) {
-                SolicitudEstudiante se = new SolicitudEstudiante();
-                se.setProyecto(p);
-                se.setPrioridad(Integer.parseInt(p.getPrioridadSeleccionada()));
-                listaAEnviar.add(se);
-            }
-        }
-        int totalProyectosEnTabla = tabla_proyectos.getItems().size();
-        if (!sonPrioridadesValidas(listaAEnviar, totalProyectosEnTabla)) {
-            return;
-        }
-        try {
-            SolicitudPracticaDAO dao = new SolicitudPracticaDAO();
-            boolean exito = dao.registrarSolicitudMultipe(idEstudianteActual,
-                    listaAEnviar);
-            if (exito) {
-                Utilidades.mostrarAlertaSimple("Éxito", 
-                        "Tus solicitudes han sido registradas correctamente.",
-                        Alert.AlertType.INFORMATION);
-                cargarProyectos();
-            }
-        } catch (ExcepcionDAO e) {
-            Utilidades.mostrarAlertaSimple("Error", 
-                    "Ocurrió un error al guardar en la base de datos.",
-                    Alert.AlertType.ERROR);
-            e.printStackTrace();
-        }
-    }
-    
-    private boolean sonPrioridadesValidas(List<SolicitudEstudiante> lista,
-            int totalProyectos) {
-        if (lista.size() != totalProyectos) {
-            Utilidades.mostrarAlertaSimple("Atención", 
-                    "Debes asignar una prioridad a TODOS los"
-                    + " proyectos de la lista antes de guardar.", 
-                    Alert.AlertType.WARNING);
-            return false;
-        }
-        Set<Integer> prioridadesUnicas = new HashSet<>();
-        for (SolicitudEstudiante se : lista) {
-            if (!prioridadesUnicas.add(se.getPrioridad())) {
-                Utilidades.mostrarAlertaSimple("Prioridad duplicada", 
-                    "Has asignado la prioridad " + se.getPrioridad() +
-                    " a más de un proyecto. Las prioridades deben ser únicas.", 
-                    Alert.AlertType.WARNING);
-                return false; 
-            }
-        }
-        
-        return true; 
-    }
 }
-

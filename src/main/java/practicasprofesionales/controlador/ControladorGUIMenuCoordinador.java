@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 import practicasprofesionales.utilidades.Utilidades;
 
 /**
- * Controlador de la vista MenuCoordinadorGUI
+ * 
  */
 public class ControladorGUIMenuCoordinador implements Initializable {
 

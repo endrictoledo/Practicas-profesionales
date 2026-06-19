@@ -26,7 +26,7 @@ import static practicasprofesionales.utilidades.Utilidades.mostrarAlertaSimple;
  *
  * @author basa2
  */
-public class FXMLRegistrarCoordinadorController implements Initializable {
+public class ControladorGUIRegistrarCoordinador implements Initializable {
 
     @FXML
     private TextField txfNombre;

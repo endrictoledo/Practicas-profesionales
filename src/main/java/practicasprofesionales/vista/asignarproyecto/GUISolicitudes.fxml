@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="538.0" prefWidth="713.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="practicasprofesionales.controlador.FXMLSolicitudesController">
+<AnchorPane prefHeight="538.0" prefWidth="713.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="practicasprofesionales.controlador.ControladorGUISolicitudes">
     <children>
       <BorderPane layoutY="-4.0" prefHeight="538.0" prefWidth="713.0">
          <center>

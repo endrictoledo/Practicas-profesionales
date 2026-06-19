@@ -32,7 +32,7 @@ import practicasprofesionales.utilidades.Utilidades;
  *
  * @author basa2
  */
-public class FXMLListaFormatosController implements Initializable {
+public class ControladorGUIListaFormatos implements Initializable {
 
     @FXML 
     private TableView<FormatoDocumentacion> tblFormatos;

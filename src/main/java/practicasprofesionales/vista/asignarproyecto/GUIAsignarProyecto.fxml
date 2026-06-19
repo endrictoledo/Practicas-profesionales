@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="450.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.FXMLAsignarProyectoController">
+<AnchorPane prefHeight="450.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIAsignarProyecto">
     <children>
         <VBox layoutX="20.0" layoutY="20.0" prefWidth="510.0" spacing="10.0">
             <Label text="Proyectos solicitados (por prioridad):" style="-fx-font-weight: bold; -fx-font-size: 14px;" />

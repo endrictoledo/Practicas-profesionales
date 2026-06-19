@@ -30,7 +30,7 @@ import practicasprofesionales.utilidades.Utilidades;
  *
  * @author basa2
  */
-public class FXMLAgregarFormatoController implements Initializable {
+public class ControladorGUIAgregarFormato implements Initializable {
 
     @FXML
     private TextField txfRutaArchivo;

@@ -30,7 +30,7 @@ import practicasprofesionales.utilidades.Utilidades;
  *
  * @author basa2
  */
-public class FXMLRegistrarPracticanteController implements Initializable {
+public class ControladorGUIRegistrarPracticante implements Initializable {
 
     @FXML
     private TextField txtMatricula;
