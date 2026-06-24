@@ -49,7 +49,7 @@ public class GeneradorPDF {
                 + " en %s, " 
                 + "teniendo como fecha de inicio %s y aproximada de "
                 + "terminación %s, " 
-                + "en el cual cubrirá un total de 200 horas, en las que"
+                + "en el cual cubrirá un total de 420 horas, en las que"
                 + " realizará actividades afines a su carrera.",
                 sol.getNombreEstudiante(), sol.getMatricula(), 
                 proy.getProyecto().getNombreEmpresa(), 

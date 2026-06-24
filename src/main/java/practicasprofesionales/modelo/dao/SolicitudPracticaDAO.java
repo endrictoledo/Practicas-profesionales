@@ -201,4 +201,22 @@ public class SolicitudPracticaDAO {
             }
         }
     }
+    
+    public static boolean estudianteTieneSolicitud(int idEstudiante) 
+                                                           throws ExcepcionDAO {
+        String sql = "SELECT COUNT(*) AS total "
+                + "FROM solicitud_practica WHERE Estudiante_idEstudiante = ?";
+        try (Connection conn = ConexionBD.obtenerConexion(); 
+                            PreparedStatement ps = conn.prepareStatement(sql)) {   
+            ps.setInt(1, idEstudiante);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total") > 0;
+                }
+            }
+        }catch (SQLException e) {
+            throw new ExcepcionDAO("Error al verificar si el estudiante tiene solicitudes", e);
+        }
+        return false;
+    }
 }

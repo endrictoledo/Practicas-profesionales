@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIRegistrarProyecto">
+<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIRegistrarProyecto">
    <children>
       <VBox layoutX="20.0" layoutY="20.0" prefHeight="660.0" prefWidth="560.0" spacing="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
@@ -23,7 +24,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <ComboBox fx:id="cbxOrganizaciones" prefWidth="560.0" promptText="Seleccionar Organización..." style="-fx-font-size: 14px;" />
+            <ComboBox fx:id="cbx_Organizaciones" prefWidth="560.0" promptText="Seleccionar Organización" style="-fx-font-size: 14px;" />
 
             <Label text="2. Datos del Proyecto">
                <font>
@@ -46,16 +47,16 @@
               </rowConstraints>
                <children>
                   <Label text="Nombre del Proyecto:" />
-                  <TextField fx:id="txfNombreProyecto" GridPane.columnIndex="1" />
+                  <TextField fx:id="txf_NombreProyecto" GridPane.columnIndex="1" />
                   
                   <Label text="Descripción:" GridPane.rowIndex="1" />
-                  <TextArea fx:id="txaDescripcion" prefHeight="60.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="txf_Descripcion" prefHeight="60.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   
                   <Label text="Objetivo:" GridPane.rowIndex="2" />
-                  <TextField fx:id="txfObjetivo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txf_Objetivo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   
                   <Label text="Cupo:" GridPane.rowIndex="3" />
-                  <TextField fx:id="txfCupo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="txf_Cupo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
 
@@ -81,26 +82,26 @@
                </rowConstraints>
                <children>
                   <Label text="Nombre:" />
-                  <TextField fx:id="txfNombreEncargado" GridPane.columnIndex="1" />
+                  <TextField fx:id="txf_NombreEncargado" GridPane.columnIndex="1" />
                   
                   <Label text="Apellido Paterno:" GridPane.rowIndex="1" />
-                  <TextField fx:id="txfApellidoPaEncargado" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txf_ApellidoPaEncargado" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   
                   <Label text="Apellido Materno:" GridPane.rowIndex="2" />
-                  <TextField fx:id="txfApellidoMaEncargado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txf_ApellidoMaEncargado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   
                   <Label text="Cargo:" GridPane.rowIndex="3" />
-                  <TextField fx:id="txfCargo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="txf_Cargo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   
                   <Label text="Correo Electrónico:" GridPane.rowIndex="4" />
-                  <TextField fx:id="txfCorreoEncargado" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="txf_CorreoEncargado" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
             
             <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#btnCancelar" prefHeight="35.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Cancelar" />
-                  <Button mnemonicParsing="false" onAction="#btnRegistrar" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-cursor: hand;" text="Registrar" />
+                  <Button mnemonicParsing="false" onAction="#btn_Cancelar" prefHeight="35.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Cancelar" />
+                  <Button mnemonicParsing="false" onAction="#btn_Registrar" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-cursor: hand;" text="Registrar" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />

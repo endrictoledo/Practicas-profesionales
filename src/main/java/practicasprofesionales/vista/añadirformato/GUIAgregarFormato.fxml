@@ -9,26 +9,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIAgregarFormato">
+<AnchorPane id="AnchorPane" prefHeight="527.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIAgregarFormato">
     <children>
-      <VBox layoutX="20.0" layoutY="20.0" spacing="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <VBox layoutX="20.0" layoutY="20.0" prefHeight="345.0" prefWidth="604.0" spacing="15.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <Label text="Seleccionar Documento" textFill="#185244">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="19.0" />
                </font></Label>
                <Label text="Tipo de Documento:" />
-               <ComboBox fx:id="cbxTipoDocumento" prefWidth="560.0" promptText="Seleccione el tipo de formato..." />
-            <HBox spacing="10.0">
+               <ComboBox fx:id="cbx_TipoDocumento" prefHeight="39.0" prefWidth="603.0" promptText="Seleccione el tipo de formato" />
+            <Region prefHeight="50.0" prefWidth="604.0" />
+            <Label text="Seleccione el archivo con el boton Seleccionar" />
+            <HBox prefHeight="57.0" prefWidth="604.0" spacing="10.0">
                <children>
-                  <TextField fx:id="txfRutaArchivo" editable="false" HBox.hgrow="ALWAYS" />
-                  <Button onAction="#btnSeleccionar" text="Seleccionar..." />
+                  <TextField fx:id="txf_RutaArchivo" editable="false" HBox.hgrow="ALWAYS" />
+                  <Button onAction="#btn_Seleccionar" text="Seleccionar" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="604.0" spacing="10.0">
                <children>
-                  <Button onAction="#btnCancelar" text="Cancelar" />
-                  <Button onAction="#btnGuardar" style="-fx-background-color: #185244; -fx-text-fill: white;" text="Guardar" />
+                  <Button onAction="#btn_Cancelar" text="Cancelar" />
+                  <Button onAction="#btn_Guardar" style="-fx-background-color: #185244; -fx-text-fill: white;" text="Guardar" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />

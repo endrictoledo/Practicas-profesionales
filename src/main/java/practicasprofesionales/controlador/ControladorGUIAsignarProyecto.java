@@ -35,45 +35,45 @@ import practicasprofesionales.utilidades.Utilidades;
 public class ControladorGUIAsignarProyecto implements Initializable {
 
     @FXML
-    private TableView<SolicitudEstudiante> tblProyectosPrioridad;
+    private TableView<SolicitudEstudiante> tbl_ProyectosPrioridad;
     @FXML
-    private TableColumn<SolicitudEstudiante, Integer> colPrioridad;
+    private TableColumn<SolicitudEstudiante, Integer> tbc_Prioridad;
     @FXML
-    private TableColumn<SolicitudEstudiante, String> colNombreProyecto;
+    private TableColumn<SolicitudEstudiante, String> tbc_NombreProyecto;
     @FXML
-    private TableColumn<SolicitudEstudiante, Integer> colCupo;
+    private TableColumn<SolicitudEstudiante, Integer> tbc_Cupo;
     @FXML
-    private DatePicker dpFechaInicio;
+    private DatePicker dtp_FechaInicio;
     @FXML
-    private DatePicker dpFechaFin;
+    private DatePicker dtp_FechaFin;
     private SolicitudPractica solicitudSeleccionada;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        colPrioridad.setCellValueFactory(
+        tbc_Prioridad.setCellValueFactory(
                 new PropertyValueFactory<>("prioridad"));
-        colNombreProyecto.setCellValueFactory(
+        tbc_NombreProyecto.setCellValueFactory(
                 new PropertyValueFactory<>("nombreProyecto"));
-        colCupo.setCellValueFactory(
+        tbc_Cupo.setCellValueFactory(
                 new PropertyValueFactory<>("cupoProyecto"));
     }
     
     @FXML
-    private void btnCancelar(ActionEvent event) {
-        Stage stage = (Stage) tblProyectosPrioridad.getScene().getWindow();
-        stage.close();
+    private void btn_Cancelar(ActionEvent event) {
+        cerrar();
     }
 
     @FXML
-    private void btnAsignar(ActionEvent event) {
-        SolicitudEstudiante seleccion = tblProyectosPrioridad.getSelectionModel().getSelectedItem();
+    private void btn_Asignar(ActionEvent event) {
+        SolicitudEstudiante seleccion =
+                tbl_ProyectosPrioridad.getSelectionModel().getSelectedItem();
         if (seleccion == null) {
             Utilidades.mostrarAlertaSimple("Error", "Selecciona un proyecto.",
                     Alert.AlertType.WARNING);
             return;
         }
-        LocalDate fechaInicio = dpFechaInicio.getValue();
-        LocalDate fechaFin = dpFechaFin.getValue();
+        LocalDate fechaInicio = dtp_FechaInicio.getValue();
+        LocalDate fechaFin = dtp_FechaFin.getValue();
         if (fechaInicio == null || fechaFin == null) {
             Utilidades.mostrarAlertaSimple("Error",
                     "Debes seleccionar ambas fechas (inicio y fin).",
@@ -86,29 +86,59 @@ public class ControladorGUIAsignarProyecto implements Initializable {
                     Alert.AlertType.ERROR);
             return;
         }
+        
+        if (fechaInicio.isBefore(LocalDate.now())) {
+            Utilidades.mostrarAlertaSimple("Fecha en el pasado", 
+                    "La fecha de inicio es demasiado antigua"
+                    + " Por favor revisa el calendario.",
+                    Alert.AlertType.WARNING);
+            return;
+        }
+         
+        long diasDuracion = java.time.temporal.ChronoUnit.DAYS.between(
+                                                        fechaInicio, fechaFin);
+        if (diasDuracion < 90) {
+            Utilidades.mostrarAlertaSimple("Duración Inválida", 
+                    "Las prácticas exigen 420 horas."
+                    + "El lapso seleccionado es de solo " + diasDuracion 
+                    + " días. "
+                    + "Debe durar por lo menos 3 a 6 meses.",
+                    Alert.AlertType.WARNING);
+            return;
+        }
         if (seleccion.getProyecto().getCupo() <= 0) {
             Utilidades.mostrarAlertaSimple("Error",
                     "Este proyecto ya no tiene cupo disponible.",
                     Alert.AlertType.ERROR);
             return;
         }
-        try {
+         try {
             boolean exito = AsignacionDAO.registrarAsignacion(
-                seleccion.getProyecto().getIdProyecto(),
-                solicitudSeleccionada.getIdEstudiante(),
-                fechaInicio.toString(),
-                fechaFin.toString()
-            );
-
+                                        seleccion.getProyecto().getIdProyecto(),
+                                        solicitudSeleccionada.getIdEstudiante(),
+                                        fechaInicio.toString(),
+                                        fechaFin.toString()
+                                         );
             if (exito) {
-                Utilidades.mostrarAlertaSimple("Éxito", 
-                        "Asignado correctamente.", Alert.AlertType.INFORMATION);
-                generarPDF(seleccion, fechaInicio, fechaFin);
-                btnCancelar(event);
+                Utilidades.mostrarAlertaSimple("Éxito",
+                        "Asignado correctamente. "
+                        + "El cupo se ha actualizado y "
+                        + "la solicitud fue marcada como ASIGNADA.",
+                        Alert.AlertType.INFORMATION);
+                
+                try {
+                    generarPDF(seleccion, fechaInicio, fechaFin);
+                } catch (Exception exPDF) {
+                    Utilidades.mostrarAlertaSimple("Aviso del Documento", 
+                            "La asignación se guardó "
+                          + "pero hubo un problema al crear el PDF."
+                          + " Asegúrate de tener cerrado otro archivo en PDF.",
+                            Alert.AlertType.WARNING);
+                }
+                cerrar();
             }
         } catch (SQLException e) {
-            Utilidades.mostrarAlertaSimple("Error",
-                    "Error en BD: " + e.getMessage(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error de Base de Datos", "Ocurrió un error al registrar: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -146,8 +176,13 @@ public class ControladorGUIAsignarProyecto implements Initializable {
         this.solicitudSeleccionada = solicitudSeleccionada;
         if (solicitudSeleccionada != null &&
                 solicitudSeleccionada.getOpcionesProyecto() != null) {
-        tblProyectosPrioridad.setItems(FXCollections.observableArrayList(
+        tbl_ProyectosPrioridad.setItems(FXCollections.observableArrayList(
                 solicitudSeleccionada.getOpcionesProyecto()));
         }
+    }
+    
+    private void cerrar(){
+        Stage stage = (Stage) tbl_ProyectosPrioridad.getScene().getWindow();
+        stage.close();
     }
 }

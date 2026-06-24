@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIListaFormatos">
+<AnchorPane id="AnchorPane" prefHeight="484.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIListaFormatos">
     <children>
       <VBox layoutX="20.0" layoutY="20.0" spacing="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
@@ -15,18 +15,30 @@
                <children>
                   <Label text="Formatos de Documentación" textFill="#185244">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="19.0" />
                      </font></Label>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button onAction="#btnAgregarDocumento" style="-fx-background-color: #185244; -fx-text-fill: white;" text="+ Agregar Documento" />
+                  <Button onAction="#btn_AgregarDocumento" style="-fx-background-color: #185244; -fx-text-fill: white;" text="+ Agregar Documento" />
                </children>
             </HBox>
-            <TableView fx:id="tblFormatos" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tbl_Formatos" prefHeight="261.0" prefWidth="623.0" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="colNombre" prefWidth="400.0" text="Nombre del documento" />
-                  <TableColumn fx:id="colEstado" prefWidth="250.0" text="Tipo de documento" />
+                  <TableColumn fx:id="tbc_Estado" prefWidth="255.0" text="Tipo de documento" />
+                  <TableColumn fx:id="tbc_Nombre" prefWidth="395.0" text="Nombre del  archivo" />
                </columns>
             </TableView>
+            <AnchorPane prefHeight="44.0" prefWidth="623.0">
+               <children>
+                  <BorderPane layoutY="134.0" prefHeight="44.0" prefWidth="737.0">
+                     <right>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #185244; -fx-text-fill: white;" text="Eliminar Documento" BorderPane.alignment="CENTER" />
+                     </right>
+                     <left>
+                        <Label text="Seleccione uno de la tabla antes de presionar eliminar:" BorderPane.alignment="CENTER" />
+                     </left>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

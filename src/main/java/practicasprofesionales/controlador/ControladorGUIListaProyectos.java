@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -57,6 +58,10 @@ public class ControladorGUIListaProyectos implements Initializable {
     private TableColumn<Proyecto, String> col_prioridad;
     @FXML
     private Button btn_masInformacion;
+    @FXML
+    private Button btn_guardar;
+    @FXML
+    private Label lbl_solicitudNoPermitida;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -96,7 +101,15 @@ public class ControladorGUIListaProyectos implements Initializable {
                     p.setPrioridadSeleccionada("Ninguna");
                 }
             }
-
+            boolean yaTieneSolicitud = SolicitudPracticaDAO.estudianteTieneSolicitud(idEstudianteActual);
+            if (yaTieneSolicitud == true) {
+                tabla_proyectos.setEditable(false);
+                btn_guardar.setDisable(true);
+                lbl_solicitudNoPermitida.setText("Ya hiciste tu solicitud,"
+                                                  + " no puedes realizar otra");
+            } else {
+                tabla_proyectos.setEditable(true);
+            }
             tabla_proyectos.setItems(FXCollections.observableArrayList(lista));
 
         } catch (ExcepcionDAO e) {
@@ -144,7 +157,7 @@ public class ControladorGUIListaProyectos implements Initializable {
     }
 
     @FXML
-    private void btn_guardar(ActionEvent event) {
+    private void btn_guardarOnAction(ActionEvent event) {
         List<SolicitudEstudiante> listaAEnviar = new ArrayList<>();
         if (SesionGlobal.getInstancia().getUsuarioActual() == null) {
             Utilidades.mostrarAlertaSimple("Error de sesión",
@@ -182,6 +195,9 @@ public class ControladorGUIListaProyectos implements Initializable {
         }
         int totalProyectosEnTabla = tabla_proyectos.getItems().size();
         if (!sonPrioridadesValidas(listaAEnviar, totalProyectosEnTabla)) {
+            return;
+        }
+        if(tieneSolicitud(idEstudianteActual) == true){
             return;
         }
         try {
@@ -308,4 +324,20 @@ public class ControladorGUIListaProyectos implements Initializable {
         });
     }
 
+    private boolean tieneSolicitud(int idEstudianteActual){
+        try {
+            if (SolicitudPracticaDAO.estudianteTieneSolicitud(idEstudianteActual)) {
+                Utilidades.mostrarAlertaSimple("Solicitud Existente",
+                    "Ya has enviado una solicitud de proyectos previamente.",
+                    Alert.AlertType.WARNING);
+                return true;
+            }
+        } catch (ExcepcionDAO e) {
+            Utilidades.mostrarAlertaSimple("Error de Conexión",
+                    "No se pudo verificar el estado actual de tus solicitudes.",
+                    Alert.AlertType.ERROR);
+            return true;
+        }
+        return false;
+    }
 }

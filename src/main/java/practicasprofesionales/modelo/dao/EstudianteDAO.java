@@ -111,4 +111,24 @@ public class EstudianteDAO {
         }
         return -1;
     }
+    
+    public static boolean existeMatriculaActiva(String matricula) throws SQLException {
+        boolean existe = false;
+        String sentencia = "SELECT COUNT(*) AS total FROM estudiante "
+                         + "WHERE matricula = ? AND Estado_Estudiante_idEstado_Estudiante = 1";
+                         
+        try (Connection conexion = ConexionBD.obtenerConexion()){
+            try (PreparedStatement ps = conexion.prepareStatement(sentencia)) {
+                ps.setString(1, matricula);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        if (rs.getInt("total") > 0) {
+                            existe = true;
+                        }
+                    }
+                }
+            }
+        }
+        return existe;
+    }
 }

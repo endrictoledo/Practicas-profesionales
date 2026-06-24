@@ -23,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import practicasprofesionales.excepciones.ExcepcionDAO;
 import practicasprofesionales.modelo.dao.SolicitudPracticaDAO;
 import practicasprofesionales.modelo.pojo.SolicitudPractica;
 import practicasprofesionales.utilidades.Utilidades;
@@ -35,30 +36,33 @@ import practicasprofesionales.utilidades.Utilidades;
 public class ControladorGUISolicitudes implements Initializable {
 
     @FXML
-    private TableView<SolicitudPractica> tblSolicitudes;
+    private TableView<SolicitudPractica> tbl_Solicitudes;
     @FXML
-    private TableColumn<SolicitudPractica, String> colEstudiante;
+    private TableColumn<SolicitudPractica, String> tbc_Estudiante;
     @FXML
-    private TableColumn<SolicitudPractica, Integer> colIdSolicitud;
+    private TableColumn<SolicitudPractica, String> tbc_Matricula;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        colIdSolicitud.setCellValueFactory(new PropertyValueFactory<>(
-                "idSolicitud"));
-        colEstudiante.setCellValueFactory(new PropertyValueFactory<>(
+        tbc_Matricula.setCellValueFactory(new PropertyValueFactory<>(
+                "matricula"));
+        tbc_Estudiante.setCellValueFactory(new PropertyValueFactory<>(
                 "nombreEstudiante"));
-
         cargarSolicitudes();
-    }  
+        javafx.scene.control.Label mensajeVacio = 
+                    new javafx.scene.control.Label(
+                                "No hay solicitudes pendientes por revisar.");
+        tbl_Solicitudes.setPlaceholder(mensajeVacio);
+    }
     
     private void cargarSolicitudes() {
         try {
             ArrayList<SolicitudPractica> lista = 
                     SolicitudPracticaDAO.obtenerTodasLasSolicitudes();
-            tblSolicitudes.setItems(FXCollections.observableArrayList(lista));
+            tbl_Solicitudes.setItems(FXCollections.observableArrayList(lista));
         } catch (SQLException e) {
             Utilidades.mostrarAlertaSimple("Error",
                     "No se pudieron cargar las solicitudes: " + e.getMessage(),
@@ -69,7 +73,7 @@ public class ControladorGUISolicitudes implements Initializable {
     @FXML
     private void btnVerDetalles(ActionEvent event) {
         SolicitudPractica seleccionada = 
-                tblSolicitudes.getSelectionModel().getSelectedItem();
+                tbl_Solicitudes.getSelectionModel().getSelectedItem();
         if (seleccionada == null) {
             Utilidades.mostrarAlertaSimple("Selección",
                     "Selecciona una solicitud primero.",
@@ -83,7 +87,7 @@ public class ControladorGUISolicitudes implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
                                 "/practicasprofesionales/vista/"
-                                + "asignarproyecto/FXMLAsignarProyecto.fxml"));
+                                + "asignarproyecto/GUIAsignarProyecto.fxml"));
             Parent root = loader.load();
             ControladorGUIAsignarProyecto controller = loader.getController();
             controller.setSolicitudSeleccionada(solicitud);

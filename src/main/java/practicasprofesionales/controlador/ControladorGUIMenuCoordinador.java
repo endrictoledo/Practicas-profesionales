@@ -26,7 +26,7 @@ public class ControladorGUIMenuCoordinador implements Initializable {
 
     @FXML
     private void accionBtnRegistrarProyecto(ActionEvent event) {
-        cargarSubVista("registrarproyecto/FXMLRegistrarProyecto.fxml");
+        cargarSubVista("registrarproyecto/GUIRegistrarProyecto.fxml");
     }
 
     @FXML
@@ -36,12 +36,12 @@ public class ControladorGUIMenuCoordinador implements Initializable {
     
     @FXML
     private void accionBtnRegistrarPracticante(ActionEvent event){
-        cargarSubVista("registrarpracticante/FXMLRegistrarPracticante.fxml");
+        cargarSubVista("registrarpracticante/GUIRegistrarPracticante.fxml");
     }
     
     @FXML
     private void btnSolicitudesProyecto(ActionEvent event) {
-        cargarSubVista("asignarproyecto/FXMLSolicitudes.fxml");
+        cargarSubVista("asignarproyecto/GUISolicitudes.fxml");
     }
 
     private void cargarSubVista(String nombreFxml) {

@@ -35,11 +35,11 @@ import practicasprofesionales.utilidades.Utilidades;
 public class ControladorGUIListaFormatos implements Initializable {
 
     @FXML 
-    private TableView<FormatoDocumentacion> tblFormatos;
+    private TableView<FormatoDocumentacion> tbl_Formatos;
     @FXML
-    private TableColumn<FormatoDocumentacion, String> colNombre;
+    private TableColumn<FormatoDocumentacion, String> tbc_Nombre;
     @FXML 
-    private TableColumn<FormatoDocumentacion, String> colEstado;
+    private TableColumn<FormatoDocumentacion, String> tbc_Estado;
 
     /**
      * Initializes the controller class.
@@ -51,18 +51,23 @@ public class ControladorGUIListaFormatos implements Initializable {
     }  
     
     private void configurarTabla() {
-        colNombre.setCellValueFactory(new PropertyValueFactory<>(
+        tbc_Nombre.setCellValueFactory(new PropertyValueFactory<>(
                                                         "nombreArchivo"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>(
+        tbc_Estado.setCellValueFactory(new PropertyValueFactory<>(
                                                         "nombreTipoDocumento"));
+        tbl_Formatos.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                descargarArchivoSeleccionado();
+            }
+        });
     }
     
     @FXML
-    private void btnAgregarDocumento(ActionEvent event) {
+    private void btn_AgregarDocumento(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
                     "/practicasprofesionales/"
-                  + "vista/añadirformato/FXMLAgregarFormato.fxml"));
+                  + "vista/añadirformato/GUIAgregarFormato.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -85,11 +90,58 @@ public class ControladorGUIListaFormatos implements Initializable {
                                           FormatoDocumentoDAO.obtenerFormatos();
             ObservableList<FormatoDocumentacion> listaObservable = 
                                FXCollections.observableArrayList(listaFormatos);
-            tblFormatos.setItems(listaObservable);
+            tbl_Formatos.setItems(listaObservable);
         } catch (SQLException e) {
             Utilidades.mostrarAlertaSimple("Error", 
                 "No se pudieron cargar los formatos: " + e.getMessage(), 
                 Alert.AlertType.ERROR);
+        }
+    }
+    
+        private void descargarArchivoSeleccionado() {
+        FormatoDocumentacion seleccion = 
+                            tbl_Formatos.getSelectionModel().getSelectedItem();
+        if (seleccion == null) {
+            return;
+        }
+        try {
+            byte[] archivoBytes = FormatoDocumentoDAO.obtenerArchivoPorId(
+                                                      seleccion.getIdFormato());
+            if (archivoBytes != null && archivoBytes.length > 0) {
+                javafx.stage.FileChooser fileChooser = 
+                                                new javafx.stage.FileChooser();
+                fileChooser.setTitle("Guardar Formato");
+                fileChooser.setInitialFileName(seleccion.getNombreArchivo());
+                
+                java.io.File archivoDestino = fileChooser.showSaveDialog(
+                                        tbl_Formatos.getScene().getWindow());
+                if (archivoDestino != null) {
+                    try (java.io.FileOutputStream fileimput = 
+                                 new java.io.FileOutputStream(archivoDestino)) {
+                        fileimput.write(archivoBytes);
+                    }
+                    Utilidades.mostrarAlertaSimple("Éxito", 
+                            "El formato se ha descargado correctamente en tu computadora.", 
+                            Alert.AlertType.INFORMATION);
+                    if (java.awt.Desktop.isDesktopSupported()) {
+                        java.awt.Desktop.getDesktop().open(archivoDestino);
+                    }
+                }
+            } else {
+                Utilidades.mostrarAlertaSimple("Error", 
+                        "El archivo no existe o está dañado en la base de datos.", 
+                        Alert.AlertType.ERROR);
+            }
+        } catch (SQLException e) {
+            Utilidades.mostrarAlertaSimple("Error de descarga", 
+                    "Ocurrió un error al intentar descargar el archivo: " 
+                    + e.getMessage(), 
+                    Alert.AlertType.ERROR);
+        } catch (IOException es){
+            Utilidades.mostrarAlertaSimple("Error de descarga", 
+                    "Ocurrió un error al intentar descargar el archivo: " 
+                    + es.getMessage(), 
+                    Alert.AlertType.ERROR);
         }
     }
     

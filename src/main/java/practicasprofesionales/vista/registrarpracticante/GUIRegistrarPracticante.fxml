@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIRegistrarPracticante">
+<AnchorPane prefHeight="700.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIRegistrarPracticante">
    <children>
       <VBox layoutX="20.0" layoutY="20.0" prefHeight="660.0" prefWidth="660.0" spacing="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
@@ -28,7 +28,6 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-
             <Label text="1. Datos del Estudiante">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -51,19 +50,15 @@
               </rowConstraints>
                <children>
                   <Label text="Matrícula:" />
-                  <TextField fx:id="txtMatricula" GridPane.columnIndex="1" />
-                  
+                  <TextField fx:id="txf_Matricula" GridPane.columnIndex="1" />
                   <Label text="Nombre Completo:" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtNombreEstudiante" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  
-                  <Label text="Avance Crediticio:" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtAvanceCrediticio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  
-                  <Label text="Promedio:" GridPane.rowIndex="3" />
-                  <TextField fx:id="txtPromedio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-                  <Label text="NRC (Sección):" GridPane.rowIndex="4" />
-                  <ComboBox fx:id="cmbSeccionEE" prefWidth="410.0" promptText="Seleccionar NRC..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="txf_NombreEstudiante" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Avance Crediticio:(0-100%)" GridPane.rowIndex="2" />
+                  <TextField fx:id="txf_AvanceCrediticio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Promedio: (0-100)" GridPane.rowIndex="3" />
+                  <TextField fx:id="txf_Promedio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Seccion (NRC de EE)" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="cmb_SeccionEE" prefWidth="410.0" promptText="Seleccionar NRC..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
 
@@ -83,20 +78,22 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> 
                </rowConstraints>
                <children>
                   <Label text="Correo Institucional:" />
-                  <TextField fx:id="txtCorreo" GridPane.columnIndex="1" />
+                  <TextField fx:id="txf_Correo" GridPane.columnIndex="1" />
                   
                   <Label text="Contraseña:" GridPane.rowIndex="1" />
-                  <PasswordField fx:id="pwfContrasena" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="pwf_Contrasena" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Confirmar Contraseña:" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="pwf_ConfirmarContrasena" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            
             <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#btnCancelar" prefHeight="35.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Cancelar" />
-                  <Button mnemonicParsing="false" onAction="#btnRegistrar" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-cursor: hand;" text="Registrar" />
+                  <Button mnemonicParsing="false" onAction="#btn_Cancelar" prefHeight="35.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Cancelar" />
+                  <Button mnemonicParsing="false" onAction="#btn_Registrar" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-cursor: hand;" text="Registrar" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />

@@ -7,14 +7,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="538.0" prefWidth="713.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="practicasprofesionales.controlador.ControladorGUISolicitudes">
+<AnchorPane prefHeight="538.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUISolicitudes">
     <children>
       <BorderPane layoutY="-4.0" prefHeight="538.0" prefWidth="713.0">
          <center>
-              <TableView fx:id="tblSolicitudes" prefHeight="400.0" prefWidth="560.0" BorderPane.alignment="CENTER">
+              <TableView fx:id="tbl_Solicitudes" prefHeight="400.0" prefWidth="560.0" BorderPane.alignment="CENTER">
                   <columns>
-                      <TableColumn fx:id="colEstudiante" prefWidth="280.0" text="Estudiante" />
-                      <TableColumn fx:id="colIdSolicitud" prefWidth="280.0" text="ID Solicitud" />
+                      <TableColumn fx:id="tbc_Matricula" prefWidth="274.0" text="Matrícula" />
+                      <TableColumn fx:id="tbc_Estudiante" prefWidth="438.0" text="Estudiante" />
                   </columns>
               </TableView>
          </center>

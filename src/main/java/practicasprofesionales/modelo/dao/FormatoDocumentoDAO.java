@@ -77,4 +77,24 @@ public class FormatoDocumentoDAO {
         }
         return null;
     }
+    
+    public static boolean existeFormatoDelCatalogo(int idCatalogoDocumento) 
+                                                          throws SQLException {
+        boolean existe = false;
+        String sql = "SELECT COUNT(*) AS total FROM formato_documento "
+                   + "WHERE idCatalogoDocumento = ?";
+        
+        try (Connection conn = ConexionBD.obtenerConexion();
+                            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idCatalogoDocumento);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    if (rs.getInt("total") > 0) {
+                        existe = true;
+                    }
+                }
+            }
+        }
+        return existe;
+    }
 }

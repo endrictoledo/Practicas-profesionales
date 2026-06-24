@@ -33,25 +33,25 @@ import practicasprofesionales.utilidades.Utilidades;
  */
 public class ControladorGUIRegistrarProyecto implements Initializable {
     @FXML
-    private TextField txfNombreProyecto;
+    private TextField txf_NombreProyecto;
     @FXML
-    private TextArea txaDescripcion;
+    private TextArea txf_Descripcion;
     @FXML
-    private TextField txfObjetivo;
+    private TextField txf_Objetivo;
     @FXML
-    private TextField txfNombreEncargado;
+    private TextField txf_NombreEncargado;
     @FXML
-    private TextField txfApellidoPaEncargado;
+    private TextField txf_ApellidoPaEncargado;
     @FXML
-    private TextField txfCupo;
+    private TextField txf_Cupo;
     @FXML
-    private TextField txfApellidoMaEncargado;
+    private TextField txf_ApellidoMaEncargado;
     @FXML
-    private TextField txfCargo;
+    private TextField txf_Cargo;
     @FXML
-    private TextField txfCorreoEncargado;
+    private TextField txf_CorreoEncargado;
     @FXML
-    private ComboBox<OrganizacionVinculada> cbxOrganizaciones;
+    private ComboBox<OrganizacionVinculada> cbx_Organizaciones;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,7 +64,7 @@ public class ControladorGUIRegistrarProyecto implements Initializable {
                     OrganizacionVinculadaDAO.obtenerOrganizaciones();
             ObservableList<OrganizacionVinculada> listaOrganizaciones = 
                     FXCollections.observableArrayList(organizacionesBD);
-            cbxOrganizaciones.setItems(listaOrganizaciones);
+            cbx_Organizaciones.setItems(listaOrganizaciones);
         } catch (SQLException e) {
             Utilidades.mostrarAlertaSimple("Error de conexión", 
                 "No se pudo cargar la lista de organizaciones vinculadas.", 
@@ -73,122 +73,165 @@ public class ControladorGUIRegistrarProyecto implements Initializable {
     }
 
     @FXML
-    private void btnRegistrar(ActionEvent event) {
+    private void btn_Registrar(ActionEvent event) {
         if (!sonCamposValidos()) {
-            return; // El método ya mostró la alerta, cortamos ejecución
+            return;
         }
-
-        boolean confirmar = Utilidades.mostrarAlertaConfirmacion("Confirmar Registro", 
-                "¿Estás seguro de que deseas registrar este proyecto y su encargado?");
-        
+        try {
+            if(existeProyectoDuplicado()){
+                return;
+            }
+        }catch (SQLException e) {
+            Utilidades.mostrarAlertaSimple("Error de Base de Datos", 
+                    e.getMessage(), Alert.AlertType.ERROR);
+        }
+        boolean confirmar = Utilidades.mostrarAlertaConfirmacion(
+                "Confirmar Registro", 
+                "¿Estás seguro de que deseas registrar este proyecto y"
+                + " su encargado?");
         if (confirmar) {
             guardarInformacion();
         }
     }
 
     @FXML
-    private void btnCancelar(ActionEvent event) {
+    private void btn_Cancelar(ActionEvent event) {
         boolean confirmar = Utilidades.mostrarAlertaConfirmacion("Cancelar", 
-                "¿Estás seguro de que deseas salir? Los datos no guardados se perderán.");
+                "¿Estás seguro de que deseas salir? Los datos no guardados"
+                + " se perderán.");
         if (confirmar) {
             limpiarFormulario();
         }
     }
     
    private void guardarInformacion() {
-        int idOrganizacion = cbxOrganizaciones.getValue().getIdOrganizacionVinculada();
+        int idOrganizacion = 
+                     cbx_Organizaciones.getValue().getIdOrganizacionVinculada();
         try {
             Encargado encargadoNuevo = serializarEncargado(idOrganizacion);
-            int idEncargadoGenerado = EncargadoDAO.registrarEncargado(encargadoNuevo);
+            int idEncargadoGenerado = EncargadoDAO.registrarEncargado(
+                                                                encargadoNuevo);
             if (idEncargadoGenerado > 0) {
-                Proyecto proyectoNuevo = serializarProyecto(idOrganizacion, idEncargadoGenerado);
-                int resultadoProyecto = ProyectoDAO.registrarProyecto(proyectoNuevo);
+                Proyecto proyectoNuevo = serializarProyecto(idOrganizacion, 
+                                                           idEncargadoGenerado);
+                int resultadoProyecto = ProyectoDAO.registrarProyecto(
+                                                                 proyectoNuevo);
                 if (resultadoProyecto > 0) {
                     Utilidades.mostrarAlertaSimple("Registro exitoso", 
-                            "El proyecto y el encargado se han registrado correctamente.", 
+                            "El proyecto y el encargado se han registrado"
+                            + " correctamente.", 
                             Alert.AlertType.INFORMATION);
                     limpiarFormulario();
                 } else {
-                    Utilidades.mostrarAlertaSimple("Error", "No se pudo registrar el proyecto.", Alert.AlertType.ERROR);
+                    Utilidades.mostrarAlertaSimple("Error",
+                            "No se pudo registrar el proyecto.",
+                            Alert.AlertType.ERROR);
                 }
             } else {
-                Utilidades.mostrarAlertaSimple("Error", "No se pudo registrar al encargado.", Alert.AlertType.ERROR);
+                Utilidades.mostrarAlertaSimple("Error", 
+                        "No se pudo registrar al encargado.",
+                        Alert.AlertType.ERROR);
             }
         } catch (SQLException e) {
             Utilidades.mostrarAlertaSimple("Error de Base de Datos", 
-                "Ha ocurrido un error al guardar: " + e.getMessage(), Alert.AlertType.ERROR);
+                "Ha ocurrido un error al guardar: " + e.getMessage(), 
+                Alert.AlertType.ERROR);
         }
     }
 
     private Encargado serializarEncargado(int idOrganizacion) {
         Encargado encargado = new Encargado();
-        encargado.setNombreEncargado(txfNombreEncargado.getText().trim());
-        encargado.setApellidoPaterno(txfApellidoPaEncargado.getText().trim());
-        encargado.setApellidoMaterno(txfApellidoMaEncargado.getText().trim());
-        encargado.setCargo(txfCargo.getText().trim());
-        encargado.setCorreoElectronico(txfCorreoEncargado.getText().trim());
+        encargado.setNombreEncargado(txf_NombreEncargado.getText().trim());
+        encargado.setApellidoPaterno(txf_ApellidoPaEncargado.getText().trim());
+        encargado.setApellidoMaterno(txf_ApellidoMaEncargado.getText().trim());
+        encargado.setCargo(txf_Cargo.getText().trim());
+        encargado.setCorreoElectronico(txf_CorreoEncargado.getText().trim());
         encargado.setIdOrganizacionVinculada(idOrganizacion);
         return encargado;
     }
 
     private Proyecto serializarProyecto(int idOrganizacion, int idEncargado) {
         Proyecto proyecto = new Proyecto();
-        proyecto.setNombre(txfNombreProyecto.getText().trim());
-        proyecto.setDescripcion(txaDescripcion.getText().trim());
-        proyecto.setObjetivo(txfObjetivo.getText().trim());
-        proyecto.setCupo(Integer.parseInt(txfCupo.getText().trim()));
+        proyecto.setNombre(txf_NombreProyecto.getText().trim());
+        proyecto.setDescripcion(txf_Descripcion.getText().trim());
+        proyecto.setObjetivo(txf_Objetivo.getText().trim());
+        proyecto.setCupo(Integer.parseInt(txf_Cupo.getText().trim()));
         proyecto.setIdOrganizacionVinculada(idOrganizacion);
         proyecto.setIdEncargado(idEncargado);
         return proyecto;
     }
     
     private boolean sonCamposValidos() {
-        String nombreP = txfNombreProyecto.getText().trim();
-        String descP = txaDescripcion.getText().trim();
-        String objP = txfObjetivo.getText().trim();
-        String cupoStr = txfCupo.getText().trim();
-        String nombreE = txfNombreEncargado.getText().trim();
-        String apellidoPaE = txfApellidoPaEncargado.getText().trim();
-        String apellidoMaE = txfApellidoMaEncargado.getText().trim();
-        String cargo = txfCargo.getText().trim();
-        String correo = txfCorreoEncargado.getText().trim();
-        if (cbxOrganizaciones.getValue() == null) {
+        String nombreP = txf_NombreProyecto.getText().trim();
+        String descP = txf_Descripcion.getText().trim();
+        String objP = txf_Objetivo.getText().trim();
+        String cupoStr = txf_Cupo.getText().trim();
+        
+        String nombreE = txf_NombreEncargado.getText().trim();
+        String apellidoPaE = txf_ApellidoPaEncargado.getText().trim();
+        String apellidoMaE = txf_ApellidoMaEncargado.getText().trim();
+        String cargo = txf_Cargo.getText().trim();
+        String correo = txf_CorreoEncargado.getText().trim();
+
+        if (cbx_Organizaciones.getValue() == null) {
             Utilidades.mostrarAlertaSimple("Organización requerida",
                     "Por favor selecciona una Organización Vinculada.",
                     Alert.AlertType.WARNING);
             return false;
         }
         
-        if (nombreP.isEmpty() || descP.isEmpty() ||
-                objP.isEmpty() || cupoStr.isEmpty() ||
-                nombreE.isEmpty() || apellidoPaE.isEmpty() ||
-                cargo.isEmpty() || correo.isEmpty()) {
-            Utilidades.mostrarAlertaSimple("Campos vacíos",
-                    "Por favor completa todos los campos obligatorios.",
+        if (nombreP.isEmpty() || descP.isEmpty() || objP.isEmpty() 
+                                                        || cupoStr.isEmpty()) {
+            Utilidades.mostrarAlertaSimple("Campos vacíos (Proyecto)",
+                    "Por favor completa todos los campos del Proyecto.",
                     Alert.AlertType.WARNING);
             return false;
         }
         
-        try {
-            int cupoValue = Integer.parseInt(cupoStr);
-            if (cupoValue <= 0) {
-                Utilidades.mostrarAlertaSimple("Cupo inválido", 
-                        "El cupo debe ser un número mayor a cero.",
-                        Alert.AlertType.WARNING);
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            Utilidades.mostrarAlertaSimple("Formato de cupo", "El cupo debe ser un número entero válido.", Alert.AlertType.WARNING);
+        if (nombreE.isEmpty() || apellidoPaE.isEmpty() || cargo.isEmpty() 
+                                                        || correo.isEmpty()) {
+            Utilidades.mostrarAlertaSimple("Campos vacíos (Encargado)",
+                    "Por favor completa todos los campos obligatorios "
+                            + "del Encargado.",
+                    Alert.AlertType.WARNING);
+            return false;
+        }
+
+        if (!cupoStr.matches("\\d+")) {
+            Utilidades.mostrarAlertaSimple("Formato de cupo",
+                    "El cupo debe ser un número entero válido",
+                    Alert.AlertType.WARNING);
             return false;
         }
         
-        if (nombreP.length() > 45 || objP.length() > 45 
-                                                    || descP.length() > 255) {
-            Utilidades.mostrarAlertaSimple("Límite excedido",
-                    "La información del proyecto excede los límites "
-                        + "de caracteres permitidos.", Alert.AlertType.WARNING);
+        int cupoValue = Integer.parseInt(cupoStr);
+        
+        if (cupoValue <= 0) {
+            Utilidades.mostrarAlertaSimple("Cupo inválido", 
+                    "El cupo debe ser un número mayor a cero.",
+                    Alert.AlertType.WARNING);
             return false;
         }
+        if (nombreP.length() > 45){
+            Utilidades.mostrarAlertaSimple("Límite excedido",
+                    "El nombre no puede exceder los 45 caracteres.", 
+                    Alert.AlertType.WARNING);
+            return false;
+        }
+        if (objP.length() > 45) {
+            Utilidades.mostrarAlertaSimple("Límite excedido",
+                    "El objetivo no puede exceder los 45 caracteres.", 
+                    Alert.AlertType.WARNING);
+            return false;
+        }
+        if(descP.length() > 255){
+            Utilidades.mostrarAlertaSimple("Límite excedido",
+                    "La información de la descripcion no puede "
+                            + "exceder los 255 caracteres", 
+                    Alert.AlertType.WARNING);
+            return false;
+        }
+        
         if (!nombreE.matches("\\D+") || !apellidoPaE.matches("\\D+") ||
                     (!apellidoMaE.isEmpty() && !apellidoMaE.matches("\\D+"))) {
             Utilidades.mostrarAlertaSimple("Formato incorrecto",
@@ -196,24 +239,70 @@ public class ControladorGUIRegistrarProyecto implements Initializable {
                Alert.AlertType.WARNING);
             return false;
         }
+        
+        if (nombreE.length() > 45 || apellidoPaE.length() > 45 
+                                                || apellidoMaE.length() > 45) {
+            Utilidades.mostrarAlertaSimple("Límite excedido",
+              "El nombre y apellidos del encargado no pueden"
+                      + " rebasar los 45 caracteres.",
+               Alert.AlertType.WARNING);
+            return false;
+        }
+        
+        if (cargo.length() > 45) {
+            Utilidades.mostrarAlertaSimple("Límite excedido",
+              "El cargo del encargado no puede rebasar los 45 caracteres.",
+               Alert.AlertType.WARNING);
+            return false;
+        }
+        
+        if (!correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            Utilidades.mostrarAlertaSimple("Correo inválido",
+              "Por favor ingresa un correo electrónico válido ",
+               Alert.AlertType.WARNING);
+            return false;
+        }
+        
+        if (correo.length() > 45) {
+            Utilidades.mostrarAlertaSimple("Límite excedido",
+              "El correo del encargado no puede rebasar los 60 caracteres.",
+               Alert.AlertType.WARNING);
+            return false;
+        }
         return true;
     }
     
+    private boolean existeProyectoDuplicado() throws SQLException {
+        String nombreIngresado = txf_NombreProyecto.getText().trim();
+        int idOrg = 
+             cbx_Organizaciones.getValue().getIdOrganizacionVinculada();
+        boolean estaDuplicado = ProyectoDAO.existeProyecto(
+                                                nombreIngresado, idOrg);
+        if (estaDuplicado) {
+            Utilidades.mostrarAlertaSimple("Proyecto duplicado", 
+                "La organización seleccionada ya tiene un proyecto"
+                + " registrado con el nombre '" + nombreIngresado + "'", 
+                Alert.AlertType.WARNING);
+            return true;
+        }
+        return false;
+    }
+    
     private void cerrar() {
-        Stage stageActual = (Stage) txfNombreProyecto.getScene().getWindow();
+        Stage stageActual = (Stage) txf_NombreProyecto.getScene().getWindow();
         stageActual.close();
     }
     
     private void limpiarFormulario() {
-        txfNombreProyecto.clear();
-        txaDescripcion.clear();
-        txfObjetivo.clear();
-        txfCupo.clear();
-        cbxOrganizaciones.getSelectionModel().clearSelection();
-        txfNombreEncargado.clear();
-        txfApellidoPaEncargado.clear();
-        txfApellidoMaEncargado.clear();
-        txfCargo.clear();
-        txfCorreoEncargado.clear();
+        txf_NombreProyecto.clear();
+        txf_Descripcion.clear();
+        txf_Objetivo.clear();
+        txf_Cupo.clear();
+        cbx_Organizaciones.getSelectionModel().clearSelection();
+        txf_NombreEncargado.clear();
+        txf_ApellidoPaEncargado.clear();
+        txf_ApellidoMaEncargado.clear();
+        txf_Cargo.clear();
+        txf_CorreoEncargado.clear();
     }
 }

@@ -12,10 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import practicasprofesionales.utilidades.Utilidades;
 
 /**
  * FXML Controller class
@@ -25,34 +23,47 @@ import javafx.stage.Stage;
 public class ControladorGUIMenuAdministrador implements Initializable {
 
     @FXML
-    private MenuItem mniUsuarios;
-
+    private Pane pne_principal;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Inicializaciones al abrir el menú administrador
+        
     }
 
     @FXML
-    private void mniUsuarios(ActionEvent event) {
-        cargarVentanaRegistroCoordinador();
+    private void btn_cerrarSesion(ActionEvent event) {
+        Utilidades.cerrarSesion(event);
     }
     
-    private void cargarVentanaRegistroCoordinador() {
+    private void cargarSubVista(String nombreFxml) {
         try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource(
-                  "/practicasprofesionales/vista/registrarcoordinador/"
-                + "FXMLRegistrarCoordinador.fxml"));
-            Parent vista = cargador.load();
-            Scene scene = new Scene(vista);
-            Stage stageRegistro = new Stage();
-            stageRegistro.setScene(scene);
-            stageRegistro.setTitle("Registrar Coordinador");
-            stageRegistro.initModality(Modality.APPLICATION_MODAL);
-            stageRegistro.showAndWait();
+            Parent subVista = FXMLLoader.load(getClass().getResource(
+                    "/practicasprofesionales/vista/" + nombreFxml));
+            pne_principal.getChildren().clear();
+            pne_principal.getChildren().add(subVista);
         } catch (IOException e) {
-            System.err.println("Error al cargar la ventana de Registro"
-                             + " de Coordinador: " + e.getMessage());
+            System.err.println(
+                    "Error: No se pudo cargar el archivo FXML: " +
+                    nombreFxml);
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void btn_registrarCoordinador(ActionEvent event) {
+        cargarSubVista("registrarcoordinador/GUIRegistrarCoordinador.fxml");
+    }
+
+    @FXML
+    private void btn_registrarProfesor(ActionEvent event) {
+    }
+
+    @FXML
+    private void btn_usuairos(ActionEvent event) {
+    }
+
+    @FXML
+    private void btn_Buzon(ActionEvent event) {
+    }
+
 }

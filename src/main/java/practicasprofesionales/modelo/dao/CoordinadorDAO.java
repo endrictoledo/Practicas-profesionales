@@ -126,4 +126,52 @@ public class CoordinadorDAO {
         }
     }
     
+    public static Coordinador existeCoordinadorActivo() throws SQLException{
+        Connection conexionBD = ConexionBD.obtenerConexion();
+        if(conexionBD != null){
+            Coordinador coordinadorActivo = null;
+            String sentencia = "SELECT p.nombreProfesor, p.apellidoPaterno, "
+                   + "p.apellidoMaterno, p.numeroPersonal "
+                   + "FROM personal_practicas p "
+                   + "INNER JOIN personal_tiene_rol pr "
+                   + "ON p.idProfesor = pr.Personal_practicas_id_proefesor "
+                   + "INNER JOIN estado_personal ep "
+                   + "ON p.Estado_Personal_idEstado_Personal = ep.idEstadoPersonal " 
+                   + "WHERE pr.Rol_idRol = 3 "
+                   + "AND ep.nombreEstado = 'ACTIVO';";
+            try (PreparedStatement ps = conexionBD.prepareStatement(sentencia);
+                                                 ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    coordinadorActivo = new Coordinador();
+                    coordinadorActivo.setNombre(rs.getString("nombreProfesor"));
+                    coordinadorActivo.setApellidoPaterno(rs.getString("apellidoPaterno"));
+                    coordinadorActivo.setApellidoMaterno(rs.getString("apellidoMaterno"));
+                    coordinadorActivo.setNoPersonal(rs.getString("numeroPersonal"));
+                }
+            }
+            return coordinadorActivo;
+        } else {
+            throw new SQLException("No hay conexión a la base de datos.");
+        }
+        
+    }
+
+    public static boolean existeNumeroPersonal(String numeroPersonalBuscado) throws SQLException {
+        Connection conexionBD = ConexionBD.obtenerConexion();
+        boolean existe = false;
+        String sentencia = "SELECT COUNT(*) AS total FROM personal_practicas WHERE numeroPersonal = ?";
+
+        try (PreparedStatement ps = conexionBD.prepareStatement(sentencia)) {
+            ps.setString(1, numeroPersonalBuscado);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int totalEncontrados = rs.getInt("total");
+                    if (totalEncontrados > 0) {
+                        existe = true;
+                    }
+                }
+            }
+        }
+        return existe;
+    }
 }

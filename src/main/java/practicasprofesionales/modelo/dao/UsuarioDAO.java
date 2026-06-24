@@ -14,10 +14,12 @@ import practicasprofesionales.utilidades.UtilidadContrasena;
 
 public class UsuarioDAO {
 
-    private static final Logger logger = Logger.getLogger(UsuarioDAO.class.getName());
+    private static final Logger logger = Logger.getLogger(
+                                                   UsuarioDAO.class.getName());
 
     private static final String SQL_INSERT
-            = "INSERT INTO usuario (correoInstitucional, contraseña, tipoUsuario, estado) "
+            = "INSERT INTO usuario (correoInstitucional, contraseña, "
+            + "tipoUsuario, estado) "
             + "VALUES (?, ?, ?, ?)";
 
     private static final String SQL_UPDATE_PASSWORD
@@ -29,14 +31,18 @@ public class UsuarioDAO {
     public int registerUser(Usuario usuario) throws ExcepcionDAO {
         validarUsuarioParaRegistro(usuario);
 
-        String hashedPassword = UtilidadContrasena.hash(usuario.getContrasenaPlana());
+        String hashedPassword = UtilidadContrasena.hash(
+                                                  usuario.getContrasenaPlana());
 
         try (Connection connection = ConexionBD.obtenerConexion(); 
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
 
-            preparedStatement.setString(1, usuario.getCorreo().trim().toLowerCase());
+            preparedStatement.setString(1,
+                                      usuario.getCorreo().trim().toLowerCase());
             preparedStatement.setString(2, hashedPassword);
-            preparedStatement.setString(3, usuario.getTipoUsuario().getDbValue());
+            preparedStatement.setString(3, 
+                                      usuario.getTipoUsuario().getDbValue());
             preparedStatement.setInt(4, usuario.isActivo() ? 1 : 2);
 
             preparedStatement.executeUpdate();
@@ -45,7 +51,8 @@ public class UsuarioDAO {
                 if (keys.next()) {
                     int generatedId = keys.getInt(1);
                     logger.info(() -> "Usuario registrado — id: " + generatedId
-                            + ", tipo: " + usuario.getTipoUsuario().getDbValue());
+                            + ", tipo: " +
+                            usuario.getTipoUsuario().getDbValue());
                     return generatedId;
                 }
             }
@@ -53,25 +60,32 @@ public class UsuarioDAO {
 
         } catch (SQLException e) {
             if (isDuplicateEntry(e)) {
-                throw new ExcepcionDAO("El correo electrónico ya está registrado en el sistema.", e);
+                throw new ExcepcionDAO("El correo electrónico "
+                        + "ya está registrado en el sistema.", e);
             }
             throw new ExcepcionDAO("Error al registrar usuario", e);
         }
     }
 
-    public Usuario ingresar(String correoInstitucional, String plainPassword) throws ExcepcionDAO {
-        if (correoInstitucional == null || correoInstitucional.isBlank() || plainPassword == null || plainPassword.isBlank()) {
+    public Usuario ingresar(String correoInstitucional, String plainPassword)
+            throws ExcepcionDAO {
+        if (correoInstitucional == null || correoInstitucional.isBlank() 
+                        || plainPassword == null || plainPassword.isBlank()) {
             return null;
         }
 
-        String sentencia = "SELECT u.idUsuario, u.correoInstitucional, u.contraseña, u.tipoUsuario, eu.nombreEstado AS estadoActividad "
-                + "FROM usuario u JOIN estado_usuario eu on u.estado = eu.idEstadoUsuario "
-                + "WHERE u.correoInstitucional = ? AND eu.nombreEstado = 'ACTIVO'";
+        String sentencia = "SELECT u.idUsuario, u.correoInstitucional,"
+           + " u.contraseña, u.tipoUsuario, eu.nombreEstado AS estadoActividad "
+           + "FROM usuario u JOIN estado_usuario eu "
+           + "ON u.estado = eu.idEstadoUsuario "
+           + "WHERE u.correoInstitucional = ? AND eu.nombreEstado = 'ACTIVO'";
                 
         try (Connection connection = ConexionBD.obtenerConexion(); 
-             PreparedStatement preparedStatement = connection.prepareStatement(sentencia)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                                                                   sentencia)) {
 
-            preparedStatement.setString(1, correoInstitucional.trim().toLowerCase());
+            preparedStatement.setString(1, 
+                                      correoInstitucional.trim().toLowerCase());
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -79,13 +93,16 @@ public class UsuarioDAO {
 
                     if (UtilidadContrasena.verify(plainPassword, storedHash)) {
                         Usuario usuario = mapearResultSet(resultSet);
-                        logger.info(() -> "Login exitoso — correo: " + correoInstitucional
-                                + ", tipo: " + usuario.getTipoUsuario().getDbValue());
+                        logger.info(() -> "Login exitoso — correo: " + 
+                                correoInstitucional
+                                + ", tipo: " +
+                                usuario.getTipoUsuario().getDbValue());
                         return usuario;
                     }
                 }
             }
-            logger.warning(() -> "Intento de login fallido — correo: " + correoInstitucional);
+            logger.warning(() -> "Intento de login fallido — correo: " + 
+                                                           correoInstitucional);
             return null;
 
         } catch (SQLException e) {
@@ -94,21 +111,25 @@ public class UsuarioDAO {
         }
     }
 
-    public boolean actualizarContrasena(int idUsuario, String newPlainPassword) throws ExcepcionDAO {
+    public boolean actualizarContrasena(int idUsuario, String newPlainPassword)
+                                                           throws ExcepcionDAO {
         if (newPlainPassword == null || newPlainPassword.isBlank()) {
-            throw new ExcepcionDAO("La nueva contraseña no puede estar vacía", null);
+            throw new ExcepcionDAO("La nueva contraseña no puede estar vacía", 
+                                                                          null);
         }
 
         String newHash = UtilidadContrasena.hash(newPlainPassword);
 
         try (Connection connection = ConexionBD.obtenerConexion(); 
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_PASSWORD)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                                                        SQL_UPDATE_PASSWORD)) {
 
             preparedStatement.setString(1, newHash);
             preparedStatement.setInt(2, idUsuario);
 
             int rows = preparedStatement.executeUpdate();
-            logger.info(() -> "Contraseña actualizada — idUsuario: " + idUsuario);
+            logger.info(() -> "Contraseña actualizada — idUsuario: " +
+                                                                    idUsuario);
             return rows > 0;
 
         } catch (SQLException e) {
@@ -118,7 +139,8 @@ public class UsuarioDAO {
 
     public boolean desactivarUsuario(int idUsuario) throws ExcepcionDAO {
         try (Connection connection = ConexionBD.obtenerConexion(); 
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DESACTIVATE)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                                                            SQL_DESACTIVATE)) {
 
             preparedStatement.setInt(1, idUsuario);
             int rows = preparedStatement.executeUpdate();
@@ -134,8 +156,10 @@ public class UsuarioDAO {
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(resultSet.getInt("idUsuario"));
         usuario.setCorreo(resultSet.getString("correoInstitucional"));
-        usuario.setTipoUsuario(TipoUsuario.fromDbValue(resultSet.getString("tipoUsuario")));
-        usuario.setActivo("ACTIVO".equalsIgnoreCase(resultSet.getString("estadoActividad")));
+        usuario.setTipoUsuario(TipoUsuario.fromDbValue(resultSet.getString(
+                                                               "tipoUsuario")));
+        usuario.setActivo("ACTIVO".equalsIgnoreCase(resultSet.getString(
+                                                           "estadoActividad")));
         return usuario;
     }
 
@@ -144,10 +168,13 @@ public class UsuarioDAO {
             throw new ExcepcionDAO("El usuario no puede ser null", null);
         }
         if (user.getCorreo()== null || user.getCorreo().isBlank()) {
-            throw new ExcepcionDAO("El correo del usuario es obligatorio", null);
+            throw new ExcepcionDAO("El correo del usuario es obligatorio",
+                                                                        null);
         }
-        if (user.getContrasenaPlana()== null || user.getContrasenaPlana().isBlank()) {
-            throw new ExcepcionDAO("La contraseña del usuario es obligatoria", null);
+        if (user.getContrasenaPlana()== null 
+                                       || user.getContrasenaPlana().isBlank()) {
+            throw new ExcepcionDAO("La contraseña del usuario es obligatoria",
+                                                                        null);
         }
         if (user.getTipoUsuario()== null) {
             throw new ExcepcionDAO("El tipo de usuario es obligatorio", null);
@@ -156,5 +183,45 @@ public class UsuarioDAO {
 
     private boolean isDuplicateEntry(SQLException e) {
         return e.getErrorCode() == 1062;
+    }
+    
+    public static boolean existeCorreo(String correoBuscado)
+                                                          throws SQLException {
+        Connection conexionBD = ConexionBD.obtenerConexion();
+        boolean existe = false;
+        String sentencia = "SELECT COUNT(*) AS total FROM usuario "
+                + "WHERE correoInstitucional = ?";
+        try (PreparedStatement ps = conexionBD.prepareStatement(sentencia)) {
+            ps.setString(1, correoBuscado);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int totalEncontrados = rs.getInt("total");
+                    if (totalEncontrados > 0) {
+                        existe = true;
+                    }
+                }
+            }
+        }
+        return existe;
+    }
+    
+    public static boolean existeCorreoActivo(String correo)
+                                                       throws SQLException {
+        boolean existe = false;
+        String sentencia = "SELECT COUNT(*) AS total FROM usuario "
+                         + "WHERE correoInstitucional = ? AND estado = 1";
+        try (Connection conexion = ConexionBD.obtenerConexion()){
+            try (PreparedStatement ps = conexion.prepareStatement(sentencia)) {
+                ps.setString(1, correo);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        if (rs.getInt("total") > 0) {
+                            existe = true;
+                        }
+                    }
+                }
+            }
+        }
+        return existe;
     }
 }

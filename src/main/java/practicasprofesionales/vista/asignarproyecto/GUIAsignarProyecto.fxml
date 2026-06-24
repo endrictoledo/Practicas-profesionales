@@ -6,35 +6,49 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="450.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIAsignarProyecto">
+<AnchorPane prefHeight="542.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionales.controlador.ControladorGUIAsignarProyecto">
     <children>
-        <VBox layoutX="20.0" layoutY="20.0" prefWidth="510.0" spacing="10.0">
-            <Label text="Proyectos solicitados (por prioridad):" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
-            
-            <TableView fx:id="tblProyectosPrioridad" prefHeight="250.0" prefWidth="510.0">
-                <columns>
-                    <TableColumn fx:id="colPrioridad" text="Prioridad" prefWidth="80.0" />
-                    <TableColumn fx:id="colNombreProyecto" text="Nombre Proyecto" prefWidth="300.0" />
-                    <TableColumn fx:id="colCupo" text="Cupo" prefWidth="128.0" />
-                </columns>
-            </TableView>
-
-            <HBox spacing="20.0" alignment="CENTER_LEFT" style="-fx-padding: 10 0 0 0;">
-                <VBox spacing="5.0">
-                    <Label text="Fecha de Inicio:" />
-                    <DatePicker fx:id="dpFechaInicio" prefWidth="240.0" />
-                </VBox>
-                <VBox spacing="5.0">
-                    <Label text="Fecha de Fin:" />
-                    <DatePicker fx:id="dpFechaFin" prefWidth="240.0" />
-                </VBox>
-            </HBox>
-
-            <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 10 0 0 0;">
-                <Button text="Cancelar" onAction="#btnCancelar" prefWidth="100.0" style="-fx-cursor: hand;" />
-                <Button text="Asignar Proyecto" onAction="#btnAsignar" prefWidth="150.0" 
-                        style="-fx-background-color: #185244; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" />
-            </HBox>
-        </VBox>
+      <BorderPane prefHeight="542.0" prefWidth="685.0">
+         <center>
+              <VBox prefWidth="510.0" spacing="10.0" BorderPane.alignment="CENTER">
+                 <children>
+                     <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Proyectos solicitados (por prioridad):" />
+                     
+                     <TableView fx:id="tbl_ProyectosPrioridad" prefHeight="250.0" prefWidth="510.0">
+                         <columns>
+                             <TableColumn fx:id="tbc_Prioridad" prefWidth="116.0" text="Prioridad" />
+                             <TableColumn fx:id="tbc_NombreProyecto" prefWidth="428.0" text="Nombre Proyecto" />
+                             <TableColumn fx:id="tbc_Cupo" prefWidth="140.0" text="Cupo" />
+                         </columns>
+                     </TableView>
+         
+                     <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-padding: 10 0 0 0;">
+            <children>
+                            <VBox spacing="5.0">
+                               <children>
+                                   <Label text="Fecha de Inicio:" />
+                                   <DatePicker fx:id="dtp_FechaInicio" prefWidth="240.0" />
+                               </children>
+                            </VBox>
+                            <VBox spacing="5.0">
+                               <children>
+                                   <Label text="Fecha de Fin:" />
+                                   <DatePicker fx:id="dtp_FechaFin" prefWidth="240.0" />
+                               </children>
+                            </VBox>
+            </children>
+                     </HBox>
+                  <AnchorPane prefHeight="86.0" prefWidth="685.0" />
+         
+                     <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 10 0 0 0;">
+            <children>
+                            <Button onAction="#btn_Cancelar" prefWidth="100.0" style="-fx-cursor: hand;" text="Cancelar" />
+                            <Button onAction="#btn_Asignar" prefHeight="39.0" prefWidth="193.0" style="-fx-background-color: #185244; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Asignar Proyecto" />
+            </children>
+                     </HBox>
+                 </children>
+              </VBox>
+         </center>
+      </BorderPane>
     </children>
 </AnchorPane>

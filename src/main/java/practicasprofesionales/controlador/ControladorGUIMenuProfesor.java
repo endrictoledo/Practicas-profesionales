@@ -49,7 +49,7 @@ public class ControladorGUIMenuProfesor implements Initializable {
 
     @FXML
     private void btnFormatos(ActionEvent event) {
-        cargarSubVista("añadirformato/FXMLListaFormatos.fxml");
+        cargarSubVista("añadirformato/GUIListaFormatos.fxml");
     }
 
     @FXML

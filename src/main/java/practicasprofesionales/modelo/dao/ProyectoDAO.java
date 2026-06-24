@@ -120,4 +120,29 @@ public class ProyectoDAO {
                     "Error al verificar los cupos del proyecto", e);
         }
     }
+    
+    public static boolean existeProyecto(String nombreProyecto,
+                                       int idOrganizacion) throws SQLException {
+        boolean existe = false;
+        String sentencia = "SELECT COUNT(*) AS total FROM proyecto "
+                + "WHERE nombre = ? "
+                + "AND Organizacion_vinculada_id_organizacion_vinculada = ?";
+        try (Connection conn = ConexionBD.obtenerConexion()) {
+            try (PreparedStatement ps = conn.prepareStatement(sentencia)) {
+
+                ps.setString(1, nombreProyecto);
+                ps.setInt(2, idOrganizacion);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        if (rs.getInt("total") > 0) {
+                            existe = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return existe;
+    }
 }
