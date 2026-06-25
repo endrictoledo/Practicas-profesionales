@@ -122,9 +122,16 @@ public class ControladorGUIRegistrarPracticante implements Initializable {
 
         if (matricula.isEmpty() || nombre.isEmpty() || avance.isEmpty() || 
             promedio.isEmpty() || correo.isEmpty() || pass.isEmpty() ||
-            passConf.isEmpty() || cmb_SeccionEE.getValue() == null) {
+            passConf.isEmpty()) {
             Utilidades.mostrarAlertaSimple("Campos Vacíos",
                     "Por favor llena todos los campos.",
+                    Alert.AlertType.WARNING);
+            return false;
+        }
+        
+        if (cmb_SeccionEE.getValue() == null) {
+            Utilidades.mostrarAlertaSimple("Campos Vacíos",
+                    "Por favor selecciona una Sección de la lista despleglable.",
                     Alert.AlertType.WARNING);
             return false;
         }

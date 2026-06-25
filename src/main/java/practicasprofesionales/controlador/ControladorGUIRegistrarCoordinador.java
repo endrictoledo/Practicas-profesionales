@@ -254,7 +254,7 @@ public class ControladorGUIRegistrarCoordinador implements Initializable {
                 Utilidades.mostrarAlertaSimple("Éxito",
                         "Coordinador registrado exitosamente",
                         Alert.AlertType.INFORMATION);
-                cerrar();
+                limpiarFormulario();
             } else {
                 Utilidades.mostrarAlertaSimple("Error",
                         respuesta.getMensaje(), Alert.AlertType.WARNING);

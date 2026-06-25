@@ -55,7 +55,7 @@
                   <TextField fx:id="txf_NombreEstudiante" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Avance Crediticio:(0-100%)" GridPane.rowIndex="2" />
                   <TextField fx:id="txf_AvanceCrediticio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Promedio: (0-100)" GridPane.rowIndex="3" />
+                  <Label text="Promedio: (0.00-10.00)" GridPane.rowIndex="3" />
                   <TextField fx:id="txf_Promedio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Seccion (NRC de EE)" GridPane.rowIndex="4" />
                   <ComboBox fx:id="cmb_SeccionEE" prefWidth="410.0" promptText="Seleccionar NRC..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
